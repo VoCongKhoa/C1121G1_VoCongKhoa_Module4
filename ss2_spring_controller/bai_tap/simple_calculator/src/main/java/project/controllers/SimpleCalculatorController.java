@@ -17,7 +17,7 @@ public class SimpleCalculatorController {
 
     @RequestMapping(value = "/calculate", method = RequestMethod.POST)
     public String getResult(@RequestParam(defaultValue = "") String calculate,
-                            @RequestParam (NumberFormatException(new )) double number1,
+                            @RequestParam double number1,
                             @RequestParam double number2,
                             Model model) {
         switch (calculate) {
