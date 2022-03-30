@@ -20,19 +20,36 @@ public class SimpleCalculatorController {
                             @RequestParam double number1,
                             @RequestParam double number2,
                             Model model) {
-        switch (calculate) {
-            case "+":
-                model.addAttribute("result", number1 + number2);
-                break;
-            case "-":
-                model.addAttribute("result", number1 - number2);
-                break;
-            case "x":
-                model.addAttribute("result", number1 * number2);
-                break;
-            case ":":
-                model.addAttribute("result", number1 / number2);
-                break;
+        if (number2 == 0){
+            switch (calculate) {
+                case "+":
+                    model.addAttribute("result", number1 + number2);
+                    break;
+                case "-":
+                    model.addAttribute("result", number1 - number2);
+                    break;
+                case "x":
+                    model.addAttribute("result", number1 * number2);
+                    break;
+                case ":":
+                    model.addAttribute("result", "Wrong number! Input again!");
+                    break;
+            }
+        } else {
+            switch (calculate) {
+                case "+":
+                    model.addAttribute("result", number1 + number2);
+                    break;
+                case "-":
+                    model.addAttribute("result", number1 - number2);
+                    break;
+                case "x":
+                    model.addAttribute("result", number1 * number2);
+                    break;
+                case ":":
+                    model.addAttribute("result", number1 / number2);
+                    break;
+            }
         }
         return "index";
     }
