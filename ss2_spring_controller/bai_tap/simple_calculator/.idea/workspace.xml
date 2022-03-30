@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86a24b3b-189c-4f89-be77-8cf8690ab63f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/project/controllers/SimpleCalculatorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/controllers/SimpleCalculatorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,6 +147,7 @@
       <option name="presentableId" value="Default" />
       <updated>1648565209368</updated>
       <workItem from="1648565210571" duration="2114000" />
+      <workItem from="1648610483728" duration="48000" />
     </task>
     <servers />
   </component>

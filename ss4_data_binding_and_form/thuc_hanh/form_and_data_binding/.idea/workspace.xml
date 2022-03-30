@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="dd4d8159-dc38-4881-92f6-bab8d0e6be9d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../../../ss2_spring_controller/thuc_hanh/customer_management_spring_overview_update/src/main/java/cg/wbd/grandemonstration/configuration/AppInit.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss2_spring_controller/thuc_hanh/customer_management_spring_overview_update/src/main/java/cg/wbd/grandemonstration/configuration/ApplicationConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/java/project/configurations/AppConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/java/project/configurations/AppInitializer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/java/project/controllers/CustomerController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/java/project/models/Customer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/java/project/services/CustomerService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/java/project/services/ICustomerService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/webapp/WEB-INF/views/create.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/webapp/WEB-INF/views/delete.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/webapp/WEB-INF/views/edit.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/webapp/WEB-INF/views/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/webapp/WEB-INF/views/layout.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/webapp/WEB-INF/views/view.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/webapp/resources/css/bootstrap-grid.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/webapp/resources/css/bootstrap-grid.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/webapp/resources/css/bootstrap-grid.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/webapp/resources/css/bootstrap-grid.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/webapp/resources/css/bootstrap-grid.rtl.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/webapp/resources/css/bootstrap-grid.rtl.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/webapp/resources/css/bootstrap-grid.rtl.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/webapp/resources/css/bootstrap-grid.rtl.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/webapp/resources/css/bootstrap-reboot.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/webapp/resources/css/bootstrap-reboot.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/webapp/resources/css/bootstrap-reboot.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/webapp/resources/css/bootstrap-reboot.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/webapp/resources/css/bootstrap-reboot.rtl.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/webapp/resources/css/bootstrap-reboot.rtl.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/webapp/resources/css/bootstrap-reboot.rtl.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/webapp/resources/css/bootstrap-reboot.rtl.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/webapp/resources/css/bootstrap-utilities.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/webapp/resources/css/bootstrap-utilities.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/webapp/resources/css/bootstrap-utilities.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/webapp/resources/css/bootstrap-utilities.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/webapp/resources/css/bootstrap-utilities.rtl.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/webapp/resources/css/bootstrap-utilities.rtl.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/webapp/resources/css/bootstrap-utilities.rtl.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/webapp/resources/css/bootstrap-utilities.rtl.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/webapp/resources/css/bootstrap.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/webapp/resources/css/bootstrap.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/webapp/resources/css/bootstrap.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/webapp/resources/css/bootstrap.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/webapp/resources/css/bootstrap.rtl.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/webapp/resources/css/bootstrap.rtl.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/webapp/resources/css/bootstrap.rtl.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/webapp/resources/css/bootstrap.rtl.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/webapp/resources/js/bootstrap.bundle.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/webapp/resources/js/bootstrap.bundle.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/webapp/resources/js/bootstrap.bundle.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/webapp/resources/js/bootstrap.bundle.min.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/webapp/resources/js/bootstrap.esm.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/webapp/resources/js/bootstrap.esm.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/webapp/resources/js/bootstrap.esm.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/webapp/resources/js/bootstrap.esm.min.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/webapp/resources/js/bootstrap.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/webapp/resources/js/bootstrap.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/webapp/resources/js/bootstrap.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ss3_vews_and_thymeleaf/thuc_hanh/customer_data_management_thymeleaf/src/main/webapp/resources/js/bootstrap.min.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/src/main/java/project/controllers/EmployeeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/src/main/java/project/models/Employee.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/src/main/webapp/WEB-INF/views/create.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/src/main/webapp/WEB-INF/views/info.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/src/main/webapp/resources/css/bootstrap-grid.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/src/main/webapp/resources/css/bootstrap-grid.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/src/main/webapp/resources/css/bootstrap-grid.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/src/main/webapp/resources/css/bootstrap-grid.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/src/main/webapp/resources/css/bootstrap-grid.rtl.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/src/main/webapp/resources/css/bootstrap-grid.rtl.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/src/main/webapp/resources/css/bootstrap-grid.rtl.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/src/main/webapp/resources/css/bootstrap-grid.rtl.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/src/main/webapp/resources/css/bootstrap-reboot.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/src/main/webapp/resources/css/bootstrap-reboot.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/src/main/webapp/resources/css/bootstrap-reboot.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/src/main/webapp/resources/css/bootstrap-reboot.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/src/main/webapp/resources/css/bootstrap-reboot.rtl.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/src/main/webapp/resources/css/bootstrap-reboot.rtl.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/src/main/webapp/resources/css/bootstrap-reboot.rtl.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/src/main/webapp/resources/css/bootstrap-reboot.rtl.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/src/main/webapp/resources/css/bootstrap-utilities.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/src/main/webapp/resources/css/bootstrap-utilities.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/src/main/webapp/resources/css/bootstrap-utilities.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/src/main/webapp/resources/css/bootstrap-utilities.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/src/main/webapp/resources/css/bootstrap-utilities.rtl.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/src/main/webapp/resources/css/bootstrap-utilities.rtl.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/src/main/webapp/resources/css/bootstrap-utilities.rtl.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/src/main/webapp/resources/css/bootstrap-utilities.rtl.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/src/main/webapp/resources/css/bootstrap.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/src/main/webapp/resources/css/bootstrap.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/src/main/webapp/resources/css/bootstrap.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/src/main/webapp/resources/css/bootstrap.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/src/main/webapp/resources/css/bootstrap.rtl.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/src/main/webapp/resources/css/bootstrap.rtl.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/src/main/webapp/resources/css/bootstrap.rtl.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/src/main/webapp/resources/css/bootstrap.rtl.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/src/main/webapp/resources/js/bootstrap.bundle.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/src/main/webapp/resources/js/bootstrap.bundle.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/src/main/webapp/resources/js/bootstrap.bundle.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/src/main/webapp/resources/js/bootstrap.bundle.min.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/src/main/webapp/resources/js/bootstrap.esm.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/src/main/webapp/resources/js/bootstrap.esm.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/src/main/webapp/resources/js/bootstrap.esm.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/src/main/webapp/resources/js/bootstrap.esm.min.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/src/main/webapp/resources/js/bootstrap.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/src/main/webapp/resources/js/bootstrap.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/src/main/webapp/resources/js/bootstrap.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/src/main/webapp/resources/js/bootstrap.min.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/project/controllers/EmployeeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/project/models/Employee.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/applicationContext.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/dispatcher-servlet.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/create.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/info.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap-grid.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap-grid.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap-grid.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap-grid.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap-grid.rtl.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap-grid.rtl.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap-grid.rtl.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap-grid.rtl.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap-reboot.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap-reboot.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap-reboot.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap-reboot.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap-reboot.rtl.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap-reboot.rtl.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap-reboot.rtl.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap-reboot.rtl.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap-utilities.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap-utilities.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap-utilities.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap-utilities.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap-utilities.rtl.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap-utilities.rtl.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap-utilities.rtl.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap-utilities.rtl.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap.rtl.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap.rtl.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap.rtl.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap.rtl.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/bootstrap.bundle.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/bootstrap.bundle.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/bootstrap.bundle.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/bootstrap.bundle.min.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/bootstrap.esm.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/bootstrap.esm.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/bootstrap.esm.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/bootstrap.esm.min.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/bootstrap.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/bootstrap.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/bootstrap.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/bootstrap.min.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ss2_spring_controller/bai_tap/simple_calculator/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ss2_spring_controller/bai_tap/simple_calculator/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ss2_spring_controller/bai_tap/simple_calculator/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ss2_spring_controller/bai_tap/simple_calculator/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ss2_spring_controller/thuc_hanh/customer_management_spring_overview_update/src/main/java/cg/wbd/grandemonstration/controller/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ss2_spring_controller/thuc_hanh/customer_management_spring_overview_update/src/main/java/cg/wbd/grandemonstration/controller/CustomerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ss2_spring_controller/thuc_hanh/customer_management_spring_overview_update/src/main/webapp/WEB-INF/applicationContext.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/src/main/webapp/WEB-INF/applicationContext.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ss2_spring_controller/thuc_hanh/customer_management_spring_overview_update/src/main/webapp/WEB-INF/dispatcher-servlet.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/src/main/webapp/WEB-INF/dispatcher-servlet.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ss2_spring_controller/thuc_hanh/customer_management_spring_overview_update/src/main/webapp/WEB-INF/views/info.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ss2_spring_controller/thuc_hanh/customer_management_spring_overview_update/src/main/webapp/WEB-INF/views/info.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ss2_spring_controller/thuc_hanh/customer_management_spring_overview_update/src/main/webapp/WEB-INF/views/list.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ss2_spring_controller/thuc_hanh/customer_management_spring_overview_update/src/main/webapp/WEB-INF/views/list.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ss2_spring_controller/thuc_hanh/customer_management_spring_overview_update/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../bai_tap/email_setting/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2766uFX2mkCTKyNHJ9stuZKp2wb" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/webapp" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\codygym_c1121g1\C1121G1-VoCongKhoa\C1121G1_VoCongKhoa_Module4\C1121G1_VoCongKhoa_Module4\ss4_data_binding_and_form\thuc_hanh\form_and_data_binding\src\main\webapp" />
+      <recent name="D:\codygym_c1121g1\C1121G1-VoCongKhoa\C1121G1_VoCongKhoa_Module4\C1121G1_VoCongKhoa_Module4\ss4_data_binding_and_form\thuc_hanh\form_and_data_binding\src\main\java" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Tomcat 8.5.76" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 8.5.76" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
+      <option name="UPDATING_POLICY" value="restart-server" />
+      <deployment>
+        <artifact name="Gradle : org.example : form_and_data_binding-1.0-SNAPSHOT.war">
+          <settings>
+            <option name="CONTEXT_PATH" value="" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="dfc4ce9f-627c-478d-bc94-07052a93f0e6" />
+      </server-settings>
+      <predefined_log_file enabled="true" id="Tomcat" />
+      <predefined_log_file enabled="true" id="Tomcat Catalina" />
+      <predefined_log_file id="Tomcat Manager" />
+      <predefined_log_file id="Tomcat Host Manager" />
+      <predefined_log_file id="Tomcat Localhost Access" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="52240" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Profile">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="Gradle : org.example : form_and_data_binding-1.0-SNAPSHOT.war" />
+        </option>
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="dd4d8159-dc38-4881-92f6-bab8d0e6be9d" name="Changes" comment="" />
+      <created>1648628409853</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1648628409853</updated>
+      <workItem from="1648628411511" duration="732000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
