@@ -10,10 +10,8 @@
 </head>
 <body>
 <div class="container mt-5">
-    <input type="password" >
     <form:form modelAttribute="emailDetail" method="post" action="/emailDetail/update">
-        <form:hidden path="id">
-        </form:hidden>
+        <form:hidden path="id"/>
         <div class="form-row">
             <div class="form-group col-md-6">
                 <form:label path="email">Email</form:label>
@@ -21,23 +19,13 @@
             </div>
             <div class="form-group col-md-6">
                 <form:label path="language">Language</form:label>
-                <form:select class="form-control" path="language">
-                    <form:option value="English">English</form:option>
-                    <form:option value="Vietnamese">Vietnamese</form:option>
-                    <form:option value="Japanese">Japanese</form:option>
-                    <form:option value="Chinese">Chinese</form:option>
+                <form:select class="form-control" path="language" items="${languageList}">
                 </form:select>
             </div>
         </div>
         <div class="form-group">
             <form:label path="pageSize">Page size</form:label>
-            <form:select class="form-control" path="pageSize">
-                <form:option value="5">5</form:option>
-                <form:option value="10">10</form:option>
-                <form:option value="15">15</form:option>
-                <form:option value="25">25</form:option>
-                <form:option value="50">50</form:option>
-                <form:option value="100">100</form:option>
+            <form:select class="form-control" path="pageSize" items="${pageSizeList}">
             </form:select>
         </div>
         <div class="form-group">

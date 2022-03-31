@@ -1,8 +1,10 @@
 package project.controllers;
 
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,17 +37,21 @@ public class EmployeeController {
         spamsEnableMap.put(false, "Unenable");
         return spamsEnableMap;
     }
-    @ModelAttribute("languageList")
-    public List<String> getLanguageList(){
-        return iEmailDetailService.getLanguageList();
-    }
-    @ModelAttribute("pageSizeList")
-    public List<Integer> getPageSizeList(){
-        return iEmailDetailService.getPageSizeList();
-    }
+//    @ModelAttribute("languageList")
+//    public List<String> getLanguageList(){
+//        return iEmailDetailService.getLanguageList();
+//    }
+//    @ModelAttribute("pageSizeList")
+//    public List<Integer> getPageSizeList(){
+//        return iEmailDetailService.getPageSizeList();
+//    }
 
     @RequestMapping(value = "listAll", method = RequestMethod.GET)
-    public String listAll() {
+    public String listAll(Model model) {
+        List<Integer> pageSizeList = iEmailDetailService.getPageSizeList();
+        List<String> languageList = iEmailDetailService.getLanguageList();
+        model.addAttribute("pageSizeList",pageSizeList);
+        model.addAttribute("languageList",languageList);
         return "list";
     }
 
@@ -62,6 +68,10 @@ public class EmployeeController {
 
     @RequestMapping(value = "listOne/{id}", method = RequestMethod.GET)
     public String listOne(ModelMap modelMap, @PathVariable int id) {
+        List<Integer> pageSizeList = iEmailDetailService.getPageSizeList();
+        List<String> languageList = iEmailDetailService.getLanguageList();
+        modelMap.addAttribute("pageSizeList",pageSizeList);
+        modelMap.addAttribute("languageList",languageList);
         EmailDetail emailDetail = iEmailDetailService.findOne(id);
         modelMap.addAttribute("emailDetail", emailDetail);
         return "update";
@@ -69,16 +79,8 @@ public class EmployeeController {
 
     @RequestMapping(value = "update", method = RequestMethod.POST)
     public String update(@ModelAttribute EmailDetail emailDetail){
-        System.out.println(emailDetail);
         iEmailDetailService.update(emailDetail);
         return "redirect:/emailDetail/listAll";
     }
 
-//    @RequestMapping(value = "/detail", method = RequestMethod.POST)
-//    public String submit(@ModelAttribute("detailEmail") EmailDetail emailDetail, ModelMap model) {
-//        model.addAttribute("name", emailDetail.getName());
-//        model.addAttribute("contactNumber", emailDetail.getContactNumber());
-//        model.addAttribute("id", emailDetail.getId());
-//        return "info";
-//    }
 }

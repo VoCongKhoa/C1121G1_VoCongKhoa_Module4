@@ -5,70 +5,51 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4e08328b-0b5e-4207-ab31-f597d77bd933" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../email_setting/src/main/java/project/repositories/EmailDetailRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../email_setting/src/main/java/project/repositories/IEmailDetailRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../email_setting/src/main/java/project/services/EmailDetailService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../email_setting/src/main/java/project/services/IEmailDetailService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../email_setting/src/main/webapp/WEB-INF/views/list.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../email_setting/src/main/webapp/WEB-INF/views/update.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/project/controllers/EmployeeController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/project/models/EmailDetail.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/project/repositories/EmailDetailRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/project/repositories/IEmailDetailRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/project/services/EmailDetailService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/project/services/IEmailDetailService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/applicationContext.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/dispatcher-servlet.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/create.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/index.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/list.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/update.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/main.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/global.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/vendor/datepicker/daterangepicker.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/vendor/datepicker/daterangepicker.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/vendor/datepicker/moment.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/vendor/font-awesome-4.7/HELP-US-OUT.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/vendor/font-awesome-4.7/css/font-awesome.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/vendor/font-awesome-4.7/css/font-awesome.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/vendor/font-awesome-4.7/fonts/FontAwesome.otf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/vendor/font-awesome-4.7/fonts/fontawesome-webfont.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/vendor/font-awesome-4.7/fonts/fontawesome-webfont.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/vendor/font-awesome-4.7/fonts/fontawesome-webfont.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/vendor/font-awesome-4.7/fonts/fontawesome-webfont.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/vendor/font-awesome-4.7/fonts/fontawesome-webfont.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/vendor/jquery/jquery.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/vendor/jquery/jquery.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/vendor/mdi-font/css/material-design-iconic-font.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/vendor/mdi-font/css/material-design-iconic-font.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/vendor/mdi-font/fonts/Material-Design-Iconic-Font.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/vendor/mdi-font/fonts/Material-Design-Iconic-Font.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/vendor/mdi-font/fonts/Material-Design-Iconic-Font.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/vendor/mdi-font/fonts/Material-Design-Iconic-Font.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/vendor/mdi-font/fonts/Material-Design-Iconic-Font.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/vendor/select2/select2.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/vendor/select2/select2.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/project/controllers/DonDangKyController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/project/models/DonDangKy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/project/repositories/DonDangKyRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/project/repositories/IDonDangKyRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/project/services/DonDangKyService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/project/services/IDonDangKyService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../email_setting/.gradle/7.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../email_setting/.gradle/7.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../email_setting/.gradle/7.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../email_setting/.gradle/7.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../email_setting/.gradle/7.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../email_setting/.gradle/7.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../email_setting/.gradle/7.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../email_setting/.gradle/7.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../email_setting/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../email_setting/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../email_setting/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../email_setting/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../email_setting/build/classes/java/main/project/controllers/EmployeeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../email_setting/build/classes/java/main/project/controllers/EmployeeController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../email_setting/build/classes/java/main/project/models/EmailDetail.class" beforeDir="false" afterPath="$PROJECT_DIR$/../email_setting/build/classes/java/main/project/models/EmailDetail.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../email_setting/build/libs/email_setting-1.0-SNAPSHOT.war" beforeDir="false" afterPath="$PROJECT_DIR$/../email_setting/build/libs/email_setting-1.0-SNAPSHOT.war" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../email_setting/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../email_setting/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../email_setting/src/main/java/project/controllers/EmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../email_setting/src/main/java/project/controllers/EmployeeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../email_setting/src/main/java/project/models/EmailDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/../email_setting/src/main/java/project/models/EmailDetail.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../email_setting/src/main/webapp/WEB-INF/views/create.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../email_setting/src/main/webapp/WEB-INF/views/create.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../email_setting/src/main/webapp/WEB-INF/views/update.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../email_setting/src/main/webapp/WEB-INF/views/update.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/project/controllers/EmployeeController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/project/models/EmailDetail.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/project/repositories/EmailDetailRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/project/repositories/IEmailDetailRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/project/services/EmailDetailService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/project/services/IEmailDetailService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/libs/medical_registration_form-1.0-SNAPSHOT.war" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/medical_registration_form-1.0-SNAPSHOT.war" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/project/controllers/EmployeeController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/project/models/EmailDetail.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/project/repositories/EmailDetailRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/project/repositories/IEmailDetailRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/project/services/EmailDetailService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/project/services/IEmailDetailService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/create.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/create.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/index.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/list.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/list.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/update.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/update.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/main.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,6 +78,13 @@
       </state>
     </system>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
   </component>
@@ -121,19 +109,19 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/webapp/WEB-INF/views" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\codygym_c1121g1\C1121G1-VoCongKhoa\C1121G1_VoCongKhoa_Module4\C1121G1_VoCongKhoa_Module4\ss4_data_binding_and_form\bai_tap\medical_registration_form\src\main\java" />
       <recent name="D:\codygym_c1121g1\C1121G1-VoCongKhoa\C1121G1_VoCongKhoa_Module4\C1121G1_VoCongKhoa_Module4\ss4_data_binding_and_form\bai_tap\medical_registration_form\src\main\webapp\WEB-INF\views" />
+      <recent name="D:\codygym_c1121g1\C1121G1-VoCongKhoa\C1121G1_VoCongKhoa_Module4\C1121G1_VoCongKhoa_Module4\ss4_data_binding_and_form\bai_tap\medical_registration_form\src\main\java" />
       <recent name="D:\codygym_c1121g1\C1121G1-VoCongKhoa\C1121G1_VoCongKhoa_Module4\C1121G1_VoCongKhoa_Module4\ss4_data_binding_and_form\bai_tap\medical_registration_form\src\main\webapp\resources" />
       <recent name="D:\codygym_c1121g1\C1121G1-VoCongKhoa\C1121G1_VoCongKhoa_Module4\C1121G1_VoCongKhoa_Module4\ss4_data_binding_and_form\bai_tap\medical_registration_form\src\main\webapp" />
     </key>
   </component>
   <component name="RunManager">
     <configuration name="Tomcat 8.5.76" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 8.5.76" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
-      <option name="UPDATING_POLICY" value="restart-server" />
+      <option name="UPDATING_POLICY" value="redeploy-artifacts" />
       <deployment>
         <artifact name="Gradle : org.example : medical_registration_form-1.0-SNAPSHOT.war">
           <settings>
@@ -230,6 +218,9 @@
       <updated>1648657504160</updated>
       <workItem from="1648657506051" duration="1459000" />
       <workItem from="1648661321136" duration="47000" />
+      <workItem from="1648698710361" duration="2547000" />
+      <workItem from="1648704735391" duration="15866000" />
+      <workItem from="1648728162305" duration="1119000" />
     </task>
     <servers />
   </component>
