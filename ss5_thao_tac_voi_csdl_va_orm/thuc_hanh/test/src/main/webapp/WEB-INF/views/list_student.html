@@ -1,0 +1,45 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>List student</title>
+</head>
+<body>
+    <div th:insert="~{common_student :: headerStudent}">
+    </div>
+
+    <h2>List student</h2>
+    <a href="/student/create">Create new student</a>
+    <p style="color: green" th:text="${msg}"></p>
+    <table border="1">
+        <tr>
+            <th>No</th>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Date of birth</th>
+            <th>Gender</th>
+            <th>Rank</th>
+            <th colspan="2">Action</th>
+        </tr>
+        <tr th:each="studentObj,loop : ${studentList}">
+            <td th:text="${loop.index + 1}"></td>
+            <td th:text="${studentObj.id}"></td>
+            <td th:text="${studentObj.name}"></td>
+            <td th:text="${studentObj.dateOfBirth}"></td>
+            <td th:switch="${studentObj.gender}">
+                <span th:case="0">Female</span>
+                <span th:case="1">Male</span>
+                <span th:case="*">None</span>
+            </td>
+            <td>
+                <span th:if="${studentObj.grade <= 4}">Bad</span>
+                <span th:if="${studentObj.grade > 4 && studentObj.grade <= 7}">Good</span>
+                <span th:if="${studentObj.grade > 7}">Ver good</span>
+            </td>
+            <td><a th:href="@{/student/detail(idStudent=${studentObj.id})}">Detail student RP</a></td>
+            <td><a th:href="@{/student/detail/{idStudent}(idStudent=${studentObj.id})}">Detail student PV</a></td>
+        </tr>
+    </table>
+
+    <div th:replace="~{common_student :: footerStudent}">
+    </div>
+</body>
+</html>
