@@ -1,0 +1,29 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Update song</title>
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+</head>
+<body>
+<div th:replace="~{common :: headerSong}">
+</div>
+<form action="/song/update/" method="post" th:object="${songObj}">
+    <label for="id">Id: </label>
+    <input th:field="*{id}" id="id">
+
+    <label for="name">Name: </label>
+    <input th:field="*{name}" id="name">
+
+    <label for="singer">Singer: </label>
+    <input type="text" id="singer" th:field="*{singer}">
+
+    <label for="category">Category: </label>
+    <input type="text" id="category" th:field="*{category}">
+
+    <label for="source">Source: </label>
+    <input type="text" id="source" th:field="*{source}">
+    <button>Update</button>
+</form>
+<div th:replace="~{common :: footerSong}">
+</div>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <title>Detail song</title>
+</head>
+<body>
+    <div th:replace="~{common :: headerSong}">
+    </div>
+    <p>Id: <span th:text="${songObj.id}"></span></p>
+    <p>Name: <span th:text="${songObj.name}"></span></p>
+    <p>Singer: <span th:text="${songObj.singer}"></span></p>
+    <p>Category: <span th:text="${songObj.category}"></span></p>
+    <p>Source: <span th:text="${songObj.source}"></span></p>
+    <div th:replace="~{common :: footerSong}">
+    </div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <title>Create new song</title>
+</head>
+<body>
+    <div th:replace="~{common :: headerSong}">
+    </div>
+    <h2>Create song</h2>
+
+    <form action="/song/create" method="post" th:object="${songForm}"  enctype="multipart/form-data">
+
+        <p>Name: </p>
+        <input type="text" th:field="*{name}" />
+        <p>Singer: </p>
+        <input type="text" th:field="*{singer}"/>
+        <p>Category: </p>
+        <input type="text" th:field="*{category}"/>
+        <p>Source: </p>
+        <input type="file" th:field="*{multipartFile}"/>
+
+        <input type="submit" value="Create new" />
+
+    </form>
+
+    <div th:replace="~{common :: footerSong}">
+    </div>
+</body>
+</html>

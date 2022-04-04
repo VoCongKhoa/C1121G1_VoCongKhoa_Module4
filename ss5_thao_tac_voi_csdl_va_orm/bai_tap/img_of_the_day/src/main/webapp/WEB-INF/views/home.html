@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+<h1 id="title" style="text-align: center;"></h1><br><br>
+<img id="img-of-the-day"><br><br>
+<form action="/comment/create" method="post" th:object="${commentObj}">
+    <select th:field="*{commentVote}">
+        <option th:value="1">1</option>
+        <option th:value="2">2</option>
+        <option th:value="3">3</option>
+        <option th:value="4">4</option>
+        <option th:value="5">5</option>
+    </select><br><br>
+    <input th:field="*{commentAuthor}"><br><br>
+    <textarea id="explanation" cols="200" rows="5" th:field="*{commentFeedback}"></textarea><br><br>
+    <!--    <input id="date"><br><br>-->
+    <button>Comment:</button>
+</form>
+
+<table>
+    <tr th:each="comment,loop : ${commentList}">
+        <td>
+
+            <!--            <input type="hidden" class="commentDate" th:name="commentDate">-->
+            <div style="margin-bottom: 20px;">
+                <p style="margin-bottom: 10px;width: 100%;border: none;"
+                   th:text="${comment.commentFeedback}"></p>
+                    <div style="display: flex;flex-direction: row-reverse;align-content: stretch;justify-content: flex-end;">
+                        <p style="border: none;max-width: 30px;text-align: center;margin-left: 10px; "
+                           th:text="${comment.commentLike}"></p>
+                        <a th:href="@{/comment/like(idLike=${comment.id})}" class="fa fa-thumbs-up"></a>
+                    </div>
+            </div>
+        </td>
+    </tr>
+</table>
+<!--    <table>-->
+<!--        <tr>-->
+<!--            <td>-->
+<!--                <div style="margin-bottom: 20px;">-->
+<!--                    <input style="margin-bottom: 10px;width: 100%;border: none;" value="Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit ullam repellendus vero-->
+<!--                eveniet dolorum libero unde consequatur tenetur id nihil, aut molestias facere aspernatur iste ex animi at nesciunt-->
+<!--                sapiente.">-->
+<!--                    <div style="display: flex;flex-direction: row-reverse;align-content: stretch;justify-content: flex-end;">-->
+<!--                        <input style="border: none;max-width: 30px;text-align: center;margin-left: 10px; " value="1" readonly>-->
+<!--                        <button onclick="myFunction(this)" class="fa fa-thumbs-up">-->
+<!--                        </button>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--    </table>-->
+
+
+</body>
+
+<script>
+    let query = 'https://api.nasa.gov/planetary/apod?api_key=CxMdZosxYBxoefp1VifWkWTFqJBKBVKJcCmGK6mF';
+    let request = new XMLHttpRequest();
+    request.open('GET', query);
+    request.onload = function () {
+        if (request.status === 200) {
+            let response = JSON.parse(request.responseText);
+            document.getElementById('img-of-the-day').setAttribute('src', response.url);
+            document.getElementById('title').innerText = response.title;
+        }
+    };
+    request.send();
+
+    function myFunction(x) {
+        x.classList.toggle("fa-thumbs-down");
+    }
+</script>
+</html>
