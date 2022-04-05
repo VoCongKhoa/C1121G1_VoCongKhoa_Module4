@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>W3.CSS Template</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+    <style>
+        body, h1, h2, h3, h4, h5, h6 {
+            font-family: "Karma", sans-serif
+        }
+
+        .w3-bar-block .w3-bar-item {
+            padding: 20px
+        }
+
+        .w3-quarter a {
+            font-weight: 400;
+            /*margin: 15px 0 10px 0;*/
+            font-size: 24px;
+            text-decoration-line: none;
+        }
+
+        .w3-quarter a:hover {
+            color: #6868d9;
+        }
+    </style>
+</head>
+<body>
+<!--Header-->
+<div th:replace="~{/common::header}"></div>
+
+<div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px">
+    <p>
+        <a th:href="@{/post}">
+            Back to post list
+        </a>
+    </p>
+    <form action="/post/save" th:object="${post}">
+        <label>Title</label><br>
+        <input th:field="*{title}" style="width: 100%;"/><br><br>
+        <label>Intro</label><br>
+        <input th:field="*{intro}" style="width: 100%;"/><br><br>
+        <label>Content</label><br>
+        <textarea type="text" th:field="*{content}" rows="20" style="width: 100%;"></textarea><br><br>
+        <label>Thumbnail Source</label><br>
+        <input type="text" th:src="*{thumbnailSource}" style="width: 100%;"/><br><br>
+        <label>Date Modified</label><br>
+        <input type="date" th:field="*{dateModified}" style="width: 100%;"/><br><br>
+        <label>Author</label><br>
+        <input type="text" th:field="*{author}" style="width: 100%;"/><br><br>
+        <button style="position: relative;left: 44%;font-size: 30px;width: 200px;">Create</button>
+    </form>
+    <!-- Footer -->
+    <div th:replace="~{/common::footer}"></div>
+</div>
+
+<script>
+    // Script to open and close sidebar
+    function w3_open() {
+        document.getElementById("mySidebar").style.display = "block";
+    }
+
+    function w3_close() {
+        document.getElementById("mySidebar").style.display = "none";
+    }
+</script>
+</body>
+</html>

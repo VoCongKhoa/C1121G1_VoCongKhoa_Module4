@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>W3.CSS Template</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+    <style>
+        body, h1, h2, h3, h4, h5, h6 {
+            font-family: "Karma", sans-serif
+        }
+
+        .w3-bar-block .w3-bar-item {
+            padding: 20px
+        }
+
+        .w3-quarter a {
+            font-weight: 400;
+            /*margin: 15px 0 10px 0;*/
+            font-size: 24px;
+            text-decoration-line: none;
+        }
+
+        .w3-quarter a:hover {
+            color: #6868d9;
+        }
+    </style>
+</head>
+<body>
+<!--Header-->
+<div th:replace="~{/common::header}"></div>
+
+<div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px">
+    <h3 th:text="${post.title}"></h3>
+    <p>
+        <a th:href="@{/post}">
+            Back to post list
+        </a>
+    </p>
+    <div id="form">
+        <div>
+            <!--        <label>ID</label>-->
+            <img th:src="${post.thumbnailSource}" alt="">
+            <p type="text" th:text="${post.author}"></p>
+            <p type="text" th:text="${post.dateModified}"></p>
+        </div>
+        <div>
+            <!--        <label>First Name</label>-->
+            <p type="text" th:text="${post.content}"></p>
+        </div>
+    </div>
+    <div style="display: flex; justify-content: space-around;">
+        <button style="padding-top: 7px;"><a th:href="@{/post/{id}/edit(id=${post.id})}" style="text-decoration-line: none;">Edit</a></button>
+        <button style="padding-top: 7px;"><a th:href="@{/post/{id}/delete(id=${post.id})}" style="text-decoration-line: none;">Delete</a></button>
+    </div>
+
+
+    <!-- Footer -->
+    <div th:replace="~{/common::footer}"></div>
+</div>
+
+<script>
+    // Script to open and close sidebar
+    function w3_open() {
+        document.getElementById("mySidebar").style.display = "block";
+    }
+
+    function w3_close() {
+        document.getElementById("mySidebar").style.display = "none";
+    }
+</script>
+</body>
+</html>
