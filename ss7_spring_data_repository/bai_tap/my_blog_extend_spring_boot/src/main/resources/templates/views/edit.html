@@ -29,7 +29,7 @@
 </head>
 <body>
 <!--Header-->
-<div th:replace="~{/common::header}"></div>
+<div th:replace="~{/views/common::header}"></div>
 
 <div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px">
     <p>
@@ -37,24 +37,27 @@
             Back to post list
         </a>
     </p>
-    <form action="/post/update" th:object="${post}" method="post">
-        <input th:field="*{id}" style="width: 100%;" th:type="hidden"/><br><br>
+    <form th:action="@{/post/update}" th:object="${post}" method="post">
+        <input type="hidden" th:field="*{postId}">
         <label>Title</label><br>
-        <input th:field="*{title}" style="width: 100%;"/><br><br>
+        <input th:field="*{postTitle}" style="width: 100%;"/><br><br>
         <label>Intro</label><br>
-        <input th:field="*{intro}" style="width: 100%;"/><br><br>
+        <input th:field="*{postIntro}" style="width: 100%;"/><br><br>
         <label>Content</label><br>
-        <textarea type="text" th:field="*{content}" rows="20" style="width: 100%;"></textarea><br><br>
+        <textarea type="text" th:field="*{postContent}" rows="20" style="width: 100%;"></textarea><br><br>
         <label>Thumbnail Source</label><br>
-        <img type="text" th:src="*{thumbnailSource}" style="width: 100%;"/><br><br>
+        <img th:src="${post.postThumbnailSource}" alt="" style="width: 100%;"><br><br>
+        <!--        <input type="text" th:src="*{postThumbnailSource}" style="width: 100%;"/><br><br>-->
         <label>Date Modified</label><br>
-        <input type="date" th:field="*{dateModified}" style="width: 100%;"/><br><br>
+        <input type="date" th:field="*{postDateModified}" style="width: 100%;"/><br><br>
         <label>Author</label><br>
-        <input type="text" th:field="*{author}" style="width: 100%;"/><br><br>
-        <button style="position: relative;left: 44%;font-size: 30px;width: 200px;">Update</button>
+        <select th:field="*{author}">
+            <option th:each="author : ${authorList}" th:value="${author.authorId}" th:text="${author.authorName}"></option>
+        </select><br><br>
+        <button style="position: relative;left: 41%;font-size: 30px;width: 200px;">Update</button>
     </form>
     <!-- Footer -->
-    <div th:replace="~{/common::footer}"></div>
+    <div th:replace="~{/views/common::footer}"></div>
 </div>
 
 <script>

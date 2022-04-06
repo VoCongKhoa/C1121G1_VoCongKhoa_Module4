@@ -1,10 +1,15 @@
 package project.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import project.models.Post;
 import project.repositories.IPostRepository;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -12,9 +17,40 @@ public class PostService implements IPostService {
     @Autowired
     IPostRepository iPostRepository;
 
+
+    //ONLY PAGING
+//    @Override
+//    public Page<Post> findAll(Pageable pageable) {
+//        int pageSize = pageable.getPageSize();
+//        int currentPage = pageable.getPageNumber();
+//        int startItem = currentPage * pageSize;
+//        List<Post> list;
+//
+//        if (iPostRepository.findAll().size() < startItem) {
+//            list = Collections.emptyList();
+//        } else {
+//            int toIndex = Math.min(startItem + pageSize, iPostRepository.findAll().size());
+//            list = iPostRepository.findAll().subList(startItem, toIndex);
+//        }
+//
+//        return new PageImpl<>(list, PageRequest.of(currentPage, pageSize), iPostRepository.findAll().size());
+//    }
+
+
     @Override
-    public List<Post> findAll() {
-        return iPostRepository.findAll();
+    public Page<Post> findAllWithSort(Pageable pageable) {
+        Page<Post> postList = iPostRepository.findAllByOrderByPostDateModified(pageable);
+        return postList;
+    }
+
+    @Override
+    public Page<Post> findAllWithSearch(Pageable pageable, String valueSearch) {
+        return iPostRepository.findAllByPostTitleContaining(pageable,valueSearch);
+    }
+
+    @Override
+    public List<Post> findAllByCategory(int categoryId) {
+        return iPostRepository.findAllByCategory(categoryId);
     }
 
     @Override
@@ -40,7 +76,12 @@ public class PostService implements IPostService {
 
     @Override
     public List<Post> searchByContent(String contentSearch) {
-        return iPostRepository.findPostByPostContentContaining(contentSearch);
+        return iPostRepository.findAllByPostContentContaining(contentSearch);
+    }
+
+    @Override
+    public Page<Post> findAll(Pageable pageable) {
+        return iPostRepository.findAll(pageable);
     }
 
 }

@@ -46,14 +46,15 @@
         <label>Content</label><br>
         <textarea type="text" th:field="*{postContent}" rows="20" style="width: 100%;"></textarea><br><br>
         <label>Thumbnail Source</label><br>
-        <input type="text" th:src="*{postThumbnailSource}" style="width: 100%;"/><br><br>
+        <img th:src="${post.postThumbnailSource}" alt="" style="width: 100%;"><br><br>
+<!--        <input type="text" th:src="*{postThumbnailSource}" style="width: 100%;"/><br><br>-->
         <label>Date Modified</label><br>
         <input type="date" th:field="*{postDateModified}" style="width: 100%;"/><br><br>
         <label>Author</label><br>
         <select th:field="*{author}">
             <option th:each="author : ${authorList}" th:value="${author.authorId}" th:text="${author.authorName}"></option>
-        </select>
-        <button style="position: relative;left: 44%;font-size: 30px;width: 200px;">Delete</button>
+        </select><br><br>
+        <button style="position: relative;left: 41%;font-size: 30px;width: 200px;">Delete</button>
     </form>
     <!-- Footer -->
     <div th:replace="~{/views/common::footer}"></div>

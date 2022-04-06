@@ -21,11 +21,16 @@ public class Post {
     private String postThumbnailSource;
     @Column(name = "post_date_modified", columnDefinition = "DATE")
     private String postDateModified;
+
     @ManyToOne
     @JoinColumn(name= "author_id", referencedColumnName = "author_id")
     private Author author;
+
     @OneToMany(mappedBy = "post")
     private List<Comment> commentList;
+
+    @OneToMany(mappedBy = "post")
+    private List<PostCategory> postCategoryList;
 
 
     public Post() {
@@ -93,5 +98,13 @@ public class Post {
 
     public void setCommentList(List<Comment> commentList) {
         this.commentList = commentList;
+    }
+
+    public List<PostCategory> getPostCategoryList() {
+        return postCategoryList;
+    }
+
+    public void setPostCategoryList(List<PostCategory> postCategoryList) {
+        this.postCategoryList = postCategoryList;
     }
 }

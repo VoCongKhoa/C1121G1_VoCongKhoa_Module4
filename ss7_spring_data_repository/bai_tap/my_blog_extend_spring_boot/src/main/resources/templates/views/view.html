@@ -43,6 +43,8 @@
         <img th:src="${post.postThumbnailSource}" alt=""><br><br>
         <b><p type="text" th:text="${post.author.authorName}" style="font-size: 30px;"></p></b>
         <p type="text" th:text="${post.postDateModified}"></p>
+        Category:
+        <p type="text" th:text="${categoryNameString}"></p>
     </div>
     <div>
         <p type="text" th:text="${post.postContent}" style="font-size: 20px;"></p>
@@ -65,9 +67,9 @@
     <br>
     <div style="display: flex; justify-content: space-around;">
         <button style="padding-top: 7px;width: 100px;"><a th:href="@{/post/{id}/edit(id=${post.postId})}"
-                                             style="text-decoration-line: none;">Edit</a></button>
+                                                          style="text-decoration-line: none;">Edit</a></button>
         <button style="padding-top: 7px;width: 100px;"><a th:href="@{/post/{id}/delete(id=${post.postId})}"
-                                             style="text-decoration-line: none;">Delete</a></button>
+                                                          style="text-decoration-line: none;">Delete</a></button>
     </div>
 
 

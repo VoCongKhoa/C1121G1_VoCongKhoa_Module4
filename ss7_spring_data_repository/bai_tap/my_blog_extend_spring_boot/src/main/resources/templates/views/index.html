@@ -30,22 +30,28 @@
 <body>
 
 <!-- Sidebar (hidden by default) -->
-<nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left"
-     style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
-    <a href="javascript:void(0)" onclick="w3_close()"
-       class="w3-bar-item w3-button">Close Menu</a>
-    <a href="#food" onclick="w3_close()" class="w3-bar-item w3-button">Food</a>
-    <a th:href="@{/post/create}" class="w3-bar-item w3-button">Create a new Blog</a>
-    <a href="#about" onclick="w3_close()" class="w3-bar-i   tem w3-button">About</a>
-</nav>
+<!--<nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left"-->
+<!--     style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">-->
+<!--    <a href="javascript:void(0)" onclick="w3_close()"-->
+<!--       class="w3-bar-item w3-button">Close Menu</a>-->
+<!--    <a href="#food" onclick="w3_close()" class="w3-bar-item w3-button">Food</a>-->
+<!--    <a th:href="@{/post/create}" class="w3-bar-item w3-button">Create a new Blog</a>-->
+<!--    <a href="#about" onclick="w3_close()" class="w3-bar-i   tem w3-button">About</a>-->
+<!--</nav>-->
 
 <!-- Top menu -->
 <div th:replace="~{/views/common::header}"></div>
 
+<!--Sort-->
+<br><br>
+<button style="margin-top: 7%;"><a th:href="@{/post(sort='postDateModified')}">Sort By Date Modified</a></button>
+<br><br>
 <!-- !PAGE CONTENT! -->
 <div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px">
 
-    <!-- First Photo Grid-->
+
+
+    <!-- Post -->
     <div class="w3-row-padding w3-padding-16 w3-center" id="food" style="display: flex;flex-wrap: wrap;">
         <div class="w3-quarter" th:each="row,rowStat : ${postList}">
             <img th:src="${row.postThumbnailSource}" alt="" style="width:100%">
@@ -54,17 +60,52 @@
         </div>
     </div>
 
+
+
     <!-- Pagination -->
+
     <div class="w3-center w3-padding-32">
         <div class="w3-bar">
-            <a href="#" class="w3-bar-item w3-button w3-hover-black">«</a>
-            <a href="#" class="w3-bar-item w3-black w3-button">1</a>
-            <a href="#" class="w3-bar-item w3-button w3-hover-black">2</a>
-            <a href="#" class="w3-bar-item w3-button w3-hover-black">3</a>
-            <a href="#" class="w3-bar-item w3-button w3-hover-black">4</a>
-            <a href="#" class="w3-bar-item w3-button w3-hover-black">»</a>
+            <a th:if="${postList.hasPrevious()}" th:href="@{/post(page=${postList.number - 1}, search=${valueSearch}, sort=${sort})}"
+               class="w3-bar-item w3-button w3-hover-black">«</a>
+            <span th:text="${postList.number + 1}"></span> / <span th:text="${postList.totalPages}"></span>
+            <a th:if="${postList.hasNext()}" th:href="@{/post(page=${postList.number + 1}, search=${valueSearch}, sort=${sort})}"
+               class="w3-bar-item w3-button w3-hover-black">»</a>
         </div>
     </div>
+    <!--    <div class="w3-center w3-padding-32">-->
+    <!--        <div class="w3-bar">-->
+    <!--&lt;!&ndash;            <a th:if="${postList.hasPrevious()}" th:href="@{/post(size=${postList.size}, page=${postList.number - 1})}"&ndash;&gt;-->
+    <!--&lt;!&ndash;               class="w3-bar-item w3-button w3-hover-black">«</a>&ndash;&gt;-->
+    <!--            <div th:if="${postList.totalPages > 0}"-->
+    <!--                 th:each="pageNumber : ${pageNumbers}" class="w3-bar-item w3-button w3-hover-black">-->
+    <!--                <a th:href="@{/post(size=${postList.size}, page=${pageNumber})}"-->
+    <!--                   th:text="${pageNumber}"-->
+    <!--                   th:class="${pageNumber==postList.number + 1} ? 'w3-bar-item w3-black w3-button':'w3-bar-item w3-button w3-hover-black'"></a>-->
+    <!--            </div>-->
+    <!--&lt;!&ndash;            <a th:if="${postList.hasNext()}" th:href="@{/post(size=${postList.size}, page=${postList.number + 1})}"&ndash;&gt;-->
+    <!--&lt;!&ndash;               class="w3-bar-item w3-button w3-hover-black">»</a>&ndash;&gt;-->
+    <!--        </div>-->
+    <!--    </div>-->
+    <!--</div>-->
+    <!--<div class="w3-center w3-padding-32">-->
+    <!--    <div class="w3-bar">-->
+    <!--        <a th:if="${postList.hasPrevious()}" th:href="@{/post(page=${postList.number - 1})}"-->
+    <!--           class="w3-bar-item w3-button w3-hover-black">«</a>-->
+    <!--        &lt;!&ndash;            <a href="#" class="w3-bar-item w3-black w3-button">1</a>&ndash;&gt;-->
+    <!--        <a href="#" class="w3-bar-item w3-black w3-button">1</a>-->
+    <!--        <div th:if="${postList.totalPages > 0}" class="pagination"-->
+    <!--             th:each="pageNumber : ${pageNumbers}">-->
+
+    <!--            <a th:href="@{/post(size=${postList.size}, page=${pageNumber})}" th:text="${pageNumber}"-->
+    <!--               th:class="${pageNumber == postList.number + 1} ? active"></a>-->
+    <!--        </div>-->
+    <!--        <a href="#" class="w3-bar-item w3-button w3-hover-black">3</a>-->
+    <!--        <a href="#" class="w3-bar-item w3-button w3-hover-black">4</a>-->
+    <!--        <a th:if="${postList.hasNext()}" th:href="@{/post(page=${postList.number + 1})}"-->
+    <!--           class="w3-bar-item w3-button w3-hover-black">»</a>-->
+    <!--    </div>-->
+    <!--</div>-->
 
     <hr id="about">
 
