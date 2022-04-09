@@ -82,13 +82,17 @@ public class SoTietKiemController {
     @GetMapping(value = "/update")
     public String goUpdate(Model model, @RequestParam int id) {
         SoTietKiem soTietKiem = iSoTietKiemService.findById(id);
-        SoTietKiemDto soTietKiemDto = new SoTietKiemDto();
-        BeanUtils.copyProperties(soTietKiem,soTietKiemDto);
-        soTietKiemDto.setSoTienGui(String.valueOf(soTietKiem.getSoTienGui()));
-        soTietKiemDto.setKyHan(String.valueOf(soTietKiem.getKyHan()));
-        model.addAttribute("soTietKiemDto", soTietKiemDto);
-        model.addAttribute("khachHangList",iKhachHangService.findAll());
-        return "/views/edit";
+        if (soTietKiem != null){
+            SoTietKiemDto soTietKiemDto = new SoTietKiemDto();
+            BeanUtils.copyProperties(soTietKiem,soTietKiemDto);
+            soTietKiemDto.setSoTienGui(String.valueOf(soTietKiem.getSoTienGui()));
+            soTietKiemDto.setKyHan(String.valueOf(soTietKiem.getKyHan()));
+            model.addAttribute("soTietKiemDto", soTietKiemDto);
+            model.addAttribute("khachHangList",iKhachHangService.findAll());
+            return "/views/edit";
+        } else {
+            return "views/404";
+        }
     }
 
     @PostMapping(value = "/update")
@@ -113,17 +117,25 @@ public class SoTietKiemController {
     @GetMapping(value = "/detail/{id}")
     public String goDetail(Model model, @PathVariable int id) {
         SoTietKiem soTietKiem = iSoTietKiemService.findById(id);
-        model.addAttribute("soTietKiem", soTietKiem);
-        model.addAttribute("khachHangList",iKhachHangService.findAll());
-        return "views/detail";
+        if (soTietKiem != null){
+            model.addAttribute("soTietKiem", soTietKiem);
+            model.addAttribute("khachHangList",iKhachHangService.findAll());
+            return "views/detail";
+        } else {
+            return "views/404";
+        }
     }
 
     @GetMapping(value = "/delete/{id}")
     public String goDelete(Model model, @PathVariable int id) {
         SoTietKiem soTietKiem = iSoTietKiemService.findById(id);
-        model.addAttribute("soTietKiem", soTietKiem);
-        model.addAttribute("khachHangList",iKhachHangService.findAll());
-        return "views/delete";
+        if (soTietKiem != null){
+            model.addAttribute("soTietKiem", soTietKiem);
+            model.addAttribute("khachHangList",iKhachHangService.findAll());
+            return "views/delete";
+        } else {
+            return "views/404";
+        }
     }
 
     @PostMapping(value = "/delete")
