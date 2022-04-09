@@ -1,11 +1,13 @@
 package project.services;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import project.models.SoTietKiem;
 
 import java.util.List;
 
 public interface ISoTietKiemService {
-    List<SoTietKiem> findAll();
+    Page<SoTietKiem> findAll(Pageable pageable);
 
     void save(SoTietKiem soTietKiem);
 
@@ -14,5 +16,5 @@ public interface ISoTietKiemService {
     void deleteById(Integer maSoTietKiem);
 
 
-    List<SoTietKiem> findAllByTenKhachHangAndNgayGui(String tenKhachHangThuc, String ngayBatDauThuc, String ngayKetThucThuc);
+    Page<SoTietKiem> findAllByTenKhachHangAndNgayGui(String tenKhachHangThuc, String ngayBatDauThuc, String ngayKetThucThuc,Pageable pageable);
 }

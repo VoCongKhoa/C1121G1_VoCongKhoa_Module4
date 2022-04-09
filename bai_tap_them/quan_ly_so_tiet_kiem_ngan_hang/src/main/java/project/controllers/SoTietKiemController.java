@@ -2,6 +2,9 @@ package project.controllers;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,9 +30,25 @@ public class SoTietKiemController {
     private IKhachHangService iKhachHangService;
 
     @GetMapping(value = "")
-    public String index(Model model) {
-        model.addAttribute("soTietKiemList", iSoTietKiemService.findAll());
-        return "views/list";
+    public String index(Model model,
+                        @PageableDefault(value = 2) Pageable pageable,
+                        @RequestParam Optional<String> tenKhachHang,
+                        @RequestParam Optional<String> ngayBatDau,
+                        @RequestParam Optional<String> ngayKetThuc) {
+
+        String tenKhachHangThuc = tenKhachHang.orElse("");
+        String ngayBatDauThuc = ngayBatDau.orElse("");
+        String ngayKetThucThuc = ngayKetThuc.orElse("");
+        if(!(tenKhachHangThuc.equals("")&ngayBatDauThuc.equals("")&ngayKetThucThuc.equals(""))){
+            return "redirect:/index/search";
+        } else {
+            Page<SoTietKiem> soTietKiemList = iSoTietKiemService.findAllByTenKhachHangAndNgayGui(tenKhachHangThuc,ngayBatDauThuc,ngayKetThucThuc, pageable);
+            model.addAttribute("soTietKiemList", iSoTietKiemService.findAll(pageable));
+            model.addAttribute("tenKhachHangThuc",tenKhachHangThuc);
+            model.addAttribute("ngayBatDauThuc",ngayBatDauThuc);
+            model.addAttribute("ngayKetThucThuc",ngayKetThucThuc);
+            return "views/list";
+        }
     }
 
     @GetMapping(value = "/create")
@@ -116,11 +135,11 @@ public class SoTietKiemController {
     @GetMapping(value = "/search")
     public String search(Model model, @RequestParam Optional<String> tenKhachHang,
                          @RequestParam Optional<String> ngayBatDau,
-                         @RequestParam Optional<String> ngayKetThuc) {
+                         @RequestParam Optional<String> ngayKetThuc, @PageableDefault(value = 2) Pageable pageable) {
         String tenKhachHangThuc = tenKhachHang.orElse("");
         String ngayBatDauThuc = ngayBatDau.orElse("");
         String ngayKetThucThuc = ngayKetThuc.orElse("");
-        List<SoTietKiem> soTietKiemList = iSoTietKiemService.findAllByTenKhachHangAndNgayGui(tenKhachHangThuc,ngayBatDauThuc,ngayKetThucThuc);
+        Page<SoTietKiem> soTietKiemList = iSoTietKiemService.findAllByTenKhachHangAndNgayGui(tenKhachHangThuc,ngayBatDauThuc,ngayKetThucThuc, pageable);
         model.addAttribute("soTietKiemList", soTietKiemList);
         return "views/list";
     }

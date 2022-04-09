@@ -1,6 +1,8 @@
 package project.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import project.models.SoTietKiem;
 import project.repositories.ISoTietKiemRepository;
@@ -14,8 +16,8 @@ public class SoTietKiemService implements ISoTietKiemService {
     ISoTietKiemRepository iSoTietKiemRepository;
 
     @Override
-    public List<SoTietKiem> findAll() {
-        return iSoTietKiemRepository.findAll();
+    public Page<SoTietKiem> findAll(Pageable pageable) {
+        return iSoTietKiemRepository.findAll(pageable);
     }
 
     @Override
@@ -34,36 +36,36 @@ public class SoTietKiemService implements ISoTietKiemService {
     }
 
     @Override
-    public List<SoTietKiem> findAllByTenKhachHangAndNgayGui(String tenKhachHangThuc, String ngayBatDauThuc, String ngayKetThucThuc) {
+    public Page<SoTietKiem> findAllByTenKhachHangAndNgayGui(String tenKhachHangThuc, String ngayBatDauThuc, String ngayKetThucThuc, Pageable pageable) {
 
         if (tenKhachHangThuc.equals("") & ngayBatDauThuc.equals("") & ngayKetThucThuc.equals("")) {
-            return findAll();
+            return findAll(pageable);
         }
 
         if (!tenKhachHangThuc.equals("") & !ngayBatDauThuc.equals("") & !ngayKetThucThuc.equals("")) {
-            return iSoTietKiemRepository.findAllByTenAnd2Ngay(tenKhachHangThuc, ngayBatDauThuc, ngayKetThucThuc);
+            return iSoTietKiemRepository.findAllByTenAnd2Ngay(tenKhachHangThuc, ngayBatDauThuc, ngayKetThucThuc, pageable);
         }
 
         if (tenKhachHangThuc.equals("") & ngayBatDauThuc.equals("")) {
-            return iSoTietKiemRepository.findAllByNgayKetThuc(ngayKetThucThuc);
+            return iSoTietKiemRepository.findAllByNgayKetThuc(ngayKetThucThuc, pageable);
         }
 
         if (tenKhachHangThuc.equals("") & ngayKetThucThuc.equals("")) {
-            return iSoTietKiemRepository.findAllByNgayBatDau(ngayBatDauThuc);
+            return iSoTietKiemRepository.findAllByNgayBatDau(ngayBatDauThuc, pageable);
         }
 
         if (ngayBatDauThuc.equals("") & ngayKetThucThuc.equals("")) {
-            return iSoTietKiemRepository.findAllByTenKhachHang(tenKhachHangThuc);
+            return iSoTietKiemRepository.findAllByTenKhachHang(tenKhachHangThuc, pageable);
         }
 
         if (tenKhachHangThuc.equals("") & !ngayBatDauThuc.equals("") & !ngayKetThucThuc.equals("")) {
-            return iSoTietKiemRepository.findAllBy2Ngay(ngayBatDauThuc, ngayKetThucThuc);
+            return iSoTietKiemRepository.findAllBy2Ngay(ngayBatDauThuc, ngayKetThucThuc, pageable);
         }
         if (!tenKhachHangThuc.equals("") & ngayBatDauThuc.equals("") & !ngayKetThucThuc.equals("")) {
-            return iSoTietKiemRepository.findAllByTenKhachHangAndNgayKetThuc(tenKhachHangThuc, ngayKetThucThuc);
+            return iSoTietKiemRepository.findAllByTenKhachHangAndNgayKetThuc(tenKhachHangThuc, ngayKetThucThuc, pageable);
         }
         if (!tenKhachHangThuc.equals("") & !ngayBatDauThuc.equals("") & ngayKetThucThuc.equals("")) {
-            return iSoTietKiemRepository.findAllByTenKhachHangAndNgayBatDau(tenKhachHangThuc, ngayBatDauThuc);
+            return iSoTietKiemRepository.findAllByTenKhachHangAndNgayBatDau(tenKhachHangThuc, ngayBatDauThuc, pageable);
         }
         return null;
     }
