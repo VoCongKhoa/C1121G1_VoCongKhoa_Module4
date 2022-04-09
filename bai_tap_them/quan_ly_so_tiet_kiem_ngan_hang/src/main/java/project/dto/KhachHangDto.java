@@ -1,12 +1,9 @@
 package project.dto;
 
-import org.springframework.validation.Errors;
-import org.springframework.validation.Validator;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
-public class KhachHangDto implements Validator {
+public class KhachHangDto{
 
     private Integer maKhachHang;
 
@@ -33,13 +30,4 @@ public class KhachHangDto implements Validator {
         this.tenKhachHang = tenKhachHang;
     }
 
-    @Override
-    public boolean supports(Class<?> clazz) {
-        return false;
-    }
-
-    @Override
-    public void validate(Object target, Errors errors) {
-
-    }
 }

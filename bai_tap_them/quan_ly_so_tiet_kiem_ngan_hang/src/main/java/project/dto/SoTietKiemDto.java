@@ -4,6 +4,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import project.models.KhachHang;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -28,6 +29,7 @@ public class SoTietKiemDto implements Validator {
 //    @Pattern(regexp = "^\\d+$", message = "Wrong format!")
     private String soTienGui;
 
+    @Valid
     private KhachHang khachHang;
 
     public SoTietKiemDto() {
