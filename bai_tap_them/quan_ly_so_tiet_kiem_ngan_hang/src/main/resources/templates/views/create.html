@@ -1,0 +1,39 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Tạo mới sổ tiết kiệm</title>
+</head>
+<body>
+<div th:replace="~{/views/common :: header}">
+</div>
+<h2>Tạo mới sổ tiết kiệm</h2>
+
+<form action="/index/create" method="post" th:object="${soTietKiemDto}">
+
+<!--    <p>Mã số tiết kiệm: </p>-->
+<!--    <input type="text" th:field="*{maSoTietKiem}" />-->
+    <p>Thời gian bắt đầu gởi: </p>
+    <input type="date" th:field="*{thoiGianBatDauGui}"/><br>
+    <small style="color: red" th:if="${#fields.hasErrors('thoiGianBatDauGui')}" th:errors="*{thoiGianBatDauGui}"></small>
+
+    <p>Kỳ hạn: </p>
+    <input type="text" th:field="*{kyHan}" /><br>
+    <small style="color: red" th:if="${#fields.hasErrors('kyHan')}" th:errors="*{kyHan}"></small>
+
+    <p>Số tiền gửi: </p>
+    <input type="text" th:field="*{soTienGui}" /><br>
+    <small style="color: red" th:if="${#fields.hasErrors('soTienGui')}" th:errors="*{soTienGui}"></small>
+
+    <p>Tên khách hàng: </p>
+    <select th:field="*{khachHang}">
+        <option th:each="row : ${khachHangList}" th:value="${row.maKhachHang}" th:text="${row.tenKhachHang}"></option>
+    </select><br>
+    <small style="color: red" th:if="${#fields.hasErrors('khachHang')}" th:errors="*{khachHang}"></small>
+    <br><br>
+    <input type="submit" value="Create new" />
+
+</form>
+
+<div th:replace="~{/views/common :: footer}">
+</div>
+</body>
+</html>
