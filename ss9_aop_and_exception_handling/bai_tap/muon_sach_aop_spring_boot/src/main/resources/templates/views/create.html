@@ -1,0 +1,44 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Tạo mới sổ tiết kiệm</title>
+</head>
+<body>
+<div th:replace="~{/views/common :: header}">
+</div>
+<h2>Mượn sách</h2>
+
+<form action="/index/create" method="post" th:object="${theMuonSachDto}">
+
+    <p>Mã mượn sách: </p>
+    <input type="text" th:field="*{maMuonSach}" />
+    <small style="color: red" th:if="${#fields.hasErrors('maMuonSach')}" th:errors="*{maMuonSach}"></small>
+
+    <p>Tên sách: </p>
+    <select th:field="*{sachDto.maSach}">
+        <option th:each="row : ${sachList}" th:value="${row.maSach}" th:text="${row.tenSach}"></option>
+    </select><br>
+    <small style="color: red" th:if="${#fields.hasErrors('sachDto.maSach')}" th:errors="*{sachDto.maSach}"></small>
+
+    <p>Tên học sinh: </p>
+    <select th:field="*{hocSinhDto.maHocSinh}">
+        <option th:each="row : ${hocSinhList}" th:value="${row.maHocSinh}" th:text="${row.hoTen}"></option>
+    </select><br>
+    <small style="color: red" th:if="${#fields.hasErrors('hocSinhDto.maHocSinh')}" th:errors="*{hocSinhDto.maHocSinh}"></small>
+
+    <p>Ngày mượn sách: </p>
+    <input type="date" th:field="*{ngayMuon}"/><br>
+    <small style="color: red" th:if="${#fields.hasErrors('ngayMuon')}" th:errors="*{ngayMuon}"></small>
+
+    <p>Ngày trả sách: </p>
+    <input type="date" th:field="*{ngayTra}"/><br>
+    <small style="color: red" th:if="${#fields.hasErrors('ngayTra')}" th:errors="*{ngayTra}"></small>
+
+    <br><br>
+    <input type="submit" value="Create new" />
+
+</form>
+
+<div th:replace="~{/views/common :: footer}">
+</div>
+</body>
+</html>

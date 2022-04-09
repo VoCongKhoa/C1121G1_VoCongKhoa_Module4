@@ -1,6 +1,7 @@
 package project.models;
 
 import javax.persistence.*;
+import javax.swing.*;
 
 @Entity
 public class SoTietKiem {
