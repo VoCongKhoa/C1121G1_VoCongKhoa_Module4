@@ -20,6 +20,7 @@ import project.services.ITheMuonSachService;
 
 import javax.validation.Valid;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -35,28 +36,6 @@ public class MuonSachController {
 
     @Autowired
     private ITheMuonSachService iTheMuonSachService;
-
-//    @GetMapping(value = "")
-//    public String index(Model model,
-//                        @PageableDefault(value = 2) Pageable pageable,
-//                        @RequestParam Optional<String> tenKhachHang,
-//                        @RequestParam Optional<String> ngayBatDau,
-//                        @RequestParam Optional<String> ngayKetThuc) {
-//
-//        String tenKhachHangThuc = tenKhachHang.orElse("");
-//        String ngayBatDauThuc = ngayBatDau.orElse("");
-//        String ngayKetThucThuc = ngayKetThuc.orElse("");
-//        if(!(tenKhachHangThuc.equals("")&ngayBatDauThuc.equals("")&ngayKetThucThuc.equals(""))){
-//            return "redirect:/index/search";
-//        } else {
-//            Page<SoTietKiem> soTietKiemList = iSachService.findAllByTenKhachHangAndNgayGui(tenKhachHangThuc,ngayBatDauThuc,ngayKetThucThuc, pageable);
-//            model.addAttribute("soTietKiemList", iSachService.findAll(pageable));
-//            model.addAttribute("tenKhachHangThuc",tenKhachHangThuc);
-//            model.addAttribute("ngayBatDauThuc",ngayBatDauThuc);
-//            model.addAttribute("ngayKetThucThuc",ngayKetThucThuc);
-//            return "views/list";
-//        }
-//    }
 
     @GetMapping
     public String index(Model model, @PageableDefault(value = 2) Pageable pageable) {
@@ -77,6 +56,8 @@ public class MuonSachController {
     public String create(@Valid @ModelAttribute TheMuonSachDto theMuonSachDto,
                          BindingResult bindingResult,
                          Model model) {
+
+//        BindingResult bindingResult1 = new BindingResult();
         if (iTheMuonSachService.findById(theMuonSachDto.getMaMuonSach()) != null) {
             bindingResult.rejectValue("maMuonSach", "maMuonSach.duplicate", "Mã mượn sách đã tồn tại!");
         }
@@ -102,7 +83,7 @@ public class MuonSachController {
     }
 
     @GetMapping(value = "/update")
-    public String goUpdate(Model model, @RequestParam String maSach) {
+    public String goUpdate(Model model, @RequestParam String maSach) throws Exception {
         Sach sach = iSachService.findById(maSach);
         if (sach != null) {
             SachDto sachDto = new SachDto();
@@ -111,7 +92,7 @@ public class MuonSachController {
             model.addAttribute("sachDto", sachDto);
             return "views/update";
         } else {
-            return "views/404";
+            throw new Exception();
         }
     }
 
@@ -139,24 +120,24 @@ public class MuonSachController {
 
 
     @GetMapping(value = "/detail/{maSach}")
-    public String goDetail(Model model, @PathVariable String maSach) {
+    public String goDetail(Model model, @PathVariable String maSach) throws Exception {
         Sach sach = iSachService.findById(maSach);
         if (sach != null) {
             model.addAttribute("sach", sach);
             return "views/detail";
         } else {
-            return "views/404";
+            throw new Exception();
         }
     }
 
     @GetMapping(value = "/delete/{maSach}")
-    public String goDelete(Model model, @PathVariable String maSach) {
+    public String goDelete(Model model, @PathVariable String maSach) throws Exception {
         Sach sach = iSachService.findById(maSach);
         if (sach != null) {
             model.addAttribute("sach", sach);
             return "views/delete";
         } else {
-            return "views/404";
+            throw new Exception();
         }
     }
 
@@ -178,16 +159,28 @@ public class MuonSachController {
         return "views/list";
     }
 
-//    @GetMapping(value = "/search")
-//    public String search(Model model, @RequestParam Optional<String> tenKhachHang,
-//                         @RequestParam Optional<String> ngayBatDau,
-//                         @RequestParam Optional<String> ngayKetThuc, @PageableDefault(value = 2) Pageable pageable) {
-//        String tenKhachHangThuc = tenKhachHang.orElse("");
-//        String ngayBatDauThuc = ngayBatDau.orElse("");
-//        String ngayKetThucThuc = ngayKetThuc.orElse("");
-//        Page<SoTietKiem> soTietKiemList = iSachService.findAllByTenKhachHangAndNgayGui(tenKhachHangThuc,ngayBatDauThuc,ngayKetThucThuc, pageable);
-//        model.addAttribute("soTietKiemList", soTietKiemList);
-//        return "views/list";
-//    }
+    @GetMapping(value = "/remove")
+    public String goRemove(Model model) {
+        List<TheMuonSach> theMuonSachList = iTheMuonSachService.findAll();
+        model.addAttribute("theMuonSachList", theMuonSachList);
+        return "views/remove";
+    }
+
+    @PostMapping(value = "/remove")
+    public String remove(@RequestParam TheMuonSach theMuonSach) throws Exception {
+        TheMuonSach theMuonSach1 =  iTheMuonSachService.findById(theMuonSach.getMaMuonSach());
+        Sach sach = iSachService.findById(theMuonSach.getSach().getMaSach());
+        if (theMuonSach1 == null | sach == null) {
+            throw new Exception();
+        }
+        sach.setSoLuong(sach.getSoLuong()+1);
+        iTheMuonSachService.removeByMa(theMuonSach.getMaMuonSach());
+        return "redirect:/index";
+    }
+
+    @ExceptionHandler(Exception.class)
+    public String go404(){
+        return "views/404";
+    }
 
 }

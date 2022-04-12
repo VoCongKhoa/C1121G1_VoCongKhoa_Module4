@@ -5,7 +5,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import project.models.Sach;
-import project.repositories.IHocSinhRepository;
 import project.repositories.ISachRepository;
 
 import java.util.List;
@@ -84,8 +83,6 @@ public class SachService implements ISachService {
         if (!(soLuongThuc.equals(""))){
             return iSachRepository.findAllBySoLuong(soLuongThuc, pageable);
         }
-
-
             return null;
     }
 }

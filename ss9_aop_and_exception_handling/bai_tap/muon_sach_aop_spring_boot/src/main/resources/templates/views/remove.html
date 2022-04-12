@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Trả sách</title>
+</head>
+<body>
+<h2>Trả sách</h2>
+<form action="/index/remove" method="post">
+    <p>Chọn mã thẻ mượn sách: </p>
+    <select th:name="theMuonSach">
+        <option th:each="row : ${theMuonSachList}"
+                th:value="${row.maMuonSach}"
+                th:text="|${row.maMuonSach} - ${row.hocSinh.hoTen} - ${row.sach.tenSach}|"></option>
+        <!--                Cach nay cung duoc-->
+<!--                th:text="${row.maMuonSach} + ' - ' + ${row.hocSinh.hoTen} + ' - ' + ${row.sach.tenSach}"></option>-->
+    </select>
+
+    <button>Chọn</button>
+</form>
+</body>
+</html>

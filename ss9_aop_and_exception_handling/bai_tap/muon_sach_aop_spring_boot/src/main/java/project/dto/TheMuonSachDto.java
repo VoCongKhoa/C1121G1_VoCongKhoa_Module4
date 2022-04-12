@@ -21,7 +21,6 @@ public class TheMuonSachDto implements Validator {
     private String ngayTra;
     @Valid
     private HocSinhDto hocSinhDto;
-    @Valid
     private SachDto sachDto;
 
     public TheMuonSachDto() {
