@@ -415,7 +415,7 @@
             <div class="table-title">
                 <div class="row">
 
-<!--                    BACK TO HOMEPAGE-->
+                    <!--                    BACK TO HOMEPAGE-->
                     <div class="col-sm-4 d-flex">
                         <button type="button" class="btn btn-success">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -432,7 +432,7 @@
                         <h2>Manage <b>Customers</b></h2>
                     </div>
 
-<!--                    ADD NEW CUSTOMER-->
+                    <!--                    ADD NEW CUSTOMER-->
                     <div class="col-sm-4">
                         <a href="/customer/create" class="btn btn-success"><i class="material-icons">&#xE147;</i>
                             <span>Add New Customer</span>
@@ -444,25 +444,25 @@
                 <div class="row">
                     <div class="col-sm-3">
 
-<!--                        FORM SORT-->
-                        <form method="get" id="sortForm" onchange="submitSortForm()">
+                        <!--                        FORM SORT-->
+                        <form method="get" id="sortForm" onchange="submitSortForm()" action="/customer/list">
                             <div class="filter-group">
-                                <select name="action" id="sort" class="form-control">
-                                    <option value="default" selected>Sort</option>
-                                    <option value="idSort">Sort by ID</option>
+                                <select th:name="sortOption" id="sort" class="form-control">
+                                    <option value="" selected>Sort</option>
+                                    <!--                                    <option value="idSort">Sort by ID</option>-->
                                     <option value="nameSort">Sort by name</option>
-                                    <option value="birthdaySort">Sort by birthday</option>
+                                    <!--                                    <option value="birthdaySort">Sort by birthday</option>-->
                                 </select>
                             </div>
                         </form>
                     </div>
                     <div class="col-sm-9">
 
-<!--                        FORM SEARCH-->
+                        <!--                        FORM SEARCH-->
                         <div class="filter-group">
                             <div class="filter-group d-flex">
 
-<!--                                REFRESH BUTTON-->
+                                <!--                                REFRESH BUTTON-->
                                 <span class="input-group-text" id="basic-addon1"
                                       style="width: fit-content;padding-bottom: 0px;">
                                       <a href="/customer?action=list" type="button"><svg
@@ -478,14 +478,17 @@
                                       </svg></a>
 
                                     </span>
-                                <form method="get">
+                                <form method="get" action="/customer/list">
                                     <input type="hidden" name="action" value="search">
+                                    <input type="text" class="form-control" placeholder="Search by code"
+                                           aria-label="Input group example" aria-describedby="basic-addon1"
+                                           name="codeSearch">
                                     <input type="text" class="form-control" placeholder="Search by name"
                                            aria-label="Input group example" aria-describedby="basic-addon1"
-                                           name="customerNameSearch">
+                                           name="nameSearch">
                                     <input type="text" class="form-control" placeholder="Search by address"
                                            aria-label="Input group example" aria-describedby="basic-addon1"
-                                           name="customerAddressSearch">
+                                           name="addressSearch">
                                     <button type="submit" class="btn btn-primary" style="margin-left: 10px;"><i
                                             class="fa fa-search"></i></button>
                                 </form>
@@ -536,17 +539,26 @@
                 </tr>
                 </tbody>
             </table>
-            <!--        <div class="clearfix">-->
-            <!--            <%&#45;&#45;            <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>&#45;&#45;%>-->
-            <!--            <ul class="pagination">-->
-            <!--                <%&#45;&#45;                <li class="page-item disabled"><a href="/customer?action=list&numberPage=${numberPage-1}">Previous</a></li>&#45;&#45;%>-->
-            <!--                <c:forEach begin="1" end="${endPageNumber}" var="numberPage">-->
-            <!--                    <li class="page-item"><a href="/customer?action=list&numberPage=${numberPage}"-->
-            <!--                                             class="page-link">${numberPage}</a></li>-->
-            <!--                </c:forEach>-->
-            <!--                <%&#45;&#45;                <li class="page-item"><a href="/customer?action=list&numberPage=${numberPage+1}" class="page-link">Next</a></li>&#45;&#45;%>-->
-            <!--            </ul>-->
-            <!--        </div>-->
+            <div class="clearfix">
+                <!--                                   <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>-->
+                <ul class="pagination">
+                    <a th:if="${customerList.hasPrevious()}"
+                       th:href="@{/customer/list(page=${customerList.number - 1}, codeSearch=${code},nameSearch=${name},addressSearch=${address},sortOption=${sortOption})}"
+                       class="page-link">«</a>
+                    <span th:text="${customerList.number + 1}"  class="page-item"></span> / <span th:text="${customerList.totalPages}"  class="page-item"></span>
+                    <a th:if="${customerList.hasNext()}"
+                       th:href="@{/customer/list(page=${customerList.number + 1}, codeSearch=${code},nameSearch=${name},addressSearch=${address},sortOption=${sortOption})}"
+                       class="page-link">»</a>
+
+
+                    <!--                                           <li class="page-item disabled"><a href="/customer?action=list&numberPage=${numberPage-1}">Previous</a></li>-->
+<!--                    <c:forEach begin="1" end="${endPageNumber}" var="numberPage">-->
+<!--                        <li class="page-item"><a href="/customer?action=list&numberPage=${numberPage}"-->
+<!--                                                 class="page-link">${numberPage}</a></li>-->
+<!--                    </c:forEach>-->
+                    <!--                                           <li class="page-item"><a href="/customer?action=list&numberPage=${numberPage+1}" class="page-link">Next</a></li>-->
+                </ul>
+            </div>
         </div>
     </div>
 </div>

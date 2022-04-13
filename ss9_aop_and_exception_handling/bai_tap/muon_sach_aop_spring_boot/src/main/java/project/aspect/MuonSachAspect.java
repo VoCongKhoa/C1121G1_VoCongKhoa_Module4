@@ -14,11 +14,9 @@ public class MuonSachAspect {
 
     private static Long count = 0L;
 
+//    combine poincut aop expression
     @AfterReturning(pointcut =
-            "execution(public * project.controllers.MuonSachController.create(..)) || " +
-                    "execution(public * project.controllers.MuonSachController.update(..)) ||" +
-                    "execution(public * project.controllers.MuonSachController.delete(..)) ||" +
-                    "execution(public * project.controllers.MuonSachController.remove(..))")
+            "execution(public * project.controllers.MuonSachController.create(..)) || execution(public * project.controllers.MuonSachController.update(..)) || execution(public * project.controllers.MuonSachController.delete(..)) || execution(public * project.controllers.MuonSachController.remove(..))")
     public void logChange(JoinPoint joinPoint){
         String methodName = joinPoint.getSignature().getName();
         String args = Arrays.toString(joinPoint.getArgs());
@@ -27,6 +25,8 @@ public class MuonSachAspect {
         System.err.println("Args: " + args);
         System.err.println("Number of actions: " + count);
     }
+
+
 
     @AfterReturning(pointcut = "within(project.controllers.*)")
     public void logAllChange(JoinPoint joinPoint){

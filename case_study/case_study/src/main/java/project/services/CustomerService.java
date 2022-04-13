@@ -1,6 +1,8 @@
 package project.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import project.models.Customer;
 import project.repositories.ICustomerRepository;
@@ -8,7 +10,7 @@ import project.repositories.ICustomerRepository;
 import java.util.List;
 
 @Service
-public class CustomerService implements ICustomerService{
+public class CustomerService implements ICustomerService {
 
     @Autowired
     ICustomerRepository iCustomerRepository;
@@ -46,5 +48,15 @@ public class CustomerService implements ICustomerService{
     @Override
     public void delete(int customerId) {
         iCustomerRepository.updateActive(customerId);
+    }
+
+    @Override
+    public Page<Customer> findAllWithNameSort(Pageable pageable) {
+        return iCustomerRepository.findAllWithNameSort(pageable);
+    }
+
+    @Override
+    public Page<Customer> findAllWithSearch(String code, String name, String address, Pageable pageable) {
+        return iCustomerRepository.findAllActiveCodeAndNameAndAddressSearch(code, name, address, pageable);
     }
 }
