@@ -9,11 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import project.dto.CustomerDto;
-import project.models.Customer;
-import project.models.CustomerType;
-import project.services.ICustomerService;
-import project.services.ICustomerTypeService;
+import project.dto.customer.CustomerDto;
+import project.models.customer.Customer;
+import project.models.customer.CustomerType;
+import project.services.customer.ICustomerService;
+import project.services.customer.ICustomerTypeService;
 
 import javax.validation.Valid;
 import java.util.Collections;
@@ -55,9 +55,9 @@ public class CustomerController {
         }
 //        List<Customer> customerList = iCustomerService.findAllActive();
         model.addAttribute("customerList", customerList);
-        model.addAttribute("codeSearch", code);
-        model.addAttribute("nameSearch", name);
-        model.addAttribute("addressSearch", address);
+        model.addAttribute("code", code);
+        model.addAttribute("name", name);
+        model.addAttribute("address", address);
         model.addAttribute("sortOption", sort);
         return "views/customer/list_customer";
     }
