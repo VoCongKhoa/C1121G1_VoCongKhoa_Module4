@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Font Awesome -->
+    <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+    rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.css"
+    rel="stylesheet"
+    />
+    <!-- MDB -->
+    <script
+    type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.js"
+    ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+    <style>
+        body, h1, h2, h3, h4, h5, h6 {
+            font-family: "Karma", sans-serif
+        }
+
+        .w3-bar-block .w3-bar-item {
+            padding: 20px
+        }
+
+        .w3-quarter a {
+            font-weight: 400;
+            /*margin: 15px 0 10px 0;*/
+            font-size: 24px;
+            text-decoration-line: none;
+        }
+
+        .w3-quarter a:hover {
+            color: #6868d9;
+        }
+    </style>
+
+    <script>
+        $('document').ready(function () {
+            let pageLoad = 0;
+            getPostList(pageLoad);
+
+            $('#btnLoadMore').click(function () {
+                pageLoad++;
+                console.log(pageLoad);
+                getPostList(pageLoad)
+            });
+
+            $('#btnSearch').click(function () {
+                let inputSearchVal = $('#inputSearch').val();
+                $.ajax({
+                    headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                    },
+
+                    type: "GET", //GET, DELETE, PUT...
+
+                    url: "http://localhost:8080/postRestful/search?contentSearch=" + inputSearchVal,
+
+                    success: function(resultSuccess){
+                        let postList = resultSuccess;
+                        let outHTML = "";
+                        postList.forEach(post => {
+                            outHTML += `
+                            <div class="w3-quarter">
+                                <img src="${post.postThumbnailSource}" alt="" style="width:100%">
+                                <a href="#">${post.postTitle}</a>
+                                <p>${post.postIntro}</p>
+                            </div>
+                            `
+                        });
+                        //  console.log(outHTML);
+                        $('#postContent').html(outHTML);
+                    },
+
+                    error: function(resultError) {
+                        alert("He thong dang bao tri");
+                    }
+
+                });
+            });
+
+        });
+    
+        function getPostList(pageLoad) {
+                $.ajax({
+                    headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                    },
+
+                    type: "GET", //GET, DELETE, PUT...
+
+                    url: "http://localhost:8080/postRestful?page="+pageLoad,
+
+                    success: function(resultSuccess){
+                        if(resultSuccess.content.length == 0){
+                            $('#btnLoadMore').fadeOut();
+                        }
+                        let postList = resultSuccess.content;
+                        let outHTML = "";
+                        postList.forEach(post => {
+                            outHTML += `
+                            <div class="w3-quarter">
+                                <img src="${post.postThumbnailSource}" alt="" style="width:100%">
+                                <a href="#">${post.postTitle}</a>
+                                <p>${post.postIntro}</p>
+                            </div>
+                            `
+                        });
+                        //  console.log(postList);
+                        $('#postContent').append(outHTML);
+                    },
+
+                    error: function(resultError) {
+                        alert("He thong dang bao tri");
+                    }
+
+                });
+        }
+    </script>
+</head>
+<body>
+    <div class="container" >
+        <div class="input-group d-flex justify-content-center mt-5" style="width: 100%;">
+            <div class="form-outline">
+              <input type="search" id="inputSearch" class="form-control" />
+              <label class="form-label" for="form1">Search</label>
+            </div>
+            <button type="button" class="btn btn-primary" id="btnSearch">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+    </div>
+
+    <div class="w3-row-padding w3-padding-16 w3-center" id="postContent" style="display: flex;flex-wrap: wrap;">
+
+    </div>
+    <div class="input-group d-flex justify-content-center mt-5">
+        <button id="btnLoadMore" class="btn btn-primary">Load more</button>
+    </div>
+</body>
+</html>
