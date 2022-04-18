@@ -55,7 +55,16 @@
                         showList();
                     },
                     error: function(resultError) {
-                        alert("He thong dang bao tri");
+                        let modelError = "";
+                        let producerError = "";
+                        if (resultError.responseJSON.errorMap.model) {
+                            modelError = resultError.responseJSON.errorMap.model
+                        }
+                        if (resultError.responseJSON.errorMap.producer) {
+                            producerError = resultError.responseJSON.errorMap.producer
+                        }
+                        $('#modelError').text(modelError);
+                        $('#producerError').text(producerError);
                     }
                 });
             })
@@ -150,6 +159,7 @@
                 <div class="mb-4">
                 <label class="form-label" for="form4Example1">Model</label>
                 <input type="text" id="model" class="form-control" />
+                <small id="modelError" style="color: red;"></small>
                 </div>
             
                 <!-- Message input -->
@@ -162,6 +172,7 @@
                 <div class="mb-4">
                     <label class="form-label" for="form4Example3">Producer</label>
                     <input type="text" class="form-control" id="producer">
+                    <small id="producerError" style="color: red;"></small>
                 </div>
             </div>
             <div class="modal-footer">
