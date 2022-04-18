@@ -19,7 +19,7 @@ public class SmartphoneController {
     @Autowired
     private ISmartphoneService smartphoneService;
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<Smartphone> createSmartphone(@RequestBody Smartphone smartphone) {
         return new ResponseEntity<>(smartphoneService.save(smartphone), HttpStatus.CREATED);
     }
