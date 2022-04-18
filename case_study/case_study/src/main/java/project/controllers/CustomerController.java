@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import project.dto.customer.CustomerDto;
 import project.models.customer.Customer;
 import project.models.customer.CustomerType;
@@ -53,7 +54,11 @@ public class CustomerController {
             sort = "";
             customerList = iCustomerService.findAllWithSearch(code,name,address,pageable);
         }
-//        List<Customer> customerList = iCustomerService.findAllActive();
+//        List<CustomerType> customerTypeList = iCustomerTypeService.findAllActive();
+//        Collections.reverse(customerTypeList);
+//        model.addAttribute("customerDto", new CustomerDto());
+//        model.addAttribute("customerTypeList", customerTypeList);
+        model.addAttribute("currentPage", pageable.getPageNumber());
         model.addAttribute("customerList", customerList);
         model.addAttribute("code", code);
         model.addAttribute("name", name);

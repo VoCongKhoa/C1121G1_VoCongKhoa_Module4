@@ -465,7 +465,7 @@
                                 <!--                                REFRESH BUTTON-->
                                 <span class="input-group-text" id="basic-addon1"
                                       style="width: fit-content;padding-bottom: 0px;">
-                                      <a href="/employee?action=list" type="button"><svg
+                                      <a href="/employee/list" type="button"><svg
                                               xmlns="http://www.w3.org/2000/svg" width="16"
                                               height="16"
                                               fill="currentColor"
@@ -476,13 +476,19 @@
                                           <path
                                                   d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"></path>
                                       </svg></a>
+                                </span>
 
-                                    </span>
+<!--                                SEARCH INPUT-->
                                 <form method="get" action="/employee/list">
                                     <input type="hidden" name="action" value="search">
-                                    <!--                                    <input type="text" class="form-control" placeholder="Search by code"-->
-                                    <!--                                           aria-label="Input group example" aria-describedby="basic-addon1"-->
-                                    <!--                                           name="codeSearch">-->
+                                    <select th:name="positionId" id="positionId" class="form-control">
+                                        <option th:value="0"
+                                                 th:text="Position" selected></option>
+                                        <option th:each="row : ${positionList}"
+                                                th:value="${row.positionId}"
+                                                th:text="${row.positionName}">
+                                        </option>
+                                    </select>
                                     <input type="text" class="form-control" placeholder="Search by name"
                                            aria-label="Input group example" aria-describedby="basic-addon1"
                                            name="nameSearch">
@@ -555,27 +561,23 @@
                 </tr>
                 </tbody>
             </table>
-            <div class="clearfix">
-                <!--                                   <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>-->
-                <ul class="pagination">
-                    <a th:if="${employeeList.hasPrevious()}"
-                       th:href="@{/employee/list(page=${employeeList.number - 1}, nameSearch=${name},addressSearch=${address},sortOption=${sortOption})}"
-                       class="page-link">«</a>
-                    <span th:text="${employeeList.number + 1}" class="page-item"></span> / <span
-                        th:text="${employeeList.totalPages}" class="page-item"></span>
-                    <a th:if="${employeeList.hasNext()}"
-                       th:href="@{/employee/list(page=${employeeList.number + 1}, nameSearch=${name},addressSearch=${address},sortOption=${sortOption})}"
-                       class="page-link">»</a>
-
-
-                    <!--                                           <li class="page-item disabled"><a href="/employee?action=list&numberPage=${numberPage-1}">Previous</a></li>-->
-                    <!--                    <c:forEach begin="1" end="${endPageNumber}" var="numberPage">-->
-                    <!--                        <li class="page-item"><a href="/employee?action=list&numberPage=${numberPage}"-->
-                    <!--                                                 class="page-link">${numberPage}</a></li>-->
-                    <!--                    </c:forEach>-->
-                    <!--                                           <li class="page-item"><a href="/employee?action=list&numberPage=${numberPage+1}" class="page-link">Next</a></li>-->
-                </ul>
-            </div>
+            <hr/>
+            <ul class="nav nav-pills">
+                <a th:if="${employeeList.hasPrevious()}"
+                   th:href="@{/employee/list(page=${employeeList.number - 1}, nameSearch=${name},addressSearch=${address},positionId =${positionIdVal},sortOption=${sortOption})}"
+                   class="page-link">«</a>
+                <li class="nav-item"
+                    th:each="index : ${#numbers.sequence(1, employeeList.totalPages)}">
+                    <a th:text="${index}"
+                       class="nav-link"
+                       th:href="@{/employee/list(page=${index - 1}, nameSearch=${name},addressSearch=${address},positionId =${positionIdVal},sortOption=${sortOption})}"
+                       th:classappend="(${currentPage} == ${index - 1}) ? 'active':'' "
+                    ></a>
+                </li>
+                <a th:if="${employeeList.hasNext()}"
+                   th:href="@{/employee/list(page=${employeeList.number + 1}, nameSearch=${name},addressSearch=${address},positionId =${positionIdVal},sortOption=${sortOption})}"
+                   class="page-link">»</a>
+            </ul>
         </div>
     </div>
 </div>

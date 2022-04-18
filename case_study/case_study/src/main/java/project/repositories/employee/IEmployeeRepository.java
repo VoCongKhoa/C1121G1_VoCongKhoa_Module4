@@ -14,5 +14,10 @@ public interface IEmployeeRepository extends JpaRepository<Employee,Integer> {
 
     @Query(value = "select * from employee where active = 1 and employee_name like concat('%',:name,'%') and " +
             "employee_address like concat('%',:address,'%') ", nativeQuery = true)
-    Page<Employee> findAllWithSearch(@Param("name") String name,@Param("address") String address, Pageable pageable);
+    Page<Employee> findAllWithNameAndAddressSearch(@Param("name") String name, @Param("address") String address, Pageable pageable);
+
+    @Query(value = "select * from employee where active = 1 and employee_name like concat('%',:name,'%') and " +
+            "employee_address like concat('%',:address,'%') and position_id = :positionIdVal ", nativeQuery = true)
+    Page<Employee> findAllWithNameAndAddressAndPositionSearch(@Param("name") String name, @Param("address") String address,
+                                                              @Param("positionIdVal") Integer positionIdVal, Pageable pageable);
 }

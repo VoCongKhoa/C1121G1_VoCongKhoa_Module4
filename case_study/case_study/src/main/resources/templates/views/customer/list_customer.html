@@ -11,6 +11,9 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" th:href="@{/assets/css/modal/modal.css}">
+    <link th:href="@{/assets/css/modal/themify-icons/themify-icons.css}" rel="stylesheet">
     <style>
         body {
             color: #566787;
@@ -384,8 +387,8 @@
     </style>
     <script>
         $(document).ready(function () {
-            // Activate tooltip
-            $('[data-toggle="tooltip"]').tooltip();
+            // // Activate tooltip
+            // $('[data-toggle="tooltip"]').tooltip();
 
             // Select/Deselect checkboxes
             var checkbox = $('table tbody input[type="checkbox"]');
@@ -436,6 +439,7 @@
                     <div class="col-sm-4">
                         <a href="/customer/create" class="btn btn-success"><i class="material-icons">&#xE147;</i>
                             <span>Add New Customer</span>
+                            <!--                        <a class="dialog-btn" href="#my-modal">Click me!</a>-->
                         </a>
                     </div>
                 </div>
@@ -465,7 +469,7 @@
                                 <!--                                REFRESH BUTTON-->
                                 <span class="input-group-text" id="basic-addon1"
                                       style="width: fit-content;padding-bottom: 0px;">
-                                      <a href="/customer?action=list" type="button"><svg
+                                      <a href="/customer/list" type="button"><svg
                                               xmlns="http://www.w3.org/2000/svg" width="16"
                                               height="16"
                                               fill="currentColor"
@@ -539,69 +543,189 @@
                 </tr>
                 </tbody>
             </table>
-            <div class="clearfix">
-                <!--                                   <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>-->
-                <ul class="pagination">
-                    <a th:if="${customerList.hasPrevious()}"
-                       th:href="@{/customer/list(page=${customerList.number - 1}, codeSearch=${code},nameSearch=${name},addressSearch=${address},sortOption=${sortOption})}"
-                       class="page-link">«</a>
-                    <span th:text="${customerList.number + 1}"  class="page-item"></span> / <span th:text="${customerList.totalPages}"  class="page-item"></span>
-                    <a th:if="${customerList.hasNext()}"
-                       th:href="@{/customer/list(page=${customerList.number + 1}, codeSearch=${code},nameSearch=${name},addressSearch=${address},sortOption=${sortOption})}"
-                       class="page-link">»</a>
+<!--            <div class="clearfix">-->
+<!--                &lt;!&ndash;                                   <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>&ndash;&gt;-->
+<!--                <ul class="pagination">-->
+<!--                    <a th:if="${customerList.hasPrevious()}"-->
+<!--                       th:href="@{/customer/list(page=${customerList.number - 1}, codeSearch=${code},nameSearch=${name},addressSearch=${address},sortOption=${sortOption})}"-->
+<!--                       class="page-link">«</a>-->
+<!--                    <span th:text="${customerList.number + 1}" class="page-item"></span> / <span-->
+<!--                        th:text="${customerList.totalPages}" class="page-item"></span>-->
+<!--                    <a th:if="${customerList.hasNext()}"-->
+<!--                       th:href="@{/customer/list(page=${customerList.number + 1}, codeSearch=${code},nameSearch=${name},addressSearch=${address},sortOption=${sortOption})}"-->
+<!--                       class="page-link">»</a>-->
+<!--                </ul>-->
+<!--            </div>-->
 
-
-                    <!--                                           <li class="page-item disabled"><a href="/customer?action=list&numberPage=${numberPage-1}">Previous</a></li>-->
-<!--                    <c:forEach begin="1" end="${endPageNumber}" var="numberPage">-->
-<!--                        <li class="page-item"><a href="/customer?action=list&numberPage=${numberPage}"-->
-<!--                                                 class="page-link">${numberPage}</a></li>-->
-<!--                    </c:forEach>-->
-                    <!--                                           <li class="page-item"><a href="/customer?action=list&numberPage=${numberPage+1}" class="page-link">Next</a></li>-->
-                </ul>
-            </div>
+            <hr/>
+            <ul class="nav nav-pills">
+                <a th:if="${customerList.hasPrevious()}"
+                   th:href="@{/customer/list(page=${customerList.number - 1}, codeSearch=${code},nameSearch=${name},addressSearch=${address},sortOption=${sortOption})}"
+                   class="page-link">«</a>
+                <li class="nav-item"
+                    th:each="index : ${#numbers.sequence(1, customerList.totalPages)}">
+                    <a th:text="${index}"
+                       class="nav-link"
+                       th:href="@{/customer/list(page=${index - 1}, codeSearch=${code},nameSearch=${name},addressSearch=${address},sortOption=${sortOption})}"
+                        th:classappend="(${currentPage} == ${index - 1}) ? 'active':'' "
+                    ></a>
+                </li>
+                <a th:if="${customerList.hasNext()}"
+                   th:href="@{/customer/list(page=${customerList.number + 1}, codeSearch=${code},nameSearch=${name},addressSearch=${address},sortOption=${sortOption})}"
+                   class="page-link">»</a>
+            </ul>
         </div>
     </div>
 </div>
 
-<!--<%&#45;&#45;MODAL DELETE&#45;&#45;%>-->
-
 <!--<%&#45;&#45;MODAL CREATE CUSTOMER&#45;&#45;%>-->
+<!--<div class="my-modal" id="my-modal">-->
+<!--    <div class="my-modal-container">-->
+
+<!--        <a class="my-modal-close" href="#">-->
+<!--            <i class="ti-close"></i>-->
+<!--        </a>-->
+
+<!--        <header class="my-modal-header">-->
+<!--            <h1>Get in Touch</h1>-->
+<!--        </header>-->
+
+<!--        <form action="/customer/create" method="post" th:object="${customerDto}">-->
+<!--            <div class="my-modal-body">-->
+<!--                <div class="my-modal-row">-->
+<!--                    <div class="my-modal-block">-->
+<!--                        <label for="" class="my-modal-label">-->
+<!--                            Customer code-->
+<!--                        </label>-->
+<!--                        <input type="text" class="my-modal-input" placeholder="Type new customer code here"-->
+<!--                               th:field="*{customerCode}">-->
+<!--                        <small style="color: red" th:if="${#fields.hasErrors('customerCode')}"-->
+<!--                               th:errors="*{customerCode}"></small>-->
+<!--                    </div>-->
+<!--                    <div class="my-modal-block">-->
+<!--                        <label for="" class="my-modal-label">-->
+<!--                            Customer name-->
+<!--                        </label>-->
+<!--                        <input type="text" class="my-modal-input" placeholder="Type new customer name here"-->
+<!--                               th:field="*{customerName}">-->
+<!--                        <small style="color: red" th:if="${#fields.hasErrors('customerName')}"-->
+<!--                               th:errors="*{customerName}"></small>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div class="my-modal-row">-->
+<!--                    <div class="my-modal-block">-->
+<!--                        <label for="" class="my-modal-label">-->
+<!--                            Choose customer gender-->
+<!--                        </label>-->
+<!--                        <input type="radio" id="female" th:field="*{customerGender}" value="0" checked>-->
+<!--                        <label for="female">Female</label><br>-->
+<!--                        <input type="radio" id="male" th:field="*{customerGender}" value="1">-->
+<!--                        <label for="male">Male</label>-->
+<!--                    </div>-->
+<!--                    <div class="my-modal-block">-->
+<!--                        <label for="" class="my-modal-label">-->
+<!--                            Select customer birthday-->
+<!--                        </label>-->
+<!--                        <input type="date" class="my-modal-input" th:field="*{customerBirthday}">-->
+<!--                        <small style="color: red" th:if="${#fields.hasErrors('customerBirthday')}"-->
+<!--                               th:errors="*{customerBirthday}"></small>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="my-modal-row">-->
+<!--                    <div class="my-modal-block">-->
+<!--                        <label for="" class="my-modal-label">-->
+<!--                            Customer ID Card number-->
+<!--                        </label>-->
+<!--                        <input type="text" class="my-modal-input" placeholder="Type new customer ID card number here"-->
+<!--                               th:field="*{customerIdCard}">-->
+<!--                        <small style="color: red" th:if="${#fields.hasErrors('customerIdCard')}"-->
+<!--                               th:errors="*{customerIdCard}"></small>-->
+<!--                    </div>-->
+<!--                    <div class="my-modal-block">-->
+<!--                        <label for="" class="my-modal-label">-->
+<!--                            Customer phone-->
+<!--                        </label>-->
+<!--                        <input type="text" class="my-modal-input" placeholder="Type new customer phone here"-->
+<!--                               th:field="*{customerPhone}">-->
+<!--                        <small style="color: red" th:if="${#fields.hasErrors('customerPhone')}"-->
+<!--                               th:errors="*{customerPhone}"></small>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div class="my-modal-row">-->
+<!--                    <div class="my-modal-block">-->
+<!--                        <label for="" class="my-modal-label">-->
+<!--                            Customer email-->
+<!--                        </label>-->
+<!--                        <input type="text" class="my-modal-input" placeholder="Type new customer email here"-->
+<!--                               th:field="*{customerEmail}">-->
+<!--                        <small style="color: red" th:if="${#fields.hasErrors('customerEmail')}"-->
+<!--                               th:errors="*{customerEmail}"></small>-->
+<!--                    </div>-->
+<!--                    <div class="my-modal-block">-->
+<!--                        <label for="" class="my-modal-label">-->
+<!--                            Customer address-->
+<!--                        </label>-->
+<!--                        <input type="text" class="my-modal-input" placeholder="Type new customer address here"-->
+<!--                               th:field="*{customerAddress}">-->
+<!--                        <small style="color: red" th:if="${#fields.hasErrors('customerAddress')}"-->
+<!--                               th:errors="*{customerAddress}"></small>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div class="my-modal-row">-->
+<!--                    <div class="my-modal-block">-->
+<!--                        <label for="typeId" class="my-modal-label">Choose new customer type</label>-->
+<!--                        <select id="typeId" class="my-modal-selection" th:field="*{customerType.customerTypeId}">-->
+<!--                            <option th:each="row : ${customerTypeList}" th:value="${row.customerTypeId}"-->
+<!--                                    th:text="${row.customerTypeName}">-->
+<!--                            </option>-->
+<!--                        </select>-->
+<!--                    </div>-->
+<!--                    <div class="my-modal-block">-->
+
+<!--                    </div>-->
+<!--                </div>-->
+<!--                &lt;!&ndash;                <div class="img-container" th:if="${#fields.hasAnyErrors()}">&ndash;&gt;-->
+<!--                &lt;!&ndash;                    <input id="checkError" value="1" type="hidden" />&ndash;&gt;-->
+<!--                &lt;!&ndash;                </div>&ndash;&gt;-->
+<!--                <button id="confirm" type="submit">-->
+<!--                    <i class="ti-save"></i> CREATE-->
+<!--                </button>-->
+
+<!--            </div>-->
+<!--        </form>-->
+
+<!--        <footer class="my-modal-footer">-->
+
+<!--        </footer>-->
+
+
+<!--    </div>-->
+<!--</div>-->
+
+
+<!--<%&#45;&#45;MODAL DELETE&#45;&#45;%>-->
 
 <!--<%&#45;&#45;MODAL EDIT&#45;&#45;%>-->
 
 
 </body>
+
 <script>
-    function getIdDelete(id) {
-        document.getElementById("idGetDelete").value = id;
-    }
+    $(document).ready(function () {
+        if ($("#checkError").val() != null) {
+            let flagVal = $("#checkError").val();
+            console.log(flagVal);
+        }
+        // $("#myBtn").click(function () {
+        //     if ($("#test").val() == 1) {
+        //         $("#myModal").modal();
+        //     }
+        // });
 
-    function getIdUpdate(id) {
-        document.getElementById("idGetUpdate").value = id;
-    }
 
-    function submitSortForm() {
-        document.getElementById("sortForm").submit();
-    }
-
-    // function loadAgain(error) {
-    //     if (error != null) {
-    //         $(#exampleModalPreview).modal({show: true});
-    //     }
-    // }
-
-    function edit(customerCode, customerName, customerBirthday, customerGender, customerIdCard, customerPhone, customerEmail, customerAddress, customerTypeId) {
-        document.getElementById("customerCode").value = customerCode;
-        document.getElementById("customerName").value = customerName;
-        document.getElementById("customerBirthday").value = customerBirthday;
-        document.getElementById("customerGender").value = customerGender;
-        document.getElementById("customerIdCard").value = customerIdCard;
-        document.getElementById("customerPhone").value = customerPhone;
-        document.getElementById("customerEmail").value = customerEmail;
-        document.getElementById("customerAddress").value = customerAddress;
-        document.getElementById("customerTypeId").value = customerTypeId;
-        console.log(customerId);
-    }
-
+    });
 </script>
 </html>

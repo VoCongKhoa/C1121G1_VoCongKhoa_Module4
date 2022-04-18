@@ -19,7 +19,16 @@ public class EmployeeService implements IEmployeeService{
     }
 
     @Override
-    public Page<Employee> findAllWithSearch(String name, String address, Pageable pageable) {
-        return iEmployeeRepository.findAllWithSearch(name,address,pageable);
+    public Page<Employee> findAllWithSearch(String name, String address,Integer positionIdVal, Pageable pageable) {
+        if (positionIdVal == 0){
+            return iEmployeeRepository.findAllWithNameAndAddressSearch(name,address,pageable);
+        } else {
+            return iEmployeeRepository.findAllWithNameAndAddressAndPositionSearch(name,address,positionIdVal,pageable);
+        }
+    }
+
+    @Override
+    public void save(Employee employee) {
+        iEmployeeRepository.save(employee);
     }
 }
