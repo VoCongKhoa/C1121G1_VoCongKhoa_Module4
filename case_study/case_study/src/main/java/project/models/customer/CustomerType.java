@@ -1,5 +1,7 @@
 package project.models.customer;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -18,6 +20,7 @@ public class CustomerType {
     private int active;
 
     @OneToMany(mappedBy = "customerType", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonBackReference
     private Set<Customer> customerSet;
 
     public CustomerType() {

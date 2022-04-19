@@ -5,10 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import project.dto.customer.CustomerDto;
 import project.dto.employee.EmployeeDto;
 import project.models.customer.Customer;
 import project.models.customer.CustomerType;
@@ -16,19 +18,19 @@ import project.models.employee.Division;
 import project.models.employee.EducationDegree;
 import project.models.employee.Employee;
 import project.models.employee.Position;
+import project.models.rest.ResponseObject;
 import project.services.employee.IDivisionService;
 import project.services.employee.IEducationDegreeService;
 import project.services.employee.IEmployeeService;
 import project.services.employee.IPositionService;
 
 import javax.validation.Valid;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
-@Controller
-@RequestMapping(value = "/employee")
-public class EmployeeController {
+@RestController
+@CrossOrigin
+@RequestMapping("/employeeRestful")
+public class EmployeeRestfulController {
 
     @Autowired
     IEmployeeService iEmployeeService;
@@ -92,8 +94,33 @@ public class EmployeeController {
         return "views/employee/create_employee";
     }
 
+//    @PostMapping(value = "/create")
+//    public String create(@Valid @ModelAttribute EmployeeDto employeeDto, BindingResult bindingResult, Model model) {
+//        employeeDto.validate(employeeDto, bindingResult);
+//        if (bindingResult.hasFieldErrors()) {
+//            List<Position> positionList = iPositionService.findAllActive();
+//
+//            List<Division> divisionList = iDivisionService.findAllActive();
+//
+//            List<EducationDegree> educationDegreeList = iEducationDegreeService.findAllActive();
+//            Collections.reverse(positionList);
+//
+//            model.addAttribute("positionList", positionList);
+//            model.addAttribute("divisionList", divisionList);
+//            model.addAttribute("educationDegreeList", educationDegreeList);
+//            System.out.println(bindingResult);
+//            return "views/employee/create_employee";
+//        } else {
+//            Employee employee = new Employee();
+//            BeanUtils.copyProperties(employeeDto, employee);
+//            employee.setEmployeeSalary(Double.parseDouble(employeeDto.getEmployeeSalary()));
+//            iEmployeeService.save(employee);
+//            return "redirect:/employee/list";
+//        }
+//    }
+
     @PostMapping(value = "/create")
-    public String create(@Valid @ModelAttribute EmployeeDto employeeDto, BindingResult bindingResult, Model model) {
+    public ResponseEntity<ResponseObject> create(@Valid @ModelAttribute @RequestBody EmployeeDto employeeDto, BindingResult bindingResult, Model model) {
         employeeDto.validate(employeeDto, bindingResult);
         if (bindingResult.hasFieldErrors()) {
             List<Position> positionList = iPositionService.findAllActive();
@@ -106,15 +133,20 @@ public class EmployeeController {
             model.addAttribute("positionList", positionList);
             model.addAttribute("divisionList", divisionList);
             model.addAttribute("educationDegreeList", educationDegreeList);
+            Map<String, String> errorMap = new HashMap<>();
+            bindingResult
+                    .getFieldErrors()
+                    .stream()
+                    .forEach(f -> errorMap.put(f.getField(),f.getDefaultMessage()));
             System.out.println(bindingResult);
-            return "views/employee/create_employee";
+            errorMap.entrySet().forEach(f -> System.out.println(f.getKey() + ':' + f.getValue()));
+            return new ResponseEntity<>(new ResponseObject("not ok","Failed!", errorMap,""), HttpStatus.BAD_REQUEST);
         } else {
             Employee employee = new Employee();
             BeanUtils.copyProperties(employeeDto, employee);
             employee.setEmployeeSalary(Double.parseDouble(employeeDto.getEmployeeSalary()));
             iEmployeeService.save(employee);
-            return "redirect:/employee/list";
+            return new ResponseEntity<>(HttpStatus.OK);
         }
     }
-
 }

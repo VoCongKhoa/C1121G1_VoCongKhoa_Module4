@@ -386,7 +386,8 @@
         }
     </style>
     <script>
-        $(document).ready(function () {
+
+    $(document).ready(function () {
             // // Activate tooltip
             // $('[data-toggle="tooltip"]').tooltip();
 
@@ -437,9 +438,15 @@
 
                     <!--                    ADD NEW CUSTOMER-->
                     <div class="col-sm-4">
-                        <a href="/customer/create" class="btn btn-success"><i class="material-icons">&#xE147;</i>
+                        <!--                        <a href="/customer/create" class="btn btn-success"><i class="material-icons">&#xE147;</i>-->
+                        <!--                            <span>Add New Customer</span>-->
+                        <!--                        <a class="dialog-btn" href="#my-modal">Click me!</a>-->
+
+                        <a href="#" class="btn btn-success" id="modalActivate" type="button"
+                           data-toggle="modal"
+                           data-target="#createModal"><i
+                                class="material-icons">&#xE147;</i>
                             <span>Add New Customer</span>
-                            <!--                        <a class="dialog-btn" href="#my-modal">Click me!</a>-->
                         </a>
                     </div>
                 </div>
@@ -537,25 +544,30 @@
                     <td th:text="${customer.customerAddress}"></td>
                     <td th:text="${customer.customerType.customerTypeName}"></td>
                     <td colspan="2">
-                        <a th:href="@{/customer/update/{id}(id=${customer.customerId})}">Update</a>
+<!--                        <a th:href="@{/customer/update/{id}(id=${customer.customerId})}">Update</a>-->
+                        <button class="btn btn-success" type="button"
+                           data-toggle="modal"
+                           data-target="#updateModal" th:onclick="'javascript:sendId(' + ${customer.customerId} + ')'">
+                            <span>Update</span>
+                        </button>
                         <a th:href="@{/customer/delete/{id}(id=${customer.customerId})}">Delete</a>
                     </td>
                 </tr>
                 </tbody>
             </table>
-<!--            <div class="clearfix">-->
-<!--                &lt;!&ndash;                                   <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>&ndash;&gt;-->
-<!--                <ul class="pagination">-->
-<!--                    <a th:if="${customerList.hasPrevious()}"-->
-<!--                       th:href="@{/customer/list(page=${customerList.number - 1}, codeSearch=${code},nameSearch=${name},addressSearch=${address},sortOption=${sortOption})}"-->
-<!--                       class="page-link">«</a>-->
-<!--                    <span th:text="${customerList.number + 1}" class="page-item"></span> / <span-->
-<!--                        th:text="${customerList.totalPages}" class="page-item"></span>-->
-<!--                    <a th:if="${customerList.hasNext()}"-->
-<!--                       th:href="@{/customer/list(page=${customerList.number + 1}, codeSearch=${code},nameSearch=${name},addressSearch=${address},sortOption=${sortOption})}"-->
-<!--                       class="page-link">»</a>-->
-<!--                </ul>-->
-<!--            </div>-->
+            <!--            <div class="clearfix">-->
+            <!--                &lt;!&ndash;                                   <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>&ndash;&gt;-->
+            <!--                <ul class="pagination">-->
+            <!--                    <a th:if="${customerList.hasPrevious()}"-->
+            <!--                       th:href="@{/customer/list(page=${customerList.number - 1}, codeSearch=${code},nameSearch=${name},addressSearch=${address},sortOption=${sortOption})}"-->
+            <!--                       class="page-link">«</a>-->
+            <!--                    <span th:text="${customerList.number + 1}" class="page-item"></span> / <span-->
+            <!--                        th:text="${customerList.totalPages}" class="page-item"></span>-->
+            <!--                    <a th:if="${customerList.hasNext()}"-->
+            <!--                       th:href="@{/customer/list(page=${customerList.number + 1}, codeSearch=${code},nameSearch=${name},addressSearch=${address},sortOption=${sortOption})}"-->
+            <!--                       class="page-link">»</a>-->
+            <!--                </ul>-->
+            <!--            </div>-->
 
             <hr/>
             <ul class="nav nav-pills">
@@ -567,7 +579,7 @@
                     <a th:text="${index}"
                        class="nav-link"
                        th:href="@{/customer/list(page=${index - 1}, codeSearch=${code},nameSearch=${name},addressSearch=${address},sortOption=${sortOption})}"
-                        th:classappend="(${currentPage} == ${index - 1}) ? 'active':'' "
+                       th:classappend="(${currentPage} == ${index - 1}) ? 'active':'' "
                     ></a>
                 </li>
                 <a th:if="${customerList.hasNext()}"
@@ -578,154 +590,560 @@
     </div>
 </div>
 
-<!--<%&#45;&#45;MODAL CREATE CUSTOMER&#45;&#45;%>-->
-<!--<div class="my-modal" id="my-modal">-->
-<!--    <div class="my-modal-container">-->
+<p id="msg"></p>
 
-<!--        <a class="my-modal-close" href="#">-->
-<!--            <i class="ti-close"></i>-->
-<!--        </a>-->
+<!--MODAL CREATE CUSTOMER-->
+<div class="modal fade right" style="background: rgb(0 255 170 / 34%)" id="createModal" tabindex="-1"
+     role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="true" data-keyboard="false"
+     data-backdrop="static">
+    <div class="modal-dialog-full-width modal-dialog momodel modal-fluid" role="document">
+        <div class="modal-content-full-width modal-content ">
+            <div class=" modal-header-full-width  modal-header text-center">
+                <h5 class="modal-title w-100" id="exampleModalPreviewLabel"
+                    style="font-size: 50px;font-family: 'Varela Round';">
+                    Create new Customer
+                </h5>
+                <button type="button" class="close " data-dismiss="modal" aria-label="Close">
+                    <span style="font-size: 1.3em;" aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="container">
+                <form action="/customer/list" th:object="${customerDto}" id="createForm">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="customerCode">Customer code</label>
+                                <input type="text" class="form-control" placeholder="Type new customer code here"
+                                       id="customerCode"
+                                       th:field="*{customerCode}">
+<!--                                <small class="form-text text-warning" th:if="${#fields.hasErrors('customerCode')}"-->
+<!--                                       th:errors="*{customerCode}"></small>-->
+                                <small class="form-text text-warning" id="customerCodeError"></small>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="customerName">Customer name</label>
+                                <input type="text" class="form-control" placeholder="Type new customer name here"
+                                       id="customerName"
+                                       th:field="*{customerName}">
+<!--                                <small class="form-text text-warning" th:if="${#fields.hasErrors('customerName')}"-->
+<!--                                       th:errors="*{customerName}"></small>-->
+                                <small class="form-text text-warning" id="customerNameError"></small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="customerBirthday">Select customer birthday:</label>
+                                <input type="date" class="form-control" id="customerBirthday"
+                                       th:field="*{customerBirthday}">
+<!--                                <small class="form-text text-warning" th:if="${#fields.hasErrors('customerBirthday')}"-->
+<!--                                       th:errors="*{customerBirthday}"></small>-->
+                                <small class="form-text text-warning" id="customerBirthdayError"></small>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Choose customer gender:</label><br>
+                                <input type="radio" id="female" th:field="*{customerGender}" value="0"
+                                       name='customerGender' checked>
+                                <label for="female" style="margin-bottom: 1px;">Female</label><br>
+                                <input type="radio" id="male" th:field="*{customerGender}" value="1"
+                                       name='customerGender'>
+                                <label for="male">Male</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="customerIdCard">Customer ID Card number</label>
+                                <input type="text" class="form-control"
+                                       placeholder="Type new customer ID Card number here" id="customerIdCard"
+                                       th:field="*{customerIdCard}">
+<!--                                <small class="form-text text-warning" th:if="${#fields.hasErrors('customerIdCard')}"-->
+<!--                                       th:errors="*{customerIdCard}"></small>-->
+                                <small class="form-text text-warning" id="customerIdCardError"></small>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="customerPhone">Customer phone</label>
+                                <input type="text" class="form-control" placeholder="Type new customer phone here"
+                                       id="customerPhone"
+                                       th:field="*{customerPhone}">
+<!--                                <small class="form-text text-warning" th:if="${#fields.hasErrors('customerPhone')}"-->
+<!--                                       th:errors="*{customerPhone}"></small>-->
+                                <small class="form-text text-warning" id="customerPhoneError"></small>
+                            </div>
+                        </div>
+                    </div>
 
-<!--        <header class="my-modal-header">-->
-<!--            <h1>Get in Touch</h1>-->
-<!--        </header>-->
-
-<!--        <form action="/customer/create" method="post" th:object="${customerDto}">-->
-<!--            <div class="my-modal-body">-->
-<!--                <div class="my-modal-row">-->
-<!--                    <div class="my-modal-block">-->
-<!--                        <label for="" class="my-modal-label">-->
-<!--                            Customer code-->
-<!--                        </label>-->
-<!--                        <input type="text" class="my-modal-input" placeholder="Type new customer code here"-->
-<!--                               th:field="*{customerCode}">-->
-<!--                        <small style="color: red" th:if="${#fields.hasErrors('customerCode')}"-->
-<!--                               th:errors="*{customerCode}"></small>-->
-<!--                    </div>-->
-<!--                    <div class="my-modal-block">-->
-<!--                        <label for="" class="my-modal-label">-->
-<!--                            Customer name-->
-<!--                        </label>-->
-<!--                        <input type="text" class="my-modal-input" placeholder="Type new customer name here"-->
-<!--                               th:field="*{customerName}">-->
-<!--                        <small style="color: red" th:if="${#fields.hasErrors('customerName')}"-->
-<!--                               th:errors="*{customerName}"></small>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                <div class="my-modal-row">-->
-<!--                    <div class="my-modal-block">-->
-<!--                        <label for="" class="my-modal-label">-->
-<!--                            Choose customer gender-->
-<!--                        </label>-->
-<!--                        <input type="radio" id="female" th:field="*{customerGender}" value="0" checked>-->
-<!--                        <label for="female">Female</label><br>-->
-<!--                        <input type="radio" id="male" th:field="*{customerGender}" value="1">-->
-<!--                        <label for="male">Male</label>-->
-<!--                    </div>-->
-<!--                    <div class="my-modal-block">-->
-<!--                        <label for="" class="my-modal-label">-->
-<!--                            Select customer birthday-->
-<!--                        </label>-->
-<!--                        <input type="date" class="my-modal-input" th:field="*{customerBirthday}">-->
-<!--                        <small style="color: red" th:if="${#fields.hasErrors('customerBirthday')}"-->
-<!--                               th:errors="*{customerBirthday}"></small>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="my-modal-row">-->
-<!--                    <div class="my-modal-block">-->
-<!--                        <label for="" class="my-modal-label">-->
-<!--                            Customer ID Card number-->
-<!--                        </label>-->
-<!--                        <input type="text" class="my-modal-input" placeholder="Type new customer ID card number here"-->
-<!--                               th:field="*{customerIdCard}">-->
-<!--                        <small style="color: red" th:if="${#fields.hasErrors('customerIdCard')}"-->
-<!--                               th:errors="*{customerIdCard}"></small>-->
-<!--                    </div>-->
-<!--                    <div class="my-modal-block">-->
-<!--                        <label for="" class="my-modal-label">-->
-<!--                            Customer phone-->
-<!--                        </label>-->
-<!--                        <input type="text" class="my-modal-input" placeholder="Type new customer phone here"-->
-<!--                               th:field="*{customerPhone}">-->
-<!--                        <small style="color: red" th:if="${#fields.hasErrors('customerPhone')}"-->
-<!--                               th:errors="*{customerPhone}"></small>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                <div class="my-modal-row">-->
-<!--                    <div class="my-modal-block">-->
-<!--                        <label for="" class="my-modal-label">-->
-<!--                            Customer email-->
-<!--                        </label>-->
-<!--                        <input type="text" class="my-modal-input" placeholder="Type new customer email here"-->
-<!--                               th:field="*{customerEmail}">-->
-<!--                        <small style="color: red" th:if="${#fields.hasErrors('customerEmail')}"-->
+                    <div class="form-group">
+                        <label for="customerEmail">Customer email</label>
+                        <input type="text" class="form-control" id="customerEmail"
+                               placeholder="Type new customer email here"
+                               th:field="*{customerEmail}">
+<!--                        <small class="form-text text-warning" th:if="${#fields.hasErrors('customerEmail')}"-->
 <!--                               th:errors="*{customerEmail}"></small>-->
-<!--                    </div>-->
-<!--                    <div class="my-modal-block">-->
-<!--                        <label for="" class="my-modal-label">-->
-<!--                            Customer address-->
-<!--                        </label>-->
-<!--                        <input type="text" class="my-modal-input" placeholder="Type new customer address here"-->
-<!--                               th:field="*{customerAddress}">-->
-<!--                        <small style="color: red" th:if="${#fields.hasErrors('customerAddress')}"-->
+                        <small class="form-text text-warning" id="customerEmailError"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="customerAddress">Customer address</label>
+                        <input type="text" class="form-control" id="customerAddress"
+                               placeholder="Type new customer address here"
+                               th:field="*{customerAddress}">
+<!--                        <small class="form-text text-warning" th:if="${#fields.hasErrors('customerAddress')}"-->
 <!--                               th:errors="*{customerAddress}"></small>-->
-<!--                    </div>-->
-<!--                </div>-->
+                        <small class="form-text text-warning" id="customerAddressError"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="customerTypeId">Choose new customer type id:</label>
+                        <select th:field="*{customerType.customerTypeId}" id="customerTypeId" class="form-control">
+                            <option th:each="row : ${customerTypeList}" th:value="${row.customerTypeId}"
+                                    th:text="${row.customerTypeName}">
+                            </option>
+                        </select>
+                        <!--                        <small class="form-text text-warning">${error.get("customerTypeId")}</small>-->
+                    </div>
+                    <input type="hidden" id="messageSuccess" name="messageCreate">
+                    <div class="text-center">
+                        <button type="button" class="btn btn-primary" style="
+                              min-width: 250px;
+                              color: #fcda2e;
+                              background: #403838 !important;
+                              margin-top: 20px;
+                              border: none;"
+                                id="btn-create">
+                            <i class="fa fa-paper-plane"></i>
+                            Send
+                        </button>
+                    </div>
+                </form>
+                <br>
+                <h1 id="w3s" class="text-warning" style="text-align: center; font-family: cursive;">
+                    ${messageCreate}
+                </h1>
+                <br>
+                <a href="/" class="backHome" style="font-size: 42px;
+              font-family: cursive;
+              margin: 0 0 50px;
+              text-align: center;"><h1>Back Home</h1></a>
 
-<!--                <div class="my-modal-row">-->
-<!--                    <div class="my-modal-block">-->
-<!--                        <label for="typeId" class="my-modal-label">Choose new customer type</label>-->
-<!--                        <select id="typeId" class="my-modal-selection" th:field="*{customerType.customerTypeId}">-->
-<!--                            <option th:each="row : ${customerTypeList}" th:value="${row.customerTypeId}"-->
-<!--                                    th:text="${row.customerTypeName}">-->
-<!--                            </option>-->
-<!--                        </select>-->
-<!--                    </div>-->
-<!--                    <div class="my-modal-block">-->
-
-<!--                    </div>-->
-<!--                </div>-->
-<!--                &lt;!&ndash;                <div class="img-container" th:if="${#fields.hasAnyErrors()}">&ndash;&gt;-->
-<!--                &lt;!&ndash;                    <input id="checkError" value="1" type="hidden" />&ndash;&gt;-->
-<!--                &lt;!&ndash;                </div>&ndash;&gt;-->
-<!--                <button id="confirm" type="submit">-->
-<!--                    <i class="ti-save"></i> CREATE-->
-<!--                </button>-->
-
-<!--            </div>-->
-<!--        </form>-->
-
-<!--        <footer class="my-modal-footer">-->
-
-<!--        </footer>-->
+            </div>
+        </div>
+    </div>
+</div>
 
 
-<!--    </div>-->
-<!--</div>-->
+<!--MODAL DELETE-->
 
+<!--MODAL UPDATE-->
+<div class="modal fade right" style="background: rgb(0 255 170 / 34%)" id="updateModal" tabindex="-1"
+     role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="true" data-keyboard="false"
+     data-backdrop="static">
+    <div class="modal-dialog-full-width modal-dialog momodel modal-fluid" role="document">
+        <div class="modal-content-full-width modal-content ">
+            <div class=" modal-header-full-width  modal-header text-center">
+                <h5 class="modal-title w-100"
+                    style="font-size: 50px;font-family: 'Varela Round';">
+                    Update Customer
+                </h5>
+                <button type="button" class="close " data-dismiss="modal" aria-label="Close">
+                    <span style="font-size: 1.3em;" aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="container">
+                <form action="/customer/list" th:object="${customerDto}" id="updateForm">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="customerCodeUpdate">Customer code</label>
+                                <input type="text" class="form-control" placeholder="Type new customer code here"
+                                       id="customerCodeUpdate"
+                                       th:field="*{customerCode}">
+                                <!--                                <small class="form-text text-warning" th:if="${#fields.hasErrors('customerCode')}"-->
+                                <!--                                       th:errors="*{customerCode}"></small>-->
+                                <small class="form-text text-warning" id="customerCodeUpdateError"></small>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="customerNameUpdate">Customer name</label>
+                                <input type="text" class="form-control" placeholder="Type new customer name here"
+                                       id="customerNameUpdate"
+                                       th:field="*{customerName}">
+                                <!--                                <small class="form-text text-warning" th:if="${#fields.hasErrors('customerName')}"-->
+                                <!--                                       th:errors="*{customerName}"></small>-->
+                                <small class="form-text text-warning" id="customerNameUpdateError"></small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="customerBirthdayUpdate">Select customer birthday:</label>
+                                <input type="date" class="form-control" id="customerBirthdayUpdate"
+                                       th:field="*{customerBirthday}">
+                                <!--                                <small class="form-text text-warning" th:if="${#fields.hasErrors('customerBirthday')}"-->
+                                <!--                                       th:errors="*{customerBirthday}"></small>-->
+                                <small class="form-text text-warning" id="customerBirthdayUpdateError"></small>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Choose customer gender:</label><br>
+                                <input type="radio" id="femaleUpdate" th:field="*{customerGender}" value="0"
+                                       name='customerGenderUpdate' checked>
+                                <label for="female" style="margin-bottom: 1px;">Female</label><br>
+                                <input type="radio" id="maleUpdate" th:field="*{customerGender}" value="1"
+                                       name='customerGenderUpdate'>
+                                <label for="male">Male</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="customerIdCardUpdate">Customer ID Card number</label>
+                                <input type="text" class="form-control"
+                                       placeholder="Type new customer ID Card number here" id="customerIdCardUpdate"
+                                       th:field="*{customerIdCard}">
+                                <!--                                <small class="form-text text-warning" th:if="${#fields.hasErrors('customerIdCard')}"-->
+                                <!--                                       th:errors="*{customerIdCard}"></small>-->
+                                <small class="form-text text-warning" id="customerIdCardUpdateError"></small>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="customerPhoneUpdate">Customer phone</label>
+                                <input type="text" class="form-control" placeholder="Type new customer phone here"
+                                       id="customerPhoneUpdate"
+                                       th:field="*{customerPhone}">
+                                <!--                                <small class="form-text text-warning" th:if="${#fields.hasErrors('customerPhone')}"-->
+                                <!--                                       th:errors="*{customerPhone}"></small>-->
+                                <small class="form-text text-warning" id="customerPhoneUpdateError"></small>
+                            </div>
+                        </div>
+                    </div>
 
-<!--<%&#45;&#45;MODAL DELETE&#45;&#45;%>-->
+                    <div class="form-group">
+                        <label for="customerEmailUpdate">Customer email</label>
+                        <input type="text" class="form-control" id="customerEmailUpdate"
+                               placeholder="Type new customer email here"
+                               th:field="*{customerEmail}">
+                        <!--                        <small class="form-text text-warning" th:if="${#fields.hasErrors('customerEmail')}"-->
+                        <!--                               th:errors="*{customerEmail}"></small>-->
+                        <small class="form-text text-warning" id="customerEmailUpdateError"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="customerAddressUpdate">Customer address</label>
+                        <input type="text" class="form-control" id="customerAddressUpdate"
+                               placeholder="Type new customer address here"
+                               th:field="*{customerAddress}">
+                        <!--                        <small class="form-text text-warning" th:if="${#fields.hasErrors('customerAddress')}"-->
+                        <!--                               th:errors="*{customerAddress}"></small>-->
+                        <small class="form-text text-warning" id="customerAddressUpdateError"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="customerTypeIdUpdate">Choose new customer type id:</label>
+                        <select th:field="*{customerType.customerTypeId}" id="customerTypeIdUpdate" class="form-control">
+                            <option th:each="row : ${customerTypeList}" th:value="${row.customerTypeId}"
+                                    th:text="${row.customerTypeName}">
+                            </option>
+                        </select>
+                        <!--                        <small class="form-text text-warning">${error.get("customerTypeId")}</small>-->
+                    </div>
+                    <input type="hidden" id="messageSuccess" name="messageCreate">
+                    <div class="text-center">
+                        <button type="button" class="btn btn-primary" style="
+                              min-width: 250px;
+                              color: #fcda2e;
+                              background: #403838 !important;
+                              margin-top: 20px;
+                              border: none;"
+                                id="btn-update">
+                            <i class="fa fa-paper-plane"></i>
+                            Send
+                        </button>
+                    </div>
+                </form>
+                <br>
+                <h1 id="w3s" class="text-warning" style="text-align: center; font-family: cursive;">
+                    ${messageCreate}
+                </h1>
+                <br>
+                <a href="/" class="backHome" style="font-size: 42px;
+              font-family: cursive;
+              margin: 0 0 50px;
+              text-align: center;"><h1>Back Home</h1></a>
 
-<!--<%&#45;&#45;MODAL EDIT&#45;&#45;%>-->
-
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 
 <script>
-    $(document).ready(function () {
-        if ($("#checkError").val() != null) {
-            let flagVal = $("#checkError").val();
-            console.log(flagVal);
-        }
-        // $("#myBtn").click(function () {
-        //     if ($("#test").val() == 1) {
-        //         $("#myModal").modal();
-        //     }
-        // });
+    let idUpdate = 0;
+    function sendId(id) {
+        idUpdate = id;
+        $.ajax({
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            type: "GET", //GET, DELETE, PUT...
+            url: "http://localhost:8080/customerRestful/detail/"+idUpdate,
+            success: function (resultSuccess) {
+                let customer = resultSuccess.data;
+                $('#customerCodeUpdate').val(customer.customerCode);
 
+                $('#customerNameUpdate').val(customer.customerName);
+
+                $('#customerBirthdayUpdate').val(customer.customerBirthday);
+
+                if (customer.customerGender == 0){
+                    $("#femaleUpdate").prop("checked", true);
+                } else {
+                    $("#maleUpdate").prop("checked", true);
+                }
+
+                $('#customerIdCardUpdate').val(customer.customerIdCard);
+
+                $('#customerPhoneUpdate').val(customer.customerPhone);
+
+                $('#customerEmailUpdate').val(customer.customerEmail);
+
+                $('#customerAddressUpdate').val(customer.customerAddress);
+
+                $('#customerTypeIdUpdate').val(customer.customerType.customerTypeId);
+                // $('#msg').text('Create successfully!')
+                // $('#createModal').modal('hide');
+            },
+            error: function (resultError) {
+                alert("Not found")
+            }
+        });
+    }
+    $(document).ready(function () {
+
+        // CREATE MODAL
+        $('#btn-create').click(function () {
+
+            let customerCode = $('#customerCode').val();
+
+            let customerName = $('#customerName').val();
+
+            let customerBirthday = $('#customerBirthday').val();
+
+            let customerGender = $("input[type='radio'][name='customerGender']:checked").val();
+
+            let customerIdCard = $('#customerIdCard').val();
+
+            let customerPhone = $('#customerPhone').val();
+
+            let customerEmail = $('#customerEmail').val();
+
+            let customerAddress = $('#customerAddress').val();
+
+            let customerType = $('#customerTypeId').val();
+
+            // console.log(customerCode);
+            // console.log(customerName);
+            // console.log(customerBirthday);
+            // console.log(customerGender);
+            // console.log(customerIdCard);
+            // console.log(customerPhone);
+            // console.log(customerEmail);
+            // console.log(customerAddress);
+            // console.log(customerType);
+
+            let customerObj = {
+                customerCode: customerCode,
+                customerName: customerName,
+                customerBirthday: customerBirthday,
+                customerGender: customerGender,
+                customerIdCard: customerIdCard,
+                customerPhone: customerPhone,
+                customerEmail: customerEmail,
+                customerAddress: customerAddress,
+                customerType: {
+                    customerTypeId: customerType
+                }
+            }
+            console.log(customerObj);
+
+            $.ajax({
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                type: "POST", //GET, DELETE, PUT...
+                url: "http://localhost:8080/customerRestful/create",
+                data: JSON.stringify(customerObj),
+                success: function (resultSuccess) {
+                    $('#createForm').submit();
+                    $('#msg').text('Create successfully!')
+                    $('#createModal').modal('hide');
+                },
+                error: function (resultError) {
+                    console.log(resultError.responseJSON.errorMap);
+                    let customerCodeError = "";
+                    let customerNameError = "";
+                    let customerBirthdayError = "";
+                    let customerIdCardError = "";
+                    let customerPhoneError = "";
+                    let customerEmailError = "";
+                    let customerAddressError = "";
+
+                    if (resultError.responseJSON.errorMap.customerCode) {
+                        customerCodeError = resultError.responseJSON.errorMap.customerCode;
+                    }
+                    if (resultError.responseJSON.errorMap.customerName) {
+                        customerNameError = resultError.responseJSON.errorMap.customerName;
+                    }
+                    if (resultError.responseJSON.errorMap.customerBirthday) {
+                        customerBirthdayError = resultError.responseJSON.errorMap.customerBirthday
+                    }
+                    if (resultError.responseJSON.errorMap.customerIdCard) {
+                        customerIdCardError = resultError.responseJSON.errorMap.customerIdCard
+                    }
+                    if (resultError.responseJSON.errorMap.customerPhone) {
+                        customerPhoneError = resultError.responseJSON.errorMap.customerPhone
+                    }
+                    if (resultError.responseJSON.errorMap.customerEmail) {
+                        customerEmailError = resultError.responseJSON.errorMap.customerEmail
+                    }
+                    if (resultError.responseJSON.errorMap.customerAddress) {
+                        customerAddressError = resultError.responseJSON.errorMap.customerAddress
+                    }
+                    $('#customerCodeError').text(customerCodeError);
+                    $('#customerNameError').text(customerNameError);
+                    $('#customerBirthdayError').text(customerBirthdayError);
+                    $('#customerIdCardError').text(customerIdCardError);
+                    $('#customerPhoneError').text(customerPhoneError);
+                    $('#customerEmailError').text(customerEmailError);
+                    $('#customerAddressError').text(customerAddressError);
+                }
+            });
+        });
+
+
+        // EDIT MODAL
+        $('#btn-update').click(function () {
+
+            let customerCode = $('#customerCodeUpdate').val();
+
+            let customerName = $('#customerNameUpdate').val();
+
+            let customerBirthday = $('#customerBirthdayUpdate').val();
+
+            let customerGender = $("input[type='radio'][name='customerGenderUpdate']:checked").val();
+
+            let customerIdCard = $('#customerIdCardUpdate').val();
+
+            let customerPhone = $('#customerPhoneUpdate').val();
+
+            let customerEmail = $('#customerEmailUpdate').val();
+
+            let customerAddress = $('#customerAddressUpdate').val();
+
+            let customerType = $('#customerTypeIdUpdate').val();
+
+            let customerObj = {
+                customerCode: customerCode,
+                customerName: customerName,
+                customerBirthday: customerBirthday,
+                customerGender: customerGender,
+                customerIdCard: customerIdCard,
+                customerPhone: customerPhone,
+                customerEmail: customerEmail,
+                customerAddress: customerAddress,
+                customerType: {
+                    customerTypeId: customerType
+                }
+            }
+
+            $.ajax({
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                type: "GET", //GET, DELETE, PUT...
+                data: JSON.stringify(customerObj),
+                url: "http://localhost:8080/customerRestful/update/{"+idUpdate+"}",
+                success: function (resultSuccess) {
+                    // let customer = resultSuccess.data;
+                    // console.log(customer);
+                    // $('#customerCodeUpdate').val();
+                    //
+                    // $('#customerNameUpdate').val();
+                    //
+                    // $('#customerBirthdayUpdate').val();
+                    //
+                    // $("input[type='radio'][name='customerGenderUpdate']:checked").val();
+                    //
+                    // $('#customerIdCardUpdate').val();
+                    //
+                    // $('#customerPhoneUpdate').val();
+                    //
+                    // $('#customerEmailUpdate').val();
+                    //
+                    // $('#customerAddressUpdate').val();
+
+                    $('#btn-update').submit();
+                    $('#msg').text('Update successfully!')
+                    $('#createModal').modal('hide');
+                },
+                error: function (resultError) {
+                    console.log(resultError.responseJSON.errorMap);
+                    let customerCodeError = "";
+                    let customerNameError = "";
+                    let customerBirthdayError = "";
+                    let customerIdCardError = "";
+                    let customerPhoneError = "";
+                    let customerEmailError = "";
+                    let customerAddressError = "";
+
+                    if (resultError.responseJSON.errorMap.customerCode) {
+                        customerCodeError = resultError.responseJSON.errorMap.customerCode;
+                    }
+                    if (resultError.responseJSON.errorMap.customerName) {
+                        customerNameError = resultError.responseJSON.errorMap.customerName;
+                    }
+                    if (resultError.responseJSON.errorMap.customerBirthday) {
+                        customerBirthdayError = resultError.responseJSON.errorMap.customerBirthday
+                    }
+                    if (resultError.responseJSON.errorMap.customerIdCard) {
+                        customerIdCardError = resultError.responseJSON.errorMap.customerIdCard
+                    }
+                    if (resultError.responseJSON.errorMap.customerPhone) {
+                        customerPhoneError = resultError.responseJSON.errorMap.customerPhone
+                    }
+                    if (resultError.responseJSON.errorMap.customerEmail) {
+                        customerEmailError = resultError.responseJSON.errorMap.customerEmail
+                    }
+                    if (resultError.responseJSON.errorMap.customerAddress) {
+                        customerAddressError = resultError.responseJSON.errorMap.customerAddress
+                    }
+                    $('#customerCodeUpdateError').text(customerCodeError);
+                    $('#customerNameUpdateError').text(customerNameError);
+                    $('#customerBirthdayUpdateError').text(customerBirthdayError);
+                    $('#customerIdCardUpdateError').text(customerIdCardError);
+                    $('#customerPhoneUpdateError').text(customerPhoneError);
+                    $('#customerEmailUpdateError').text(customerEmailError);
+                    $('#customerAddressUpdateError').text(customerAddressError);
+                }
+            });
+        });
 
     });
+
+
+
 </script>
 </html>

@@ -54,10 +54,11 @@ public class CustomerController {
             sort = "";
             customerList = iCustomerService.findAllWithSearch(code,name,address,pageable);
         }
-//        List<CustomerType> customerTypeList = iCustomerTypeService.findAllActive();
-//        Collections.reverse(customerTypeList);
-//        model.addAttribute("customerDto", new CustomerDto());
-//        model.addAttribute("customerTypeList", customerTypeList);
+
+        List<CustomerType> customerTypeList = iCustomerTypeService.findAllActive();
+        Collections.reverse(customerTypeList);
+        model.addAttribute("customerDto", new CustomerDto());
+        model.addAttribute("customerTypeList", customerTypeList);
         model.addAttribute("currentPage", pageable.getPageNumber());
         model.addAttribute("customerList", customerList);
         model.addAttribute("code", code);
