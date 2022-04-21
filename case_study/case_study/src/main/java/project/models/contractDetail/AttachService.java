@@ -1,5 +1,7 @@
 package project.models.contractDetail;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -18,6 +20,7 @@ public class AttachService{
     private int active;
 
     @OneToMany(mappedBy = "attachService")
+    @JsonBackReference
     private Set<ContractDetail> contractDetailSet;
 
     public AttachService() {

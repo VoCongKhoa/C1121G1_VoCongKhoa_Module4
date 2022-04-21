@@ -1,4 +1,4 @@
-package project.controllers;
+package project.controllers.customer;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;

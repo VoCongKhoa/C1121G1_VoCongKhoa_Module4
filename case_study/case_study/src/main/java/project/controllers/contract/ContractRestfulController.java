@@ -1,4 +1,4 @@
-package project.controllers;
+package project.controllers.contract;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,14 +7,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import project.dto.contract.ContractViewDto;
 import project.dto.contract.ContractDto;
-import project.dto.customer.CustomerDto;
 import project.models.contract.Contract;
 import project.models.customer.Customer;
-import project.models.customer.CustomerType;
 import project.models.employee.Employee;
 import project.models.rest.ResponseObject;
 import project.models.services.Services;
+import project.repositories.contract.IContractViewDto;
 import project.services.contract.IContractService;
 import project.services.customer.ICustomerService;
 import project.services.employee.IEmployeeService;
@@ -69,6 +69,19 @@ public class ContractRestfulController {
             contract.setContractTotalMoney(Double.parseDouble(contractDto.getContractTotalMoney()));
             iContractService.save(contract);
             return new ResponseEntity<>(HttpStatus.OK);
+        }
+    }
+
+    @GetMapping(value = "/detail/{id}")
+    public ResponseEntity<ResponseObject> detail(@PathVariable int id) {
+        IContractViewDto iCDD = iContractService.findContractDetailDtoById(id);
+        if (iCDD != null) {
+            ContractViewDto contractViewDto = new ContractViewDto(iCDD.getContractId(),iCDD.getContractStartDate(),
+                    iCDD.getContractEndDate(),iCDD.getContractDeposit(),iCDD.getContractTotalMoney(),iCDD.getEmployeeId(),
+                    iCDD.getEmployeeName(),iCDD.getCustomerCode(),iCDD.getCustomerName(),iCDD.getServiceCode(),iCDD.getServiceName());
+            return new ResponseEntity<>(new ResponseObject("ok","Success!", new HashMap<>(), contractViewDto), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(new ResponseObject("not ok","Failed!",""),HttpStatus.BAD_REQUEST);
         }
     }
 }

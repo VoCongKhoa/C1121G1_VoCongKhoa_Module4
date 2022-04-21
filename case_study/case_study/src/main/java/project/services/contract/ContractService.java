@@ -5,7 +5,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import project.models.contract.Contract;
+import project.repositories.contract.IContractViewDto;
 import project.repositories.contract.IContractRepository;
+
+import java.util.List;
 
 @Service
 public class ContractService implements IContractService{
@@ -31,5 +34,20 @@ public class ContractService implements IContractService{
     @Override
     public void save(Contract contract) {
         iContractRepository.save(contract);
+    }
+
+    @Override
+    public Contract findByIdActive(int id) {
+        return iContractRepository.findByIdActive(id);
+    }
+
+    @Override
+    public IContractViewDto findContractDetailDtoById(int id) {
+        return iContractRepository.findContractDetailDtoById(id);
+    }
+
+    @Override
+    public List<Contract> findAllActive() {
+        return iContractRepository.findAllActive();
     }
 }

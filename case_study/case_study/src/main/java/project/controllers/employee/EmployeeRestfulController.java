@@ -1,4 +1,4 @@
-package project.controllers;
+package project.controllers.employee;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;

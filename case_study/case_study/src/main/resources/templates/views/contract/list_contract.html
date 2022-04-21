@@ -518,6 +518,7 @@
                     <th>Employee Id</th>
                     <th>Customer Id</th>
                     <th>Service Id</th>
+                    <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -531,6 +532,14 @@
                     <td th:text="${contract.employee.employeeId}"></td>
                     <td th:text="${contract.customer.customerId}"></td>
                     <td th:text="${contract.services.serviceId}"></td>
+                    <td>
+                        <button class="btn btn-success" type="button"
+                                data-toggle="modal"
+                                data-target="#detailModal"
+                                th:onclick="'javascript:sendIdDetail(' + ${contract.contractId} + ')'">
+                            <span>Detail</span>
+                        </button>
+                    </td>
                 </tr>
                 </tbody>
             </table>
@@ -670,10 +679,140 @@
     </div>
 </div>
 
+<!--MODAL DETAIL CONTRACT-->
+<div class="modal fade right" style="background: rgb(0 255 170 / 34%)" id="detailModal" tabindex="-1"
+     role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="true" data-keyboard="false"
+     data-backdrop="static">
+    <div class="modal-dialog-full-width modal-dialog momodel modal-fluid" role="document">
+        <div class="modal-content-full-width modal-content ">
+            <div class=" modal-header-full-width  modal-header text-center">
+                <h5 class="modal-title w-100"
+                    style="font-size: 50px;font-family: 'Varela Round';">
+                    Detail Contract
+                </h5>
+                <button type="button" class="close " data-dismiss="modal" aria-label="Close">
+                    <span style="font-size: 1.3em;" aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="contractId">Contract ID</label>
+                            <input type="text" class="form-control" id="contractId" readonly>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="contractStartDate">Contract start date</label>
+                            <input type="date" class="form-control" id="contractStartDate" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="contractEndDate">Contract end date</label>
+                            <input type="date" class="form-control" id="contractEndDate" readonly>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="contractDeposit">Contract deposit</label>
+                            <input type="text" class="form-control" id="contractDeposit" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="contractTotalMoney">Contract total money</label>
+                            <input type="text" class="form-control" id="contractTotalMoney" readonly>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="employeeId">Employee name</label>
+                            <input type="text" class="form-control" id="employeeId" readonly>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="customerId">Customer name</label>
+                            <input type="text" class="form-control" id="customerId" readonly>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="serviceId">Service name</label>
+                            <input type="text" class="form-control" id="serviceId" readonly>
+                        </div>
+                    </div>
+                </div>
+
+                <input type="hidden" id="messageSuccess" name="messageUpdate">
+                <div class="text-center">
+                    <button type="button" class="close " data-dismiss="modal" aria-label="Close">
+                        Close
+                    </button>
+                </div>
+                <br>
+                <h1 id="w3s" class="text-warning" style="text-align: center; font-family: cursive;">
+                    ${messageCreate}
+                </h1>
+<!--                <br>-->
+<!--                <a href="/" class="backHome" style="font-size: 42px;-->
+<!--              font-family: cursive;-->
+<!--              margin: 0 0 50px;-->
+<!--              text-align: center;"><h1>Back Home</h1></a>-->
+
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 
 <script>
 
+    let idDetail = 0;
+    function sendIdDetail(id) {
+        idDetail = id;
+        console.log(idDetail);
+        $.ajax({
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            type: "GET", //GET, DELETE, PUT...
+            url: "http://localhost:8080/contractRestful/detail/" + idDetail,
+            success: function (resultSuccess) {
+                let contract = resultSuccess.data;
+                console.log(contract);
+
+                $('#contractId').val(contract.contractId);
+
+                $('#contractStartDate').val(contract.contractStartDate);
+
+                $('#contractEndDate').val(contract.contractEndDate);
+
+                $('#contractDeposit').val(contract.contractDeposit);
+
+                $('#contractTotalMoney').val(contract.contractTotalMoney);
+
+                $('#employeeId').val(contract.employeeId +' - '+ contract.employeeName);
+
+                $('#customerId').val(contract.customerCode +' - '+ contract.customerName);
+
+                $('#serviceId').val(contract.serviceCode +' - '+ contract.serviceName);
+            },
+            error: function (resultError) {
+                alert("Not found")
+            }
+        });
+    }
     $(document).ready(function () {
 
         // CREATE MODAL

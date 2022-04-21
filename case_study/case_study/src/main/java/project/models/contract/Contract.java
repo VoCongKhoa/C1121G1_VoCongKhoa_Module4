@@ -1,5 +1,6 @@
 package project.models.contract;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import project.models.contractDetail.ContractDetail;
 import project.models.customer.Customer;
 import project.models.employee.Employee;
@@ -37,6 +38,7 @@ public class Contract {
     private Services services;
 
     @OneToMany(mappedBy = "contract")
+    @JsonBackReference
     private Set<ContractDetail> contractDetailSet;
 
     @Column(name = "active", columnDefinition = "BIT(1) default 1")
