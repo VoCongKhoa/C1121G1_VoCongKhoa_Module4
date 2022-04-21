@@ -50,4 +50,19 @@ public class ContractService implements IContractService{
     public List<Contract> findAllActive() {
         return iContractRepository.findAllActive();
     }
+
+    @Override
+    public Page<Contract> findAllWithEndDateSort(Pageable pageable) {
+        return iContractRepository.findAllWithEndDateSort(pageable);
+    }
+
+    @Override
+    public Page<Contract> findAllWithDepositSort(Pageable pageable) {
+        return iContractRepository.findAllWithDepositSort(pageable);
+    }
+
+    @Override
+    public Page<Contract> findAllWithTotalMoneySort(Pageable pageable) {
+        return iContractRepository.findAllWithTotalMoneySort(pageable);
+    }
 }

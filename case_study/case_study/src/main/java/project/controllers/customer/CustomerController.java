@@ -45,11 +45,20 @@ public class CustomerController {
         Page<Customer> customerList;
         if (sortOption.isPresent()){
             sort = sortOption.get();
-            if (sort.equals("nameSort")){
-                customerList = iCustomerService.findAllWithNameSort(pageable);
-            } else {
-                customerList = iCustomerService.findAllWithSearch(code,name,address,pageable);
+            switch (sort){
+                case "nameSort":
+                    customerList = iCustomerService.findAllWithNameSort(pageable);
+                    break;
+                case "birthdaySort":
+                    customerList = iCustomerService.findAllWithBirthdaySort(pageable);
+                    break;
+                default:
+                    customerList = iCustomerService.findAllWithSearch(code,name,address,pageable);
             }
+//            if (sort.equals("nameSort")){
+//                customerList = iCustomerService.findAllWithNameSort(pageable);
+//            } else {
+//            }
         } else {
             sort = "";
             customerList = iCustomerService.findAllWithSearch(code,name,address,pageable);

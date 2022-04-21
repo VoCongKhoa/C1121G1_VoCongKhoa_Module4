@@ -19,4 +19,10 @@ public interface IContractService {
     IContractViewDto findContractDetailDtoById(int id);
 
     List<Contract> findAllActive();
+
+    Page<Contract> findAllWithEndDateSort(Pageable pageable);
+
+    Page<Contract> findAllWithDepositSort(Pageable pageable);
+
+    Page<Contract> findAllWithTotalMoneySort(Pageable pageable);
 }

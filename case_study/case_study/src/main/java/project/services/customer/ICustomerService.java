@@ -26,4 +26,6 @@ public interface ICustomerService {
     Page<Customer> findAllWithSearch(String code, String name, String address, Pageable pageable);
 
     Customer findByIdActive(int id);
+
+    Page<Customer> findAllWithBirthdaySort(Pageable pageable);
 }

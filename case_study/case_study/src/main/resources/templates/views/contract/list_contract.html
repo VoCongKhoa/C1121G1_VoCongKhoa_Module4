@@ -451,13 +451,14 @@
                     <div class="col-sm-3">
 
                         <!--                        FORM SORT-->
-                        <form method="get" id="sortForm" action="/contract/list">
+                        <form method="get" id="sortForm" action="/contract/list" onchange="submitSortForm()">
                             <div class="filter-group">
                                 <select th:name="sortOption" id="sort" class="form-control">
                                     <option value="" selected>Sort</option>
-                                    <!--                                    <option value="idSort">Sort by ID</option>-->
-                                    <option value="nameSort">Sort by name</option>
-                                    <!--                                    <option value="birthdaySort">Sort by birthday</option>-->
+                                    <option value="startDateSort">Sort by start date</option>
+                                    <option value="endDateSort">Sort by end date</option>
+                                    <option value="depositSort">Sort by deposit</option>
+                                    <option value="totalMoneySort">Sort by total money</option>
                                 </select>
                             </div>
                         </form>
@@ -763,11 +764,11 @@
                 <h1 id="w3s" class="text-warning" style="text-align: center; font-family: cursive;">
                     ${messageCreate}
                 </h1>
-<!--                <br>-->
-<!--                <a href="/" class="backHome" style="font-size: 42px;-->
-<!--              font-family: cursive;-->
-<!--              margin: 0 0 50px;-->
-<!--              text-align: center;"><h1>Back Home</h1></a>-->
+                <!--                <br>-->
+                <!--                <a href="/" class="backHome" style="font-size: 42px;-->
+                <!--              font-family: cursive;-->
+                <!--              margin: 0 0 50px;-->
+                <!--              text-align: center;"><h1>Back Home</h1></a>-->
 
             </div>
         </div>
@@ -778,6 +779,7 @@
 <script>
 
     let idDetail = 0;
+
     function sendIdDetail(id) {
         idDetail = id;
         console.log(idDetail);
@@ -802,17 +804,22 @@
 
                 $('#contractTotalMoney').val(contract.contractTotalMoney);
 
-                $('#employeeId').val(contract.employeeId +' - '+ contract.employeeName);
+                $('#employeeId').val(contract.employeeId + ' - ' + contract.employeeName);
 
-                $('#customerId').val(contract.customerCode +' - '+ contract.customerName);
+                $('#customerId').val(contract.customerCode + ' - ' + contract.customerName);
 
-                $('#serviceId').val(contract.serviceCode +' - '+ contract.serviceName);
+                $('#serviceId').val(contract.serviceCode + ' - ' + contract.serviceName);
             },
             error: function (resultError) {
                 alert("Not found")
             }
         });
     }
+
+    function submitSortForm() {
+        document.getElementById("sortForm").submit();
+    }
+
     $(document).ready(function () {
 
         // CREATE MODAL

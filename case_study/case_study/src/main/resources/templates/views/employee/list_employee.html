@@ -456,9 +456,9 @@
                             <div class="filter-group">
                                 <select th:name="sortOption" id="sort" class="form-control">
                                     <option value="" selected>Sort</option>
-                                    <!--                                    <option value="idSort">Sort by ID</option>-->
                                     <option value="nameSort">Sort by name</option>
-                                    <!--                                    <option value="birthdaySort">Sort by birthday</option>-->
+                                    <option value="salarySort">Sort by salary</option>
+                                    <option value="birthdaySort">Sort by birthday</option>
                                 </select>
                             </div>
                         </form>
@@ -488,7 +488,8 @@
                                 <!--                                SEARCH INPUT-->
                                 <form method="get" action="/employee/list">
                                     <input type="hidden" name="action" value="search">
-                                    <select th:name="positionId" id="positionId" class="form-control">
+                                    <select th:name="positionId" id="positionId" class="form-control"
+                                            style="width: fit-content;">
                                         <option th:value="0"
                                                 th:text="Position" selected></option>
                                         <option th:each="row : ${positionList}"
@@ -562,8 +563,8 @@
                     </td>
                     <td th:text="${employee.user == null ? 'None' : employee.user.username}"></td>
                     <td colspan="2">
-<!--                        <a th:href="@{/employee/update/{id}(id=${employee.employeeId})}">Update</a>-->
-<!--                        <a th:href="@{/employee/delete/{id}(id=${employee.employeeId})}">Delete</a>-->
+                        <!--                        <a th:href="@{/employee/update/{id}(id=${employee.employeeId})}">Update</a>-->
+                        <!--                        <a th:href="@{/employee/delete/{id}(id=${employee.employeeId})}">Delete</a>-->
 
                         <button class="btn btn-success" type="button"
                                 data-toggle="modal"
@@ -1016,6 +1017,10 @@
                 alert("Not found")
             }
         });
+    }
+
+    function submitSortForm() {
+        document.getElementById("sortForm").submit();
     }
 
     $(document).ready(function () {

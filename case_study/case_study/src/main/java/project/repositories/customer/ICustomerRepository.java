@@ -36,6 +36,9 @@ public interface ICustomerRepository extends JpaRepository<Customer, Integer> {
     @Query(value = "select * from customer where active = 1 order by customer_name ", nativeQuery = true)
     Page<Customer> findAllWithNameSort(Pageable pageable);
 
+    @Query(value = "select * from customer where active = 1 order by customer_birthday ", nativeQuery = true)
+    Page<Customer> findAllWithBirthdaySort(Pageable pageable);
+
     @Query(value = "select * from customer where active = 1", nativeQuery = true)
     Page<Customer> findAllActivePaging(Pageable pageable);
 

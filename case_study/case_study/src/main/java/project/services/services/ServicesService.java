@@ -65,4 +65,14 @@ public class ServicesService implements IServicesService {
     public Services findByCodeActice(String serviceCode) {
         return iServicesRepository.findByCodeActice(serviceCode);
     }
+
+    @Override
+    public Page<Services> findAllWithCostSort(Pageable pageable) {
+        return iServicesRepository.findAllWithCostSort(pageable);
+    }
+
+    @Override
+    public Page<Services> findAllWithAreaSort(Pageable pageable) {
+        return iServicesRepository.findAllWithAreaSort(pageable);
+    }
 }

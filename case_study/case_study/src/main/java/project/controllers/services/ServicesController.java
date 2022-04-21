@@ -48,11 +48,24 @@ public class ServicesController {
         Page<Services> servicesList;
         if (sortOption.isPresent()){
             sort = sortOption.get();
-            if (sort.equals("nameSort")){
-                servicesList = iServicesService.findAllWithNameSort(pageable);
-            } else {
-                servicesList = iServicesService.findAllWithSearch(serviceTypeIdVal,convenience,cost,pageable);
+            switch (sort){
+                case "nameSort":
+                    servicesList = iServicesService.findAllWithNameSort(pageable);
+                    break;
+                case "costSort":
+                    servicesList = iServicesService.findAllWithCostSort(pageable);
+                    break;
+                case "areaSort":
+                    servicesList = iServicesService.findAllWithAreaSort(pageable);
+                    break;
+                default:
+                    servicesList = iServicesService.findAllWithSearch(serviceTypeIdVal,convenience,cost,pageable);
             }
+//            if (sort.equals("nameSort")){
+//                servicesList = iServicesService.findAllWithNameSort(pageable);
+//            } else {
+//                servicesList = iServicesService.findAllWithSearch(serviceTypeIdVal,convenience,cost,pageable);
+//            }
         } else {
             sort = "";
             servicesList = iServicesService.findAllWithSearch(serviceTypeIdVal,convenience,cost,pageable);

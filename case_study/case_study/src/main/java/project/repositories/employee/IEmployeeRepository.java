@@ -13,6 +13,10 @@ public interface IEmployeeRepository extends JpaRepository<Employee,Integer> {
 
     @Query(value = "select * from employee where active = 1 order by employee_name ", nativeQuery = true)
     Page<Employee> findAllWithNameSort(Pageable pageable);
+    @Query(value = "select * from employee where active = 1 order by employee_salary ", nativeQuery = true)
+    Page<Employee> findAllWithSalarySort(Pageable pageable);
+    @Query(value = "select * from employee where active = 1 order by employee_birthday ", nativeQuery = true)
+    Page<Employee> findAllWithBirthdaySort(Pageable pageable);
 
     @Query(value = "select * from employee where active = 1 and employee_name like concat('%',:name,'%') and " +
             "employee_address like concat('%',:address,'%') ", nativeQuery = true)
@@ -28,4 +32,6 @@ public interface IEmployeeRepository extends JpaRepository<Employee,Integer> {
 
     @Query(value = "select * from employee where active = 1 ", nativeQuery = true)
     List<Employee> findAllActive();
+
+
 }

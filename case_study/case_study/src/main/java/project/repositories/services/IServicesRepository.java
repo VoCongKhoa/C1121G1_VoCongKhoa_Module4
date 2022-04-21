@@ -16,6 +16,10 @@ public interface IServicesRepository extends JpaRepository<Services, Integer> {
 
     @Query(value = "select * from service where active = 1 order by service_name ", nativeQuery = true)
     Page<Services> findAllWithNameSort(Pageable pageable);
+    @Query(value = "select * from service where active = 1 order by service_cost ", nativeQuery = true)
+    Page<Services> findAllWithCostSort(Pageable pageable);
+    @Query(value = "select * from service where active = 1 order by service_area ", nativeQuery = true)
+    Page<Services> findAllWithAreaSort(Pageable pageable);
 
     @Query(value = "select * from service where active = 1 and description_other_convenience like concat('%',:convenience,'%') and service_cost >= :cost and service_type_id = :serviceTypeIdVal ", nativeQuery = true)
     Page<Services> findAllWithServiceTypeAndConvenienceAndCost(@Param("serviceTypeIdVal") Integer serviceTypeIdVal, @Param("convenience") String convenience, @Param("cost") String cost, Pageable pageable);
@@ -34,4 +38,6 @@ public interface IServicesRepository extends JpaRepository<Services, Integer> {
 
     @Query(value = "select * from service where active = 1 and service_code = :serviceCode ", nativeQuery = true)
     Services findByCodeActice(@Param("serviceCode") String serviceCode);
+
+
 }

@@ -16,4 +16,8 @@ public interface IEmployeeService {
     Employee findByIdActive(int id);
 
     List<Employee> findAllActive();
+
+    Page<Employee> findAllWithSalarySort(Pageable pageable);
+
+    Page<Employee> findAllWithBirthdaySort(Pageable pageable);
 }

@@ -456,11 +456,11 @@
                         <!--                        FORM SORT-->
                         <form method="get" id="sortForm" action="/services/list">
                             <div class="filter-group">
-                                <select th:name="sortOption" id="sort" class="form-control">
+                                <select th:name="sortOption" onchange="submitSortForm()" id="sort" class="form-control">
                                     <option value="" selected>Sort</option>
-                                    <!--                                    <option value="idSort">Sort by ID</option>-->
                                     <option value="nameSort">Sort by name</option>
-                                    <!--                                    <option value="birthdaySort">Sort by birthday</option>-->
+                                    <option value="costSort">Sort by cost</option>
+                                    <option value="areaSort">Sort by area</option>
                                 </select>
                             </div>
                         </form>
@@ -489,7 +489,7 @@
                                     </span>
                                 <form method="get" action="/services/list">
                                     <input type="hidden" name="action" value="search">
-                                    <select th:name="serviceTypeId" id="serviceTypeId" class="form-control">
+                                    <select th:name="serviceTypeId" id="serviceTypeId" class="form-control" style="width: fit-content;">
                                         <option th:value="0" selected>Select service type</option>
                                         <option th:each="row : ${serviceTypeList}"
                                                 th:value="${row.serviceTypeId}"
@@ -726,6 +726,10 @@
 </body>
 
 <script>
+
+    function submitSortForm() {
+        document.getElementById("sortForm").submit();
+    }
 
     $(document).ready(function () {
 

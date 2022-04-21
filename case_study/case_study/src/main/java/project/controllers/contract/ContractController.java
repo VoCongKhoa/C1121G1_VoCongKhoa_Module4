@@ -52,11 +52,28 @@ public class ContractController {
         Page<Contract> contractList;
         if (sortOption.isPresent()){
             sort = sortOption.get();
-            if (sort.equals("startDateSort")){ //switch-case
-                contractList = iContractService.findAllWithStartDateSort(pageable);
-            } else {
-                contractList = iContractService.findAllWithSearch(contractTotalMoney,contractStartDate,contractEndDate,pageable); //default
+
+            switch (sort){
+                case "startDateSort":
+                    contractList = iContractService.findAllWithStartDateSort(pageable);
+                    break;
+                case "endDateSort":
+                    contractList = iContractService.findAllWithEndDateSort(pageable);
+                    break;
+                case "depositSort":
+                    contractList = iContractService.findAllWithDepositSort(pageable);
+                    break;
+                case "totalMoneySort":
+                    contractList = iContractService.findAllWithTotalMoneySort(pageable);
+                    break;
+                default:
+                    contractList = iContractService.findAllWithSearch(contractTotalMoney,contractStartDate,contractEndDate,pageable); //default
             }
+//            if (sort.equals("startDateSort")){ //switch-case
+//                contractList = iContractService.findAllWithStartDateSort(pageable);
+//            } else {
+//                contractList = iContractService.findAllWithSearch(contractTotalMoney,contractStartDate,contractEndDate,pageable); //default
+//            }
         } else {
             sort = "";
             contractList = iContractService.findAllWithSearch(contractTotalMoney,contractStartDate,contractEndDate,pageable);

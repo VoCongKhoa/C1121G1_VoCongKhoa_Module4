@@ -13,6 +13,12 @@ public interface IContractRepository extends JpaRepository<Contract, Integer> {
 
     @Query(value = "select * from contract where active = 1 order by contract_start_date ", nativeQuery = true)
     Page<Contract> findAllWithStartDateSort(Pageable pageable);
+    @Query(value = "select * from contract where active = 1 order by contract_end_date ", nativeQuery = true)
+    Page<Contract> findAllWithEndDateSort(Pageable pageable);
+    @Query(value = "select * from contract where active = 1 order by contract_deposit ", nativeQuery = true)
+    Page<Contract> findAllWithDepositSort(Pageable pageable);
+    @Query(value = "select * from contract where active = 1 order by contract_total_money ", nativeQuery = true)
+    Page<Contract> findAllWithTotalMoneySort(Pageable pageable);
 
     @Query(value = "select * from contract where active = 1 and contract_total_money >= :contractTotalMoney and contract_start_date >= :contractStartDate and contract_end_date <= :contractEndDate ", nativeQuery = true)
     Page<Contract> findAllWithSearch(@Param("contractTotalMoney") Double contractTotalMoney, @Param("contractStartDate") String contractStartDate, @Param("contractEndDate") String contractEndDate, Pageable pageable);
@@ -35,4 +41,6 @@ public interface IContractRepository extends JpaRepository<Contract, Integer> {
 
     @Query(value = "select * from contract where active = 1 order by contract_id ", nativeQuery = true)
     List<Contract> findAllActive();
+
+
 }

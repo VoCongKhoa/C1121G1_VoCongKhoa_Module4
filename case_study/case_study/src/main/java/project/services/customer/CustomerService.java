@@ -64,4 +64,9 @@ public class CustomerService implements ICustomerService {
     public Customer findByIdActive(int id) {
         return iCustomerRepository.findByIdActive(id);
     }
+
+    @Override
+    public Page<Customer> findAllWithBirthdaySort(Pageable pageable) {
+        return iCustomerRepository.findAllWithBirthdaySort(pageable);
+    }
 }

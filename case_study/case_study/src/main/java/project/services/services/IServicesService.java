@@ -17,4 +17,8 @@ public interface IServicesService {
     Page<Services> findAllWithSearch(Integer serviceTypeIdVal, String convenience, String cost, Pageable pageable);
 
     Services findByCodeActice(String serviceCode);
+
+    Page<Services> findAllWithCostSort(Pageable pageable);
+
+    Page<Services> findAllWithAreaSort(Pageable pageable);
 }

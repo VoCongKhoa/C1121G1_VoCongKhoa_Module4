@@ -55,11 +55,24 @@ public class EmployeeController {
         System.out.println(positionIdVal);
         if (sortOption.isPresent()){
             sort = sortOption.get();
-            if (sort.equals("nameSort")){
-                employeeList = iEmployeeService.findAllWithNameSort(pageable);
-            } else {
-                employeeList = iEmployeeService.findAllWithSearch(name,address,positionIdVal,pageable);
+            switch (sort){
+                case "nameSort":
+                    employeeList = iEmployeeService.findAllWithNameSort(pageable);
+                    break;
+                case "salarySort":
+                    employeeList = iEmployeeService.findAllWithSalarySort(pageable);
+                    break;
+                case "birthdaySort":
+                    employeeList = iEmployeeService.findAllWithBirthdaySort(pageable);
+                    break;
+                default:
+                    employeeList = iEmployeeService.findAllWithSearch(name,address,positionIdVal,pageable);
             }
+//            if (sort.equals("nameSort")){
+//                employeeList = iEmployeeService.findAllWithNameSort(pageable);
+//            } else {
+//                employeeList = iEmployeeService.findAllWithSearch(name,address,positionIdVal,pageable);
+//            }
         } else {
             sort = "";
             employeeList = iEmployeeService.findAllWithSearch(name,address,positionIdVal,pageable);

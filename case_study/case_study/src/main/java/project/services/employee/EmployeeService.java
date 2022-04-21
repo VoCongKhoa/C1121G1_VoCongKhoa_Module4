@@ -43,4 +43,14 @@ public class EmployeeService implements IEmployeeService{
     public List<Employee> findAllActive() {
         return iEmployeeRepository.findAllActive();
     }
+
+    @Override
+    public Page<Employee> findAllWithSalarySort(Pageable pageable) {
+        return iEmployeeRepository.findAllWithSalarySort(pageable);
+    }
+
+    @Override
+    public Page<Employee> findAllWithBirthdaySort(Pageable pageable) {
+        return iEmployeeRepository.findAllWithBirthdaySort(pageable);
+    }
 }

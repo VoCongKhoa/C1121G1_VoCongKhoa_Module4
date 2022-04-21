@@ -463,7 +463,7 @@
                                     <option value="" selected>Sort</option>
                                     <!--                                    <option value="idSort">Sort by ID</option>-->
                                     <option value="nameSort">Sort by name</option>
-                                    <!--                                    <option value="birthdaySort">Sort by birthday</option>-->
+                                    <option value="birthdaySort">Sort by birthday</option>
                                 </select>
                             </div>
                         </form>
@@ -992,6 +992,10 @@
                 alert("Not found")
             }
         });
+    }
+
+    function submitSortForm() {
+        document.getElementById("sortForm").submit();
     }
 
     $(document).ready(function () {
