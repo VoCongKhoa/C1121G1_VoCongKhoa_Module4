@@ -1,6 +1,10 @@
 package project.models.customer;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import project.models.contract.Contract;
+
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity(name = "customer")
 public class Customer {
@@ -41,6 +45,10 @@ public class Customer {
     @ManyToOne
     @JoinColumn(name = "customer_type_id", referencedColumnName = "customer_type_id")
     private CustomerType customerType;
+
+    @OneToMany(mappedBy = "customer")
+    @JsonBackReference
+    private Set<Contract> contractSet;
 
     public Customer() {
     }
@@ -131,5 +139,13 @@ public class Customer {
 
     public void setActive(int active) {
         this.active = active;
+    }
+
+    public Set<Contract> getContractSet() {
+        return contractSet;
+    }
+
+    public void setContractSet(Set<Contract> contractSet) {
+        this.contractSet = contractSet;
     }
 }

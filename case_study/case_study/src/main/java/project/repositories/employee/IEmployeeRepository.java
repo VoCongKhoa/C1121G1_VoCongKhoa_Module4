@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import project.models.employee.Employee;
 
+import java.util.List;
+
 public interface IEmployeeRepository extends JpaRepository<Employee,Integer> {
 
     @Query(value = "select * from employee where active = 1 order by employee_name ", nativeQuery = true)
@@ -20,4 +22,10 @@ public interface IEmployeeRepository extends JpaRepository<Employee,Integer> {
             "employee_address like concat('%',:address,'%') and position_id = :positionIdVal ", nativeQuery = true)
     Page<Employee> findAllWithNameAndAddressAndPositionSearch(@Param("name") String name, @Param("address") String address,
                                                               @Param("positionIdVal") Integer positionIdVal, Pageable pageable);
+
+    @Query(value = "select * from employee where active = 1 and employee_id = :id ", nativeQuery = true)
+    Employee findByIdActive(@Param("id") int id);
+
+    @Query(value = "select * from employee where active = 1 ", nativeQuery = true)
+    List<Employee> findAllActive();
 }

@@ -1,5 +1,7 @@
 package project.models.employee;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -15,6 +17,7 @@ public class EducationDegree {
     private int active;
 
     @OneToMany(mappedBy = "educationDegree")
+    @JsonBackReference
     private List<Employee> employeeList;
 
     public EducationDegree() {

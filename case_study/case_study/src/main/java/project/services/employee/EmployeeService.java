@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import project.models.employee.Employee;
 import project.repositories.employee.IEmployeeRepository;
 
+import java.util.List;
+
 @Service
 public class EmployeeService implements IEmployeeService{
 
@@ -30,5 +32,15 @@ public class EmployeeService implements IEmployeeService{
     @Override
     public void save(Employee employee) {
         iEmployeeRepository.save(employee);
+    }
+
+    @Override
+    public Employee findByIdActive(int id) {
+        return iEmployeeRepository.findByIdActive(id);
+    }
+
+    @Override
+    public List<Employee> findAllActive() {
+        return iEmployeeRepository.findAllActive();
     }
 }

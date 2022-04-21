@@ -10,13 +10,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import project.dto.customer.CustomerDto;
 import project.dto.employee.EmployeeDto;
-import project.models.customer.Customer;
-import project.models.customer.CustomerType;
+import project.models.employee.Employee;
 import project.models.employee.Division;
 import project.models.employee.EducationDegree;
-import project.models.employee.Employee;
 import project.models.employee.Position;
 import project.models.rest.ResponseObject;
 import project.services.employee.IDivisionService;
@@ -78,22 +75,6 @@ public class EmployeeRestfulController {
         return "views/employee/list_employee";
     }
 
-    @GetMapping(value = "/create")
-    public String goCreate(Model model) {
-        List<Position> positionList = iPositionService.findAllActive();
-
-        List<Division> divisionList = iDivisionService.findAllActive();
-
-        List<EducationDegree> educationDegreeList = iEducationDegreeService.findAllActive();
-        Collections.reverse(positionList);
-
-        model.addAttribute("employeeDto", new EmployeeDto());
-        model.addAttribute("positionList", positionList);
-        model.addAttribute("divisionList", divisionList);
-        model.addAttribute("educationDegreeList", educationDegreeList);
-        return "views/employee/create_employee";
-    }
-
 //    @PostMapping(value = "/create")
 //    public String create(@Valid @ModelAttribute EmployeeDto employeeDto, BindingResult bindingResult, Model model) {
 //        employeeDto.validate(employeeDto, bindingResult);
@@ -120,7 +101,7 @@ public class EmployeeRestfulController {
 //    }
 
     @PostMapping(value = "/create")
-    public ResponseEntity<ResponseObject> create(@Valid @ModelAttribute @RequestBody EmployeeDto employeeDto, BindingResult bindingResult, Model model) {
+    public ResponseEntity<ResponseObject> create(@Valid @RequestBody EmployeeDto employeeDto, BindingResult bindingResult, Model model) {
         employeeDto.validate(employeeDto, bindingResult);
         if (bindingResult.hasFieldErrors()) {
             List<Position> positionList = iPositionService.findAllActive();
@@ -144,9 +125,68 @@ public class EmployeeRestfulController {
         } else {
             Employee employee = new Employee();
             BeanUtils.copyProperties(employeeDto, employee);
-            employee.setEmployeeSalary(Double.parseDouble(employeeDto.getEmployeeSalary()));
+//            employee.setEmployeeSalary(Double.parseDouble(employeeDto.getEmployeeSalary()));
             iEmployeeService.save(employee);
             return new ResponseEntity<>(HttpStatus.OK);
+        }
+    }
+
+    @GetMapping(value = "/detail/{id}")
+    public ResponseEntity<ResponseObject> detail(@PathVariable int id) {
+        Employee employee = iEmployeeService.findByIdActive(id);
+        if (employee != null) {
+            EmployeeDto employeeUpdateDto = new EmployeeDto();
+            BeanUtils.copyProperties(employee, employeeUpdateDto);
+            employeeUpdateDto.setEmployeeSalary(String.valueOf(employee.getEmployeeSalary()));
+            return new ResponseEntity<>(new ResponseObject("ok","Success!", new HashMap<>(),employeeUpdateDto), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(new ResponseObject("not ok","Failed!",""),HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PatchMapping(value = "/update/{id}")
+    public ResponseEntity<ResponseObject> update(@PathVariable int id, @Valid @RequestBody EmployeeDto employeeDto, BindingResult bindingResult, Model model) {
+        employeeDto.validate(employeeDto, bindingResult);
+        if (bindingResult.hasFieldErrors()) {
+            List<Position> positionList = iPositionService.findAllActive();
+
+            List<Division> divisionList = iDivisionService.findAllActive();
+
+            List<EducationDegree> educationDegreeList = iEducationDegreeService.findAllActive();
+            Collections.reverse(positionList);
+
+            model.addAttribute("positionList", positionList);
+            model.addAttribute("divisionList", divisionList);
+            model.addAttribute("educationDegreeList", educationDegreeList);
+            Map<String, String> errorMap = new HashMap<>();
+            bindingResult
+                    .getFieldErrors()
+                    .stream()
+                    .forEach(f -> errorMap.put(f.getField(),f.getDefaultMessage()));
+            return new ResponseEntity<>(new ResponseObject("not ok","Failed!", errorMap,""), HttpStatus.BAD_REQUEST);
+        } else {
+            Employee employee = iEmployeeService.findByIdActive(id);
+            if (employee != null){
+                employeeDto.setEmployeeId(employee.getEmployeeId());
+                BeanUtils.copyProperties(employeeDto,employee);
+                iEmployeeService.save(employee);
+                return new ResponseEntity<>(new ResponseObject("ok","Success!", new HashMap<>(),""),HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+
+        }
+    }
+
+    @PatchMapping(value = "/delete/{id}")
+    public ResponseEntity<ResponseObject> delete(@PathVariable int id) {
+        Employee employee = iEmployeeService.findByIdActive(id);
+        if (employee != null) {
+            employee.setActive(0);
+            iEmployeeService.save(employee);
+            return new ResponseEntity<>(new ResponseObject("ok","Success!", new HashMap<>(),""), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(new ResponseObject("not ok","Failed!",""),HttpStatus.NOT_FOUND);
         }
     }
 }

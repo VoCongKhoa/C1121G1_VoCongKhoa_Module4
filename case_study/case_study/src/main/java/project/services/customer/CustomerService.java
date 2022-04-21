@@ -59,4 +59,9 @@ public class CustomerService implements ICustomerService {
     public Page<Customer> findAllWithSearch(String code, String name, String address, Pageable pageable) {
         return iCustomerRepository.findAllActiveCodeAndNameAndAddressSearch(code, name, address, pageable);
     }
+
+    @Override
+    public Customer findByIdActive(int id) {
+        return iCustomerRepository.findByIdActive(id);
+    }
 }

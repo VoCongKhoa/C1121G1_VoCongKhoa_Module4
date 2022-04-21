@@ -123,7 +123,7 @@ public class CustomerController {
     public String goUpdate(@PathVariable int id, Model model) {
         List<CustomerType> customerTypeList = iCustomerTypeService.findAllActive();
         Collections.reverse(customerTypeList);
-        Customer customer = iCustomerService.findById(id);
+        Customer customer = iCustomerService.findByIdActive(id);
         if (customer != null) {
             CustomerDto customerDto = new CustomerDto();
             BeanUtils.copyProperties(customer, customerDto);
@@ -155,7 +155,7 @@ public class CustomerController {
     public String goDelete(@PathVariable int id, Model model) {
         List<CustomerType> customerTypeList = iCustomerTypeService.findAllActive();
         Collections.reverse(customerTypeList);
-        Customer customer = iCustomerService.findById(id);
+        Customer customer = iCustomerService.findByIdActive(id);
         if (customer != null) {
             model.addAttribute("customer", customer);
             model.addAttribute("customerTypeList", customerTypeList);

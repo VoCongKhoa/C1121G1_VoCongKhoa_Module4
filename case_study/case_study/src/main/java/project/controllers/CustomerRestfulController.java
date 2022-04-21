@@ -15,10 +15,7 @@ import project.services.customer.ICustomerService;
 import project.services.customer.ICustomerTypeService;
 
 import javax.validation.Valid;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @CrossOrigin
@@ -57,7 +54,7 @@ public class CustomerRestfulController {
 
     @GetMapping(value = "/detail/{id}")
     public ResponseEntity<ResponseObject> detail(@PathVariable int id, Model model) {
-        Customer customer = iCustomerService.findById(id);
+        Customer customer = iCustomerService.findByIdActive(id);
         if (customer != null) {
             CustomerDto customerUpdateDto = new CustomerDto();
             BeanUtils.copyProperties(customer, customerUpdateDto);
@@ -65,6 +62,45 @@ public class CustomerRestfulController {
             return new ResponseEntity<>(new ResponseObject("ok","Success!", new HashMap<>(),customerUpdateDto), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(new ResponseObject("not ok","Failed!",""),HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PatchMapping(value = "/update/{id}")
+    public ResponseEntity<ResponseObject> update(@PathVariable int id, @Valid @RequestBody CustomerDto customerDto, BindingResult bindingResult, Model model) {
+        customerDto.validate(customerDto, bindingResult);
+        if (bindingResult.hasFieldErrors()) {
+            List<CustomerType> customerTypeList = iCustomerTypeService.findAllActive();
+            Collections.reverse(customerTypeList);
+            model.addAttribute("customerTypeList", customerTypeList);
+            Map<String, String> errorMap = new HashMap<>();
+            bindingResult
+                    .getFieldErrors()
+                    .stream()
+                    .forEach(f -> errorMap.put(f.getField(),f.getDefaultMessage()));
+            return new ResponseEntity<>(new ResponseObject("not ok","Failed!", errorMap,""), HttpStatus.BAD_REQUEST);
+        } else {
+            Customer customer = iCustomerService.findByIdActive(id);
+            if (customer != null){
+                customerDto.setCustomerId(customer.getCustomerId());
+                BeanUtils.copyProperties(customerDto,customer);
+                iCustomerService.save(customer);
+                return new ResponseEntity<>(new ResponseObject("ok","Success!", new HashMap<>(),""),HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+
+        }
+    }
+
+    @PatchMapping(value = "/delete/{id}")
+    public ResponseEntity<ResponseObject> delete(@PathVariable int id) {
+        Customer customer = iCustomerService.findByIdActive(id);
+        if (customer != null) {
+            customer.setActive(0);
+            iCustomerService.save(customer);
+            return new ResponseEntity<>(new ResponseObject("ok","Success!", new HashMap<>(),""), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(new ResponseObject("not ok","Failed!",""),HttpStatus.NOT_FOUND);
         }
     }
 }

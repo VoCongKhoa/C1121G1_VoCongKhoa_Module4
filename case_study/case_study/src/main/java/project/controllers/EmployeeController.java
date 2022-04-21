@@ -10,8 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import project.dto.employee.EmployeeDto;
-import project.models.customer.Customer;
-import project.models.customer.CustomerType;
 import project.models.employee.Division;
 import project.models.employee.EducationDegree;
 import project.models.employee.Employee;
@@ -66,18 +64,6 @@ public class EmployeeController {
             sort = "";
             employeeList = iEmployeeService.findAllWithSearch(name,address,positionIdVal,pageable);
         }
-        model.addAttribute("positionList", iPositionService.findAllActive());
-        model.addAttribute("currentPage", pageable.getPageNumber());
-        model.addAttribute("employeeList", employeeList);
-        model.addAttribute("name", name);
-        model.addAttribute("address", address);
-        model.addAttribute("positionIdVal", positionIdVal);
-        model.addAttribute("sortOption", sort);
-        return "views/employee/list_employee";
-    }
-
-    @GetMapping(value = "/create")
-    public String goCreate(Model model) {
         List<Position> positionList = iPositionService.findAllActive();
 
         List<Division> divisionList = iDivisionService.findAllActive();
@@ -89,8 +75,30 @@ public class EmployeeController {
         model.addAttribute("positionList", positionList);
         model.addAttribute("divisionList", divisionList);
         model.addAttribute("educationDegreeList", educationDegreeList);
-        return "views/employee/create_employee";
+        model.addAttribute("currentPage", pageable.getPageNumber());
+        model.addAttribute("employeeList", employeeList);
+        model.addAttribute("name", name);
+        model.addAttribute("address", address);
+        model.addAttribute("positionIdVal", positionIdVal);
+        model.addAttribute("sortOption", sort);
+        return "views/employee/list_employee";
     }
+
+//    @GetMapping(value = "/create")
+//    public String goCreate(Model model) {
+//        List<Position> positionList = iPositionService.findAllActive();
+//
+//        List<Division> divisionList = iDivisionService.findAllActive();
+//
+//        List<EducationDegree> educationDegreeList = iEducationDegreeService.findAllActive();
+//        Collections.reverse(positionList);
+//
+//        model.addAttribute("employeeDto", new EmployeeDto());
+//        model.addAttribute("positionList", positionList);
+//        model.addAttribute("divisionList", divisionList);
+//        model.addAttribute("educationDegreeList", educationDegreeList);
+//        return "views/employee/create_employee";
+//    }
 
     @PostMapping(value = "/create")
     public String create(@Valid @ModelAttribute EmployeeDto employeeDto, BindingResult bindingResult, Model model) {
@@ -111,7 +119,7 @@ public class EmployeeController {
         } else {
             Employee employee = new Employee();
             BeanUtils.copyProperties(employeeDto, employee);
-            employee.setEmployeeSalary(Double.parseDouble(employeeDto.getEmployeeSalary()));
+//            employee.setEmployeeSalary(Double.parseDouble(employeeDto.getEmployeeSalary()));
             iEmployeeService.save(employee);
             return "redirect:/employee/list";
         }

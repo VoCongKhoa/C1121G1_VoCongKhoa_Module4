@@ -1,8 +1,11 @@
 package project.models.employee;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import project.models.contract.Contract;
 import project.models.user.User;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Employee {
@@ -11,11 +14,13 @@ public class Employee {
     //employee_address, position_id, position_name, education_degree_id, education_degree_name, division_id, username,password
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "employee_id")
     private int employeeId;
     private String employeeName;
     private String employeeBirthday;
     private String employeeIdCard;
-    private double employeeSalary;
+    @Column(columnDefinition = "DECIMAL(20,3)")
+    private String employeeSalary;
     private String employeePhone;
     private String employeeEmail;
     private String employeeAddress;
@@ -37,6 +42,10 @@ public class Employee {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "username")
     private User user;
+
+    @OneToMany(mappedBy = "employee")
+    @JsonBackReference
+    private Set<Contract> contractSet;
 
     public Employee() {
     }
@@ -73,11 +82,11 @@ public class Employee {
         this.employeeIdCard = employeeIdCard;
     }
 
-    public double getEmployeeSalary() {
+    public String getEmployeeSalary() {
         return employeeSalary;
     }
 
-    public void setEmployeeSalary(double employeeSalary) {
+    public void setEmployeeSalary(String employeeSalary) {
         this.employeeSalary = employeeSalary;
     }
 
@@ -143,5 +152,13 @@ public class Employee {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Set<Contract> getContractSet() {
+        return contractSet;
+    }
+
+    public void setContractSet(Set<Contract> contractSet) {
+        this.contractSet = contractSet;
     }
 }
