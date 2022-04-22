@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface IServiceTypeService {
     List<ServiceType> findAllActive();
+
+    ServiceType findByIdActive(int serviceTypeId);
 }

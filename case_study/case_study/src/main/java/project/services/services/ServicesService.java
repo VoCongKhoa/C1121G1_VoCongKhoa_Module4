@@ -52,12 +52,6 @@ public class ServicesService implements IServicesService {
         if (!(convenience.equals(""))){
             return iServicesRepository.findAllWithConvenience(convenience,pageable);
         }
-//            return findAllActive();
-//        if (serviceTypeIdVal == 0){
-//            return iServicesRepository.findAllWithNameAndAddressSearch(convenience,cost,pageable);
-//        } else {
-//            return iServicesRepository.findAllWithNameAndAddressAndPositionSearch(name,address,positionIdVal,pageable);
-//        }
         return null;
     }
 

@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Bootstrap CRUD Data Table for Database with Modal Form</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <!--    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>-->
+    <!--    <link rel="stylesheet" th:href="@{/assets/css/modal/modal.css}">-->
+    <!--    <link th:href="@{/assets/css/modal/themify-icons/themify-icons.css}" rel="stylesheet">-->
+    <style>
+        body {
+            color: #566787;
+            background: #f5f5f5;
+            font-family: 'Varela Round', sans-serif;
+            font-size: 13px;
+        }
+
+        .table-responsive {
+            margin: 30px 0;
+        }
+
+        .table-wrapper {
+            background: #fff;
+            padding: 20px 25px;
+            border-radius: 3px;
+            min-width: 1000px;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+        }
+
+        .table-title {
+            padding-bottom: 15px;
+            background: #435d7d;
+            color: #fff;
+            padding: 16px 30px;
+            min-width: 100%;
+            margin: -20px -25px 10px;
+            border-radius: 3px 3px 0 0;
+        }
+
+        .table-title h2 {
+            margin: 5px 0 0;
+            font-size: 24px;
+        }
+
+        .table-title .btn-group {
+            float: right;
+        }
+
+        .table-title .btn {
+            color: #fff;
+            float: right;
+            font-size: 13px;
+            border: none;
+            min-width: 50px;
+            border-radius: 2px;
+            border: none;
+            outline: none !important;
+            margin-left: 10px;
+        }
+
+        .table-title .btn i {
+            float: left;
+            font-size: 21px;
+            margin-right: 5px;
+        }
+
+        .table-title .btn span {
+            float: left;
+            margin-top: 2px;
+        }
+
+        table.table tr th, table.table tr td {
+            border-color: #e9e9e9;
+            padding: 12px 15px;
+            vertical-align: middle;
+        }
+
+        table.table tr th:first-child {
+            width: 60px;
+        }
+
+        table.table tr th:last-child {
+            width: 100px;
+        }
+
+        table.table-striped tbody tr:nth-of-type(odd) {
+            background-color: #fcfcfc;
+        }
+
+        table.table-striped.table-hover tbody tr:hover {
+            background: #f5f5f5;
+        }
+
+        table.table th i {
+            font-size: 13px;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+
+        table.table td:last-child i {
+            opacity: 0.9;
+            font-size: 22px;
+            margin: 0 5px;
+        }
+
+        table.table td a {
+            font-weight: bold;
+            color: #566787;
+            display: inline-block;
+            text-decoration: none;
+            outline: none !important;
+        }
+
+        table.table td a:hover {
+            color: #2196F3;
+        }
+
+        table.table td a.edit {
+            color: #FFC107;
+        }
+
+        table.table td a.delete {
+            color: #F44336;
+        }
+
+        table.table td i {
+            font-size: 19px;
+        }
+
+        table.table .avatar {
+            border-radius: 50%;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+
+        .pagination {
+            float: right;
+            margin: 0 0 5px;
+        }
+
+        .pagination li a {
+            border: none;
+            font-size: 13px;
+            min-width: 30px;
+            min-height: 30px;
+            color: #999;
+            margin: 0 2px;
+            line-height: 30px;
+            border-radius: 2px !important;
+            text-align: center;
+            padding: 0 6px;
+        }
+
+        .pagination li a:hover {
+            color: #666;
+        }
+
+        .pagination li.active a, .pagination li.active a.page-link {
+            background: #03A9F4;
+        }
+
+        .pagination li.active a:hover {
+            background: #0397d6;
+        }
+
+        .pagination li.disabled i {
+            color: #ccc;
+        }
+
+        .pagination li i {
+            font-size: 16px;
+            padding-top: 6px
+        }
+
+        .hint-text {
+            float: left;
+            margin-top: 10px;
+            font-size: 13px;
+        }
+
+        /* Custom checkbox */
+        .custom-checkbox {
+            position: relative;
+        }
+
+        .custom-checkbox input[type="checkbox"] {
+            opacity: 0;
+            position: absolute;
+            margin: 5px 0 0 3px;
+            z-index: 9;
+        }
+
+        .custom-checkbox label:before {
+            width: 18px;
+            height: 18px;
+        }
+
+        .custom-checkbox label:before {
+            content: '';
+            margin-right: 10px;
+            display: inline-block;
+            vertical-align: text-top;
+            background: white;
+            border: 1px solid #bbb;
+            border-radius: 2px;
+            box-sizing: border-box;
+            z-index: 2;
+        }
+
+        .custom-checkbox input[type="checkbox"]:checked + label:after {
+            content: '';
+            position: absolute;
+            left: 6px;
+            top: 3px;
+            width: 6px;
+            height: 11px;
+            border: solid #000;
+            border-width: 0 3px 3px 0;
+            transform: inherit;
+            z-index: 3;
+            transform: rotateZ(45deg);
+        }
+
+        .custom-checkbox input[type="checkbox"]:checked + label:before {
+            border-color: #03A9F4;
+            background: #03A9F4;
+        }
+
+        .custom-checkbox input[type="checkbox"]:checked + label:after {
+            border-color: #fff;
+        }
+
+        .custom-checkbox input[type="checkbox"]:disabled + label:before {
+            color: #b8b8b8;
+            cursor: auto;
+            box-shadow: none;
+            background: #ddd;
+        }
+
+        /* Modal styles */
+        .modal .modal-dialog {
+            max-width: 400px;
+        }
+
+        .modal .modal-header, .modal .modal-body, .modal .modal-footer {
+            padding: 20px 30px;
+        }
+
+        .modal .modal-content {
+            border-radius: 3px;
+            font-size: 14px;
+        }
+
+        .modal .modal-footer {
+            background: #ecf0f1;
+            border-radius: 0 0 3px 3px;
+        }
+
+        .modal .modal-title {
+            display: inline-block;
+        }
+
+        .modal .form-control {
+            border-radius: 2px;
+            box-shadow: none;
+            border-color: #dddddd;
+        }
+
+        .modal textarea.form-control {
+            resize: vertical;
+        }
+
+        .modal .btn {
+            border-radius: 2px;
+            min-width: 100px;
+        }
+
+        .modal form label {
+            font-weight: normal;
+        }
+
+        .filter-icon {
+            float: right;
+            margin-top: 7px;
+        }
+
+        .filter-icon i {
+            font-size: 18px;
+            opacity: 0.7;
+        }
+
+        .table-filter .filter-group {
+            float: right;
+            margin-left: 15px;
+        }
+
+        .table-filter input, .table-filter select {
+            height: 34px;
+            border-radius: 3px;
+            border-color: #ddd;
+            box-shadow: none;
+        }
+
+        .table-filter {
+            padding: 5px 0 15px;
+            border-bottom: 1px solid #e9e9e9;
+            margin-bottom: 5px;
+        }
+
+        .table-filter .btn {
+            height: 34px;
+        }
+
+        .table-filter label {
+            font-weight: normal;
+            margin-left: 10px;
+        }
+
+        .table-filter select, .table-filter input {
+            display: inline-block;
+            margin-left: 5px;
+        }
+
+        .table-filter input {
+            width: 200px;
+            display: inline-block;
+        }
+
+        .show-entries select.form-control {
+            width: 60px;
+            margin: 0 5px;
+        }
+
+        .show-entries select.form-control {
+            width: 60px;
+            margin: 0 5px;
+        }
+
+        .filter-group select.form-control {
+            width: 110px;
+        }
+
+        .table-filter .filter-group {
+            float: right;
+            margin-left: 15px;
+        }
+
+        .filter-group select.form-control {
+            width: 110px;
+        }
+
+
+        /*MODAL CREATE CUSTOMER*/
+
+        .modal-dialog-full-width {
+            width: 80% !important;
+            height: 100% !important;
+            margin: 10px auto !important;
+            padding: 0 !important;
+            max-width: none !important;
+
+        }
+
+        .modal-content-full-width {
+            height: auto !important;
+            min-height: 100% !important;
+            border-radius: 1% !important;
+            color: #000;
+            background: #046056;
+            font-family: "Roboto", sans-serif;
+        }
+
+        .modal-header-full-width {
+            border-bottom: 1px solid #9ea2a2 !important;
+        }
+
+        .modal-footer-full-width {
+            border-top: 1px solid #9ea2a2 !important;
+        }
+    </style>
+    <script>
+
+        $(document).ready(function () {
+            // // Activate tooltip
+            // $('[data-toggle="tooltip"]').tooltip();
+
+            // Select/Deselect checkboxes
+            var checkbox = $('table tbody input[type="checkbox"]');
+            $("#selectAll").click(function () {
+                if (this.checked) {
+                    checkbox.each(function () {
+                        this.checked = true;
+                    });
+                } else {
+                    checkbox.each(function () {
+                        this.checked = false;
+                    });
+                }
+            });
+            checkbox.click(function () {
+                if (!this.checked) {
+                    $("#selectAll").prop("checked", false);
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+<!--<form method="get" id="sortForm" action="/services/list">-->
+<div class="container d-flex text-center" style="justify-content: center;">
+    <form action="/services/showCreate" method="GET">
+        <label for="createSelection" style="font-size: 30px; margin-top: 10px;"><b>Select service type for create:</b></label>
+        <select th:name="serviceTypeId" id="createSelection" class="form-control mb-3" style="width: 550px;">
+            <option value="0" selected>Create new services</option>
+            <option value="1">Create by villa</option>
+            <option value="2">Sort by house</option>
+            <option value="3">Sort by room</option>
+        </select>
+        <button class="btn btn-success">Show form create</button>
+    </form>
+</div>
+
+<!--VILLA FORM CREATE-->
+<!--</form>-->
+<div th:if="${isExist == 1}">
+    <div class="container" id="villa">
+        <form action="/services/create" id="createFormVilla" th:object="${servicesDto}" method="POST">
+            <p id="checkErrorVilla" th:text="${flagVilla}" hidden></p>
+            <input value=1 name="serviceTypeId" hidden>
+            <div class="form-group">
+                <label for="serviceCodeCreateVilla">Service code</label>
+                <input type="text" class="form-control" placeholder="Type new service code here"
+                       id="serviceCodeCreateVilla"
+                       th:field="*{serviceCode}">
+                <small style="color: red" th:if="${#fields.hasErrors('serviceCode')}"
+                       th:errors="*{serviceCode}"></small>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="serviceNameCreateVilla">Service name</label>
+                        <input type="text" class="form-control" placeholder="Type new service name here"
+                               id="serviceNameCreateVilla"
+                               th:field="*{serviceName}">
+                        <small style="color: red" th:if="${#fields.hasErrors('serviceName')}"
+                               th:errors="*{serviceName}"></small>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="serviceAreaCreateVilla">Services area</label>
+                        <input type="text" class="form-control" placeholder="Type new services area here"
+                               id="serviceAreaCreateVilla"
+                               th:field="*{serviceArea}">
+                        <small style="color: red" th:if="${#fields.hasErrors('serviceArea')}"
+                               th:errors="*{serviceArea}"></small>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="serviceCostCreateVilla">Service cost:</label>
+                        <input type="text" class="form-control" id="serviceCostCreateVilla"
+                               placeholder="Type new services cost here"
+                               th:field="*{serviceCost}">
+                        <small style="color: red" th:if="${#fields.hasErrors('serviceCost')}"
+                               th:errors="*{serviceCost}"></small>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="serviceMaxPeopleCreateVilla">Service max people:</label>
+                        <input type="text" class="form-control" id="serviceMaxPeopleCreateVilla"
+                               placeholder="Type new services max people here"
+                               th:field="*{serviceMaxPeople}">
+                        <small style="color: red" th:if="${#fields.hasErrors('serviceMaxPeople')}"
+                               th:errors="*{serviceMaxPeople}"></small>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="rentTypeCreateVilla">Choose new rent type:</label>
+                        <select id="rentTypeCreateVilla" class="form-control" th:field="*{rentType.rentTypeId}">
+                            <option th:each="row : ${rentTypeList}" th:value="${row.rentTypeId}"
+                                    th:text="|${row.rentTypeName} - ${row.rentTypeCost} VND|">
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <input type="text" class="form-control" id="serviceTypeCreateVilla"
+                       th:field="*{serviceType.serviceTypeId}"
+                       value="1" hidden>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="serviceTypeCreateVilla">Service type:</label>
+                        <input type="text" class="form-control" th:value="Villa" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="standardRoomCreateVilla">Standard room:</label>
+                        <input type="text" class="form-control" id="standardRoomCreateVilla"
+                               placeholder="Type new standard room"
+                               th:field="*{standardRoom}">
+                        <small style="color: red" th:if="${#fields.hasErrors('standardRoom')}"
+                               th:errors="*{standardRoom}"></small>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="descriptionOtherConvenienceCreateVilla">Description other convenience:</label>
+                        <input type="text" class="form-control" id="descriptionOtherConvenienceCreateVilla"
+                               placeholder="Type new description other convenience"
+                               th:field="*{descriptionOtherConvenience}">
+                        <small style="color: red" th:if="${#fields.hasErrors('descriptionOtherConvenience')}"
+                               th:errors="*{descriptionOtherConvenience}"></small>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="poolAreaCreateVilla">Pool area:</label>
+                        <input type="text" class="form-control" id="poolAreaCreateVilla"
+                               placeholder="Type new description other convenience"
+                               th:field="*{poolArea}">
+                        <small style="color: red" th:if="${#fields.hasErrors('poolArea')}"
+                               th:errors="*{poolArea}"></small>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="numberOfFloorsCreateVilla">Number of floors:</label>
+                        <input type="text" class="form-control" id="numberOfFloorsCreateVilla"
+                               placeholder="Type new number of floors"
+                               th:field="*{numberOfFloors}">
+                        <small style="color: red" th:if="${#fields.hasErrors('numberOfFloors')}"
+                               th:errors="*{numberOfFloors}"></small>
+                    </div>
+                </div>
+            </div>
+
+
+            <input type="hidden" id="messageSuccess" name="messageCreate">
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary" style="
+                              min-width: 250px;
+                              color: #fcda2e;
+                              background: #403838 !important;
+                              margin-top: 20px;
+                              border: none;"
+                        id="btn-create-villa">
+                    <i class="fa fa-paper-plane"></i>
+                    Send
+                </button>
+            </div>
+        </form>
+
+        <br>
+        <h1 id="w3s" class="text-warning" style="text-align: center; font-family: cursive;">
+            ${messageCreate}
+        </h1>
+        <br>
+        <a href="/" class="backHome" style="font-size: 42px;
+              font-family: cursive;
+              margin: 0 0 50px;
+              text-align: center;"><h1>Back Home</h1></a>
+    </div>
+</div>
+
+<!--HOUSE FORM CREATE-->
+<div th:if="${isExist == 2}">
+    <div class="container" id="house">
+
+        <form action="/services/create" id="createFormHouse" th:object="${servicesDto}" method="POST">
+            <p id="checkErrorHouse" th:text="${flagHouse}" hidden></p>
+            <input value=2 name="serviceTypeId" hidden>
+            <div class="form-group">
+                <label for="serviceCodeCreateHouse">Service code</label>
+                <input type="text" class="form-control" placeholder="Type new service code here"
+                       id="serviceCodeCreateHouse"
+                       th:field="*{serviceCode}">
+                <small style="color: red" th:if="${#fields.hasErrors('serviceCode')}"
+                       th:errors="*{serviceCode}"></small>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="serviceNameCreateHouse">Service name</label>
+                        <input type="text" class="form-control" placeholder="Type new service name here"
+                               id="serviceNameCreateHouse"
+                               th:field="*{serviceName}">
+                        <small style="color: red" th:if="${#fields.hasErrors('serviceName')}"
+                               th:errors="*{serviceName}"></small>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="serviceAreaCreateHouse">Services area</label>
+                        <input type="text" class="form-control" placeholder="Type new services area here"
+                               id="serviceAreaCreateHouse"
+                               th:field="*{serviceArea}">
+                        <small style="color: red" th:if="${#fields.hasErrors('serviceArea')}"
+                               th:errors="*{serviceArea}"></small>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="serviceCostCreateHouse">Service cost:</label>
+                        <input type="text" class="form-control" id="serviceCostCreateHouse"
+                               placeholder="Type new services cost here"
+                               th:field="*{serviceCost}">
+                        <small style="color: red" th:if="${#fields.hasErrors('serviceCost')}"
+                               th:errors="*{serviceCost}"></small>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="serviceMaxPeopleCreateHouse">Service max people:</label>
+                        <input type="text" class="form-control" id="serviceMaxPeopleCreateHouse"
+                               placeholder="Type new services max people here"
+                               th:field="*{serviceMaxPeople}">
+                        <small style="color: red" th:if="${#fields.hasErrors('serviceMaxPeople')}"
+                               th:errors="*{serviceMaxPeople}"></small>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="rentTypeCreateHouse">Choose new rent type:</label>
+                        <select id="rentTypeCreateHouse" class="form-control" th:field="*{rentType.rentTypeId}">
+                            <option th:each="row : ${rentTypeList}" th:value="${row.rentTypeId}"
+                                    th:text="|${row.rentTypeName} - ${row.rentTypeCost} VND|">
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <input type="text" class="form-control" id="serviceTypeCreateHouse"
+                       th:field="*{serviceType.serviceTypeId}"
+                       th:value="2" hidden>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="serviceTypeCreateHouse">Service type:</label>
+                        <input type="text" class="form-control" th:value="House" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="standardRoomCreateHouse">Standard room:</label>
+                        <input type="text" class="form-control" id="standardRoomCreateHouse"
+                               placeholder="Type new standard room"
+                               th:field="*{standardRoom}">
+                        <small style="color: red" th:if="${#fields.hasErrors('standardRoom')}"
+                               th:errors="*{standardRoom}"></small>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="descriptionOtherConvenienceCreateHouse">Description other convenience:</label>
+                        <input type="text" class="form-control" id="descriptionOtherConvenienceCreateHouse"
+                               placeholder="Type new description other convenience"
+                               th:field="*{descriptionOtherConvenience}">
+                        <small style="color: red" th:if="${#fields.hasErrors('descriptionOtherConvenience')}"
+                               th:errors="*{descriptionOtherConvenience}"></small>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" style="width: 100%">
+                <label for="numberOfFloorsCreateHouse">Number of floors:</label>
+                <input type="text" class="form-control" id="numberOfFloorsCreateHouse"
+                       placeholder="Type new number of floors"
+                       th:field="*{numberOfFloors}">
+                <small style="color: red" th:if="${#fields.hasErrors('numberOfFloors')}"
+                       th:errors="*{numberOfFloors}"></small>
+            </div>
+
+            <input type="hidden" id="messageSuccess" name="messageCreate">
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary" style="
+                              min-width: 250px;
+                              color: #fcda2e;
+                              background: #403838 !important;
+                              margin-top: 20px;
+                              border: none;"
+                        id="btn-create-house">
+                    <i class="fa fa-paper-plane"></i>
+                    Send
+                </button>
+            </div>
+        </form>
+
+        <br>
+        <h1 id="w3s" class="text-warning" style="text-align: center; font-family: cursive;">
+            ${messageCreate}
+        </h1>
+        <br>
+        <a href="/" class="backHome" style="font-size: 42px;
+              font-family: cursive;
+              margin: 0 0 50px;
+              text-align: center;"><h1>Back Home</h1></a>
+    </div>
+</div>
+
+<!--ROOM FORM CREATE-->
+<div th:if="${isExist == 3}">
+    <div class="container" id="room">
+
+        <form action="/services/create" id="createFormRoom" th:object="${servicesDto}" method="POST">
+            <p id="checkErrorRoom" th:text="${flagRoom}" hidden></p>
+            <input value=3 name="serviceTypeId" hidden>
+            <div class="form-group">
+                <label for="serviceCodeCreateRoom">Service code</label>
+                <input type="text" class="form-control" placeholder="Type new service code here"
+                       id="serviceCodeCreateRoom"
+                       th:field="*{serviceCode}">
+                <small style="color: red" th:if="${#fields.hasErrors('serviceCode')}"
+                       th:errors="*{serviceCode}"></small>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="serviceNameCreateRoom">Service name</label>
+                        <input type="text" class="form-control" placeholder="Type new service name here"
+                               id="serviceNameCreateRoom"
+                               th:field="*{serviceName}">
+                        <small style="color: red" th:if="${#fields.hasErrors('serviceName')}"
+                               th:errors="*{serviceName}"></small>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="serviceAreaCreateRoom">Services area</label>
+                        <input type="text" class="form-control" placeholder="Type new services area here"
+                               id="serviceAreaCreateRoom"
+                               th:field="*{serviceArea}">
+                        <small style="color: red" th:if="${#fields.hasErrors('serviceArea')}"
+                               th:errors="*{serviceArea}"></small>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="serviceCostCreateRoom">Service cost:</label>
+                        <input type="text" class="form-control" id="serviceCostCreateRoom"
+                               placeholder="Type new services cost here"
+                               th:field="*{serviceCost}">
+                        <small style="color: red" th:if="${#fields.hasErrors('serviceCost')}"
+                               th:errors="*{serviceCost}"></small>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="serviceMaxPeopleCreateRoom">Service max people:</label>
+                        <input type="text" class="form-control" id="serviceMaxPeopleCreateRoom"
+                               placeholder="Type new services max people here"
+                               th:field="*{serviceMaxPeople}">
+                        <small style="color: red" th:if="${#fields.hasErrors('serviceMaxPeople')}"
+                               th:errors="*{serviceMaxPeople}"></small>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="rentTypeCreateRoom">Choose new rent type:</label>
+                        <select id="rentTypeCreateRoom" class="form-control" th:field="*{rentType.rentTypeId}">
+                            <option th:each="row : ${rentTypeList}" th:value="${row.rentTypeId}"
+                                    th:text="|${row.rentTypeName} - ${row.rentTypeCost} VND|">
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <input type="text" class="form-control" id="serviceTypeCreateRoom"
+                       th:field="*{serviceType.serviceTypeId}"
+                       th:value="3" hidden>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="serviceTypeCreateRoom">Service type:</label>
+                        <input type="text" class="form-control" th:value="Room" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" style="width: 100%">
+                <label for="freeAttachedServiceCreateRoom">Free attached service:</label>
+                <input type="text" class="form-control" id="freeAttachedServiceCreateRoom"
+                       placeholder="Type new free attached service here"
+                       th:field="*{freeAttachedService}">
+                <small style="color: red" th:if="${#fields.hasErrors('freeAttachedService')}"
+                       th:errors="*{freeAttachedService}"></small>
+            </div>
+
+            <input type="hidden" id="messageSuccess" name="messageCreate">
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary" style="
+                              min-width: 250px;
+                              color: #fcda2e;
+                              background: #403838 !important;
+                              margin-top: 20px;
+                              border: none;"
+                        id="btn-create">
+                    <i class="fa fa-paper-plane"></i>
+                    Send
+                </button>
+            </div>
+        </form>
+
+        <br>
+        <h1 id="w3s" class="text-warning" style="text-align: center; font-family: cursive;">
+            ${messageCreate}
+        </h1>
+        <br>
+        <a href="/" class="backHome" style="font-size: 42px;
+              font-family: cursive;
+              margin: 0 0 50px;
+              text-align: center;"><h1>Back Home</h1></a>
+    </div>
+</div>
+</body>
+<script>
+    // function submitSortForm() {
+    //     document.getElementById("sortForm").submit();
+    // };
+    // $(document).ready(function () {
+    //     let serviceTypeId = "";
+    //     $("#createSelection").change(function () {
+    //         $("select#createSelection option:selected").each(function () {
+    //             serviceTypeId = $(this).val();
+    //         });
+    //         console.log(serviceTypeId);
+    //         console.log($("#checkErrorVilla").text());
+    //         console.log($("#checkErrorHouse").text());
+    //         console.log($("#checkErrorRoom").text());
+    //
+    //         $.ajax({
+    //             headers: {
+    //                 'Accept': 'application/json',
+    //                 'Content-Type': 'application/json'
+    //             },
+    //             type: "GET", //GET, DELETE, PUT...
+    //             url: "http://localhost:8080/servicesRestful/create/" + serviceTypeId,
+    //             success: function (resultSuccess) {
+    //                 console.log(resultSuccess.data);
+    //                 $("#check").text(resultSuccess.data)
+    //                 // alert("sucess")
+    //             },
+    //             error: function (resultError) {
+    //                 // alert("failed")
+    //             }
+    //         });
+    //
+    //
+    //         if (serviceTypeId == 0) {
+    //             if ($("#checkErrorVilla").text() == "ERROR") {
+    //                 $("#villa").show();
+    //                 $("#house").hide();
+    //                 $("#room").hide();
+    //             }
+    //             if ($("#checkErrorHouse").text() == "ERROR") {
+    //                 $("#villa").hide();
+    //                 $("#house").show();
+    //                 $("#room").hide();
+    //             }
+    //             if ($("#checkErrorRoom").text() == "ERROR") {
+    //                 $("#villa").hide();
+    //                 $("#house").hide();
+    //                 $("#room").show();
+    //             } else {
+    //                 $("#villa").hide();
+    //                 $("#house").hide();
+    //                 $("#room").hide();
+    //             }
+    //         }
+    //         if (serviceTypeId == "1") {
+    //             $("#villa").show();
+    //             $("#house").hide();
+    //             $("#room").hide();
+    //         }
+    //         if (serviceTypeId == "2") {
+    //             $("#villa").hide();
+    //             $("#house").show();
+    //             $("#room").hide();
+    //         }
+    //         if (serviceTypeId == "3") {
+    //             $("#villa").hide();
+    //             $("#house").hide();
+    //             $("#room").show();
+    //         }
+    //     })
+    //         .change();
+    //
+    // });
+</script>
+</html>

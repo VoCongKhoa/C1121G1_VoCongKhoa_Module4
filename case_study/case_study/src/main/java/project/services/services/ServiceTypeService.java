@@ -17,4 +17,9 @@ public class ServiceTypeService implements IServiceTypeService {
     public List<ServiceType> findAllActive() {
         return iServiceTypeRepository.findAllActive();
     }
+
+    @Override
+    public ServiceType findByIdActive(int serviceTypeId) {
+        return iServiceTypeRepository.findByIdActive(serviceTypeId);
+    }
 }

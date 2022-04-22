@@ -12,4 +12,5 @@ public interface IContractViewDto {
     String getCustomerName();
     String getServiceCode();
     String getServiceName();
+    boolean getActive();
 }

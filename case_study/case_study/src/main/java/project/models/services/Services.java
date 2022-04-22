@@ -32,6 +32,7 @@ public class Services {
     private int numberOfFloors;
     @Column(name = "active", columnDefinition = "BIT(1) default 1")
     private int active;
+    private String freeAttachedService;
 
     @ManyToOne
     @JoinColumn(name = "rent_type_id", referencedColumnName = "rent_type_id")
@@ -158,5 +159,13 @@ public class Services {
 
     public void setContractSet(Set<Contract> contractSet) {
         this.contractSet = contractSet;
+    }
+
+    public String getFreeAttachedService() {
+        return freeAttachedService;
+    }
+
+    public void setFreeAttachedService(String freeAttachedService) {
+        this.freeAttachedService = freeAttachedService;
     }
 }

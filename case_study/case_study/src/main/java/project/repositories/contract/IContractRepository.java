@@ -32,7 +32,7 @@ public interface IContractRepository extends JpaRepository<Contract, Integer> {
     @Query(value = "SELECT contract_id contractId, contract_start_date contractStartDate, contract_end_date contractEndDate, " +
             "contract_deposit contractDeposit, contract_total_money contractTotalMoney, employee.employee_id employeeId, " +
             "employee.employee_name employeeName, customer.customer_code customerCode,customer.customer_name customerName, " +
-            "service.service_code serviceCode, service.service_name serviceName FROM contract " +
+            "service.service_code serviceCode, service.service_name serviceName, contract.active active FROM contract " +
             "INNER JOIN employee ON contract.employee_id=employee.employee_id " +
             "INNER JOIN customer ON contract.customer_id=customer.customer_id " +
             "INNER JOIN service ON contract.service_id=service.service_id " +

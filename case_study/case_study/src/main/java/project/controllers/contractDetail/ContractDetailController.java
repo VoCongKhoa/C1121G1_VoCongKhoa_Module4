@@ -12,14 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import project.models.contract.Contract;
 import project.models.contractDetail.AttachService;
 import project.models.contractDetail.ContractDetail;
-import project.models.customer.Customer;
-import project.models.employee.Employee;
-import project.models.services.Services;
 import project.services.contract.IContractService;
 import project.services.contractDetail.IAttachServiceService;
 import project.services.contractDetail.IContractDetailService;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 

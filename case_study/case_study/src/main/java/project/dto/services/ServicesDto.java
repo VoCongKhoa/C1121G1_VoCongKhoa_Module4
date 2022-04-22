@@ -6,11 +6,13 @@ import org.springframework.validation.Validator;
 import project.models.services.RentType;
 import project.models.services.ServiceType;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 public class ServicesDto implements Validator {
 
     private int serviceId;
     @NotBlank
+    @Pattern(regexp = "^$|^DV-[\\d]{4}$", message = "Wrong format, ex: DV-0123")
     private String serviceCode;
     @NotBlank
     private String serviceName;
@@ -25,6 +27,7 @@ public class ServicesDto implements Validator {
     private int active = 1;
     private RentType rentType;
     private ServiceType serviceType;
+    private String freeAttachedService;
 
     public ServicesDto() {
     }
@@ -133,6 +136,14 @@ public class ServicesDto implements Validator {
         this.serviceType = serviceType;
     }
 
+    public String getFreeAttachedService() {
+        return freeAttachedService;
+    }
+
+    public void setFreeAttachedService(String freeAttachedService) {
+        this.freeAttachedService = freeAttachedService;
+    }
+
     @Override
     public boolean supports(Class<?> clazz) {
         return false;
@@ -142,7 +153,7 @@ public class ServicesDto implements Validator {
     public void validate(Object target, Errors errors) {
         ServicesDto servicesDto = (ServicesDto) target;
         if (servicesDto.getServiceCost() != null){
-            if (!servicesDto.getServiceCost().matches("^\\s*(?=.*[1-9])\\d*(?:\\.\\d{1,4})?\\s*$")){
+            if (!servicesDto.getServiceCost().matches("^$|^\\s*(?=.*[1-9])\\d*(?:\\.\\d{1,4})?\\s*$")){
                 errors.rejectValue("serviceCost", "", "Wrong format (a number greater than 0)");
             }
         }

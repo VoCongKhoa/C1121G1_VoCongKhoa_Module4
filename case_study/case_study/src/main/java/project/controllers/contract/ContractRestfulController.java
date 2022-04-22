@@ -75,6 +75,7 @@ public class ContractRestfulController {
     @GetMapping(value = "/detail/{id}")
     public ResponseEntity<ResponseObject> detail(@PathVariable int id) {
         IContractViewDto iCDD = iContractService.findContractDetailDtoById(id);
+
         if (iCDD != null) {
             ContractViewDto contractViewDto = new ContractViewDto(iCDD.getContractId(),iCDD.getContractStartDate(),
                     iCDD.getContractEndDate(),iCDD.getContractDeposit(),iCDD.getContractTotalMoney(),iCDD.getEmployeeId(),
