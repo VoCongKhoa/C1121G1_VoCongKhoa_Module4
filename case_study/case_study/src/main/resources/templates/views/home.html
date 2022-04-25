@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Bootstrap Navbar Dropdown Login and Signup Form with Social Buttons</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Varela+Round">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" th:href="@{/assets/css/main.css}">
+    <script>
+        // Prevent dropdown menu from closing when click inside the form
+        $(document).on("click", ".action-buttons .dropdown-menu", function (e) {
+            e.stopPropagation();
+        });
+    </script>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #046056;">
+
+
+    <!-- <%-- LEFT NAVBAR--%> -->
+    <span class="navbar-brand">
+        <b><i>Furama Resort Danang</i></b>
+    </span>
+    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Collection of nav links, forms, and other content for toggling -->
+    <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
+        <div class="navbar-nav">
+            <a href="/" class="nav-item nav-link" style="color: white">Home</a>
+            <!--            <c:if test="${sessionScope.userDTO.roldId == 1}">-->
+            <a href="/customer/list" class="nav-item nav-link" style="color: white">
+                Customer
+            </a>
+            <a href="/employee/list" class="nav-item nav-link" style="color: white">
+                Employee
+            </a>
+            <a href="/services/list" class="nav-item nav-link" style="color: white">
+                Service
+            </a>
+            <!--            </c:if>-->
+            <!--            <c:if test="${sessionScope.userDTO.roldId == 0}">-->
+            <a href="/customer/list" class="nav-item nav-link" style="color: white">
+                Customer
+            </a>
+            <a href="/employee/list" class="nav-item nav-link" style="color: white" hidden>
+                Employee
+            </a>
+            <a href="/services/list" class="nav-item nav-link" style="color: white">
+                Service
+            </a>
+            <!--            </c:if>-->
+
+            <!--            <c:if test="${sessionScope.userDTO.roldId == 1}">-->
+            <div class="nav-item dropdown">
+                <a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle" style="color: white">
+                    Contract
+                </a>
+                <div class="dropdown-menu">
+                    <a href="/contract/list" class="dropdown-item">
+                        Contract
+                    </a>
+                    <a href="/contractDetail/list" class="dropdown-item">
+                        Contract detail
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        Attach service
+                    </a>
+                </div>
+            </div>
+            <!--            </c:if>-->
+            <!--            <c:if test="${sessionScope.userDTO.roldId == 0}">-->
+            <div class="nav-item dropdown" hidden>
+                <a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle" style="color: white">
+                    Contract
+                </a>
+                <div class="dropdown-menu">
+                    <a href="/contract/list" class="dropdown-item">
+                        Contract
+                    </a>
+                    <a href="/contractDetail/list" class="dropdown-item">
+                        Contract detail
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        Attach service
+                    </a>
+                </div>
+            </div>
+            <!--            </c:if>-->
+
+        </div>
+    </div>
+
+
+    <!--    LOGIN-->
+    <!--    <c:if test="${sessionScope.userDTO != null}">-->
+    <div class="navbar-nav ml-auto action-buttons" hidden>
+        <!--        </c:if>-->
+        <!--        <c:if test="${sessionScope.userDTO == null}">-->
+        <div class="navbar-nav ml-auto action-buttons">
+            <!--            </c:if>-->
+            <div><a href="/login?action=login" class="btn btn-primary sign-up-btn">Sign up</a></div>
+        </div>
+
+        <!--            PERSON-->
+        <!--        <c:if test="${sessionScope.userDTO != null}">-->
+        <div class="navbar-nav ml-auto" }>
+            <!--            </c:if>-->
+            <!--            <c:if test="${sessionScope.userDTO == null}">-->
+            <div class="navbar-nav ml-auto" } hidden>
+                <!--                </c:if>-->
+                <a href="#" class="nav-item nav-link notifications" style="color: white"><i
+                        class="fa fa-bell-o"></i><span
+                        class="badge">1</span></a>
+                <a href="#" class="nav-item nav-link messages" style="color: white"><i
+                        class="fa fa-envelope-o"></i><span
+                        class="badge">10</span></a></a>
+                <div class="nav-item dropdown">
+                    <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action"
+                       style="color: white"><img
+                            src="https://bootdey.com/img/Content/avatar/avatar6.png" class="avatar"
+                            alt="Avatar">${sessionScope.employee.employeeName}
+                        <b class="caret"></b></a>
+                    <div class="dropdown-menu">
+                        <a href="/employee?action=detail&id=${sessionScope.employee.employeeId}"
+                           class="dropdown-item"><i
+                                class="fa fa-user-o"></i>
+                            Profile
+                        </a></a>
+                        <!--        <a href="#" class="dropdown-item"><i class="fa fa-calendar-o"></i> Calendar</a></a>-->
+                        <a href="/employee?action=update&id=${sessionScope.employee.employeeId}"
+                           class="dropdown-item"><i
+                                class="fa fa-sliders"></i>
+                            Update
+                        </a></a>
+                        <div class="dropdown-divider"></div>
+                        <a href="/home?action=logout" class="dropdown-item"><i class="material-icons">&#xE8AC;</i>
+                            Logout
+                        </a></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!--  CAROUSEL-->
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img class="d-block w-100"
+                 src="https://furamavietnam.com/wp-content/uploads/2020/04/04-Facilities-Maintenance.jpg"
+                 alt="First slide">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>All 198 rooms & suites have polished timber floors, natural fabrics, comfortable cane furniture,
+                    plantation style shutters and ceiling fans. Each room also has its own balcony or spacious terrace
+                    providing complete privacy and with a superb view of the ocean, the tropical garden or the
+                    freshwater
+                    swimming lagoon pool.</h5>
+                <p>ROOMS & SUITES</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="https://furamavietnam.com/wp-content/uploads/2018/07/CULIRARY.jpg"
+                 alt="Second slide">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>The resort’s culinary experience features a mixture of the authentic and locally inspired
+                    Vietnamese,
+                    Asian, Italian and other European cuisines plus the best imported steaks. The resort presents guests
+                    with
+                    varied gastronomic venues – the hip and breezy bar overlooking the beach, the exclusive Lagoon pool
+                    surrounded by a tropical garden, the true Italian flare offered at the Don Cipriani’s, the refined
+                    Asian
+                    touch at Café Indochine or the authentic central Vietnam cuisine at the Danaksara.</h5>
+                <p>CULINARY</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100"
+                 src="https://furamavietnam.com/wp-content/uploads/2018/10/02.-ICP-ICP_Furama_Danang_-Ball-Room-4.jpg"
+                 alt="Third slide">
+        </div>
+        <div class="carousel-item">
+            <img src="https://furamavietnam.com/wp-content/uploads/2018/07/RECREATION.jpg" alt="Four slide">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>A well-appointed International Convention Palace with ballrooms can accommodate up to 1,000 people
+                    in
+                    style, with another ten function rooms for 50 to 300 people each. A variety of cultural-themed
+                    parties
+                    on
+                    the beach or around the lagoon, in the ballrooms or outside the resort, with the surprising arrivals
+                    of
+                    VIPs from Helicopter landing on the resort’s own Helipad…</h5>
+                <p>MEETING & EVENT</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="..." alt="Four slide">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>A full range of Water Sports will keep you busy. Stop by the Water Sport House where our experienced
+                    staff
+                    are waiting to assist or train you in the use of any of our equipment.</h5>
+                <p>RECREATION</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container_fluid my-5">
+    <div class="row">
+        <div class="col-4"
+             style="font-size: 24px;color: #cbbe73;line-height: 36px;text-align: left;font-family:Playfair Display;
+         font-weight:700;font-style:normal; text-align: center">
+            THIS WORLD CLASS RESORT, FURAMA DANANG, REPUTABLE FOR BEING A CULINARY RESORT IN VIETNAM
+        </div>
+        <div class="col-4">
+            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/IjlT_4mvd-c"
+                    title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+        </div>
+        <div class="col-4" style="text-align: justify">Overlooking the long stretch of wide white sand on Danang Beach,
+            Furama Resort Danang is a
+            gateway to three World Heritage Sites of Hoi An (20 minutes), My Son (90 minutes) and Hue (2 hours). The 198
+            rooms
+            and suites plus 70 two to four bedroom pool villas feature tasteful décor, designed with traditional
+            Vietnamese
+            style and a touch of French colonial architecture and guarantee the Vietnam’s the most prestigious resort
+            -counting royalty, presidents, movie stars and international business leaders among its celebrity guests.
+        </div>
+    </div>
+    <div class="row"></div>
+    <div class="row"></div>
+</div>
+
+</body>
+</html>

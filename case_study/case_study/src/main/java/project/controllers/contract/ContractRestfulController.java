@@ -77,6 +77,7 @@ public class ContractRestfulController {
         IContractViewDto iCDD = iContractService.findContractDetailDtoById(id);
 
         if (iCDD != null) {
+
             ContractViewDto contractViewDto = new ContractViewDto(iCDD.getContractId(),iCDD.getContractStartDate(),
                     iCDD.getContractEndDate(),iCDD.getContractDeposit(),iCDD.getContractTotalMoney(),iCDD.getEmployeeId(),
                     iCDD.getEmployeeName(),iCDD.getCustomerCode(),iCDD.getCustomerName(),iCDD.getServiceCode(),iCDD.getServiceName());

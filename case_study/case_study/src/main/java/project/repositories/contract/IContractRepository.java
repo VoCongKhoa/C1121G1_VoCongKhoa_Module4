@@ -42,5 +42,4 @@ public interface IContractRepository extends JpaRepository<Contract, Integer> {
     @Query(value = "select * from contract where active = 1 order by contract_id ", nativeQuery = true)
     List<Contract> findAllActive();
 
-
 }

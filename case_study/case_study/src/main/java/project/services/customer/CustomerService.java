@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import project.dto.customer.InHouseCustomerDto;
 import project.models.customer.Customer;
 import project.repositories.customer.ICustomerRepository;
 
@@ -68,5 +69,10 @@ public class CustomerService implements ICustomerService {
     @Override
     public Page<Customer> findAllWithBirthdaySort(Pageable pageable) {
         return iCustomerRepository.findAllWithBirthdaySort(pageable);
+    }
+
+    @Override
+    public Page<InHouseCustomerDto> findAllWithNameSortListInHouse(Pageable pageable) {
+        return iCustomerRepository.findAllWithNameSortListInHouse(pageable);
     }
 }

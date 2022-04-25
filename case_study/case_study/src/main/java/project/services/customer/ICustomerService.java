@@ -2,6 +2,7 @@ package project.services.customer;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import project.dto.customer.InHouseCustomerDto;
 import project.models.customer.Customer;
 
 import java.util.List;
@@ -28,4 +29,6 @@ public interface ICustomerService {
     Customer findByIdActive(int id);
 
     Page<Customer> findAllWithBirthdaySort(Pageable pageable);
+
+    Page<InHouseCustomerDto> findAllWithNameSortListInHouse(Pageable pageable);
 }

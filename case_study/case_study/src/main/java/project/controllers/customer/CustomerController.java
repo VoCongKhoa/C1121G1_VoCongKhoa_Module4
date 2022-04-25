@@ -9,10 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import project.dto.customer.CustomerDto;
+import project.dto.customer.InHouseCustomerDto;
 import project.models.customer.Customer;
 import project.models.customer.CustomerType;
+import project.services.contract.IContractService;
+import project.services.contractDetail.IAttachServiceService;
 import project.services.customer.ICustomerService;
 import project.services.customer.ICustomerTypeService;
 
@@ -30,6 +32,12 @@ public class CustomerController {
 
     @Autowired
     ICustomerTypeService iCustomerTypeService;
+
+    @Autowired
+    IContractService iContractService;
+
+    @Autowired
+    IAttachServiceService iAttachServiceService;
 
     @GetMapping(value = "/list")
     public String listCustomer(Model model,
@@ -55,10 +63,6 @@ public class CustomerController {
                 default:
                     customerList = iCustomerService.findAllWithSearch(code,name,address,pageable);
             }
-//            if (sort.equals("nameSort")){
-//                customerList = iCustomerService.findAllWithNameSort(pageable);
-//            } else {
-//            }
         } else {
             sort = "";
             customerList = iCustomerService.findAllWithSearch(code,name,address,pageable);
@@ -77,28 +81,50 @@ public class CustomerController {
         return "views/customer/list_customer";
     }
 
-//    @GetMapping(value = "")
-//    public String index(Model model,
-//                        @PageableDefault(value = 2) Pageable pageable,
-//                        @RequestParam Optional<String> tenKhachHang,
-//                        @RequestParam Optional<String> ngayBatDau,
-//                        @RequestParam Optional<String> ngayKetThuc) {
-//
-//        String tenKhachHangThuc = tenKhachHang.orElse("");
-//        String ngayBatDauThuc = ngayBatDau.orElse("");
-//        String ngayKetThucThuc = ngayKetThuc.orElse("");
-//
-//        if (!(tenKhachHangThuc.equals("") & ngayBatDauThuc.equals("") & ngayKetThucThuc.equals(""))) {
-//            return "redirect:/index/search";
+
+    @GetMapping(value = "/listInHouseCustomer")
+    public String listInHouseCustomer(Model model,
+                               @PageableDefault(value = 3) Pageable pageable,
+                               @RequestParam Optional<String> codeSearch,
+                               @RequestParam Optional<String> nameSearch,
+                               @RequestParam Optional<String> addressSearch,
+                               @RequestParam Optional<String> sortOption) {
+        String code = codeSearch.orElse("");
+        String name = nameSearch.orElse("");
+        String address = addressSearch.orElse("");
+        String sort = null;
+        Page<InHouseCustomerDto> inHouseCustomerDtoList = null;
+//        if (sortOption.isPresent()){
+//            sort = sortOption.get();
+//            switch (sort){
+//                case "nameSort":
+//                    inHouseCustomerDtoList = iCustomerService.findAllWithNameSortListInHouse(pageable);
+//                    break;
+//                case "birthdaySort":
+//                    inHouseCustomerDtoList = iCustomerService.findAllWithNameSortListInHouse(pageable);
+//                    break;
+//                default:
+////                    inHouseCustomerDtoList = iCustomerService.findAllWithNameSortListInHouse(code,name,address,pageable);
+//            }
 //        } else {
-//            Page<SoTietKiem> soTietKiemList = iSoTietKiemService.findAllByTenKhachHangAndNgayGui(tenKhachHangThuc, ngayBatDauThuc, ngayKetThucThuc, pageable);
-//            model.addAttribute("soTietKiemList", iSoTietKiemService.findAll(pageable));
-//            model.addAttribute("tenKhachHangThuc", tenKhachHangThuc);
-//            model.addAttribute("ngayBatDauThuc", ngayBatDauThuc);
-//            model.addAttribute("ngayKetThucThuc", ngayKetThucThuc);
-//            return "views/list";
+//            sort = "";
+//            inHouseCustomerDtoList = iCustomerService.findAllWithNameSortListInHouse(pageable);
+////            inHouseCustomerDtoList = iCustomerService.findAllWithNameSortListInHouse(code,name,address,pageable);
 //        }
-//    }
+        inHouseCustomerDtoList = iCustomerService.findAllWithNameSortListInHouse(pageable);
+
+        List<CustomerType> customerTypeList = iCustomerTypeService.findAllActive();
+        Collections.reverse(customerTypeList);
+        model.addAttribute("customerDto", new CustomerDto());
+        model.addAttribute("customerTypeList", customerTypeList);
+        model.addAttribute("currentPage", pageable.getPageNumber());
+        model.addAttribute("inHouseCustomerDtoList", inHouseCustomerDtoList);
+        model.addAttribute("code", code);
+        model.addAttribute("name", name);
+        model.addAttribute("address", address);
+        model.addAttribute("sortOption", sort);
+        return "views/customer/list_in_house_customer";
+    }
 
     @GetMapping(value = "/create")
     public String goCreate(Model model) {

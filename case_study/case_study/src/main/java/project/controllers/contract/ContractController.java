@@ -14,6 +14,7 @@ import project.models.customer.Customer;
 import project.models.employee.Employee;
 import project.models.services.Services;
 import project.services.contract.IContractService;
+import project.services.contractDetail.IAttachServiceService;
 import project.services.customer.ICustomerService;
 import project.services.employee.IEmployeeService;
 import project.services.services.IServicesService;
@@ -97,4 +98,5 @@ public class ContractController {
         model.addAttribute("sortOption", sort);
         return "views/contract/list_contract";
     }
+
 }
