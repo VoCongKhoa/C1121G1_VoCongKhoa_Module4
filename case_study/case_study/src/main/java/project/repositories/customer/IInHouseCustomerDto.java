@@ -1,31 +1,32 @@
-//package project.repositories.customer;
-//
-//public interface IInHouseCustomerDto {
-////    int getCustomerId();
-////
-////    String getCustomerCode();
-////
-////    String getCustomerName();
-////
-////    String getCustomerBirthday();
-////
-////    int getCustomerGender();
-////
-////    String getCustomerIdCard();
-////
-////    String getCustomerPhone();
-////
-////    String getCustomerEmail();
-////
-////    String getCustomerAddress();
-////
-////    int getCustomerTypeId();
-////
-////    int getContractId();
-////
-////    int getAttachServiceId();
-////
-////    int getContractDetailId();
+package project.repositories.customer;
+
+public interface IInHouseCustomerDto {
+    int getCustomerId();
+
+    String getCustomerCode();
+
+    String getCustomerName();
+
+    String getCustomerBirthday();
+
+    int getCustomerGender();
+
+    String getCustomerIdCard();
+
+    String getCustomerPhone();
+
+    String getCustomerEmail();
+
+    String getCustomerAddress();
+
+    String getCustomerTypeName();
+
+    int getContractId();
+
+    int getAttachServiceId();
+
+    int getContractDetailId();
+}
 ////
 ////    boolean getActive();
 //

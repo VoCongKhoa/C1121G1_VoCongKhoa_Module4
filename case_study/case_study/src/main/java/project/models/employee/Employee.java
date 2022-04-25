@@ -2,7 +2,7 @@ package project.models.employee;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import project.models.contract.Contract;
-import project.models.user.User;
+import project.models.user.AppUser;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -40,8 +40,8 @@ public class Employee {
     @Column(name = "active", columnDefinition = "BIT(1) default 1")
     private int active;
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "username")
-    private User user;
+    @JoinColumn(name = "username", referencedColumnName = "username")
+    private AppUser appUser;
 
     @OneToMany(mappedBy = "employee")
     @JsonBackReference
@@ -146,12 +146,12 @@ public class Employee {
         this.active = active;
     }
 
-    public User getUser() {
-        return user;
+    public AppUser getUser() {
+        return appUser;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(AppUser appUser) {
+        this.appUser = appUser;
     }
 
     public Set<Contract> getContractSet() {

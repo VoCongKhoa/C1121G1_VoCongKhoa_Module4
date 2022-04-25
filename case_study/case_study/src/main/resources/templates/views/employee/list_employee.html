@@ -192,7 +192,7 @@
                         <span th:case="4">Sau Đại Học </span>
                         <span th:case="*">None</span>
                     </td>
-                    <td th:text="${employee.user == null ? 'None' : employee.user.username}"></td>
+                    <td th:text="${employee.appUser == null ? 'None' : employee.appUser.username}"></td>
                     <td colspan="2">
                         <!--                        <a th:href="@{/employee/update/{id}(id=${employee.employeeId})}">Update</a>-->
                         <!--                        <a th:href="@{/employee/delete/{id}(id=${employee.employeeId})}">Delete</a>-->

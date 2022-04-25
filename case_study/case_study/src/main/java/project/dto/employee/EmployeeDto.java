@@ -5,9 +5,8 @@ import org.springframework.validation.Validator;
 import project.models.employee.Division;
 import project.models.employee.EducationDegree;
 import project.models.employee.Position;
-import project.models.user.User;
+import project.models.user.AppUser;
 
-import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
@@ -33,7 +32,7 @@ public class EmployeeDto implements Validator {
     private EducationDegree educationDegree;
     private Division division;
     private int active = 1;
-    private User user;
+    private AppUser appUser;
 
     public EmployeeDto() {
     }
@@ -134,12 +133,12 @@ public class EmployeeDto implements Validator {
         this.active = active;
     }
 
-    public User getUser() {
-        return user;
+    public AppUser getUser() {
+        return appUser;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(AppUser appUser) {
+        this.appUser = appUser;
     }
 
     @Override

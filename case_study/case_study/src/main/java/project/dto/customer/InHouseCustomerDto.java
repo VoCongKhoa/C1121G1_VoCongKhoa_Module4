@@ -14,12 +14,11 @@ public class InHouseCustomerDto {
     private int contractId;
     private int attachServiceId;
     private int contractDetailId;
-    private boolean active;
 
     public InHouseCustomerDto(int customerId, String customerCode, String customerName, String customerBirthday,
                               int customerGender, String customerIdCard, String customerPhone, String customerEmail,
                               String customerAddress, String customerTypeName, int contractId, int attachServiceId,
-                              int contractDetailId, boolean active) {
+                              int contractDetailId) {
         this.customerId = customerId;
         this.customerCode = customerCode;
         this.customerName = customerName;
@@ -33,7 +32,6 @@ public class InHouseCustomerDto {
         this.contractId = contractId;
         this.attachServiceId = attachServiceId;
         this.contractDetailId = contractDetailId;
-        this.active = active;
     }
 
     public int getCustomerId() {
@@ -108,12 +106,12 @@ public class InHouseCustomerDto {
         this.customerAddress = customerAddress;
     }
 
-    public String getCustomerTypeId() {
+    public String getCustomerTypeName() {
         return customerTypeName;
     }
 
-    public void setCustomerTypeId(String customerTypeId) {
-        this.customerTypeName = customerTypeId;
+    public void setCustomerTypeName(String customerTypeName) {
+        this.customerTypeName = customerTypeName;
     }
 
     public int getContractId() {
@@ -140,14 +138,6 @@ public class InHouseCustomerDto {
         this.contractDetailId = contractDetailId;
     }
 
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
     @Override
     public String toString() {
         return "InHouseCustomerDto{" +
@@ -164,7 +154,6 @@ public class InHouseCustomerDto {
                 ", contractId=" + contractId +
                 ", attachServiceId=" + attachServiceId +
                 ", contractDetailId=" + contractDetailId +
-                ", active=" + active +
                 '}';
     }
 }

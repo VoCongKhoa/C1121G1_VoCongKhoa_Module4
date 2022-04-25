@@ -13,6 +13,7 @@ import project.dto.customer.CustomerDto;
 import project.dto.customer.InHouseCustomerDto;
 import project.models.customer.Customer;
 import project.models.customer.CustomerType;
+import project.repositories.customer.IInHouseCustomerDto;
 import project.services.contract.IContractService;
 import project.services.contractDetail.IAttachServiceService;
 import project.services.customer.ICustomerService;
@@ -81,38 +82,48 @@ public class CustomerController {
         return "views/customer/list_customer";
     }
 
+//    @GetMapping(value = "/listInHouseCustomer")
+//    public String listInHouseCustomer(Model model,@PageableDefault(value = 3) Pageable pageable){
+////        Page<InHouseCustomerDto> inHouseCustomerDtoList = iCustomerService.findAllWithNameSortListInHouse(pageable);
+//        Page<IInHouseCustomerDto> inHouseCustomerDtoList = iCustomerService.findAllWithNameSortListInHouse(pageable);
+//        for (IInHouseCustomerDto ii: inHouseCustomerDtoList) {
+//            System.out.println(ii.getContractId());
+//            System.out.println(ii.getCustomerEmail());
+//            System.out.println(ii.getCustomerTypeName());
+//        }
+//        model.addAttribute("inHouseCustomerDtoList", inHouseCustomerDtoList);
+//        return "views/customer/list_in_house_customer";
+//    }
+
 
     @GetMapping(value = "/listInHouseCustomer")
     public String listInHouseCustomer(Model model,
-                               @PageableDefault(value = 3) Pageable pageable,
-                               @RequestParam Optional<String> codeSearch,
-                               @RequestParam Optional<String> nameSearch,
-                               @RequestParam Optional<String> addressSearch,
-                               @RequestParam Optional<String> sortOption) {
+                                      @PageableDefault(value = 3) Pageable pageable,
+                                      @RequestParam Optional<String> codeSearch,
+                                      @RequestParam Optional<String> nameSearch,
+                                      @RequestParam Optional<String> addressSearch,
+                                      @RequestParam Optional<String> sortOption) {
         String code = codeSearch.orElse("");
         String name = nameSearch.orElse("");
         String address = addressSearch.orElse("");
-        String sort = null;
-        Page<InHouseCustomerDto> inHouseCustomerDtoList = null;
-//        if (sortOption.isPresent()){
-//            sort = sortOption.get();
-//            switch (sort){
-//                case "nameSort":
-//                    inHouseCustomerDtoList = iCustomerService.findAllWithNameSortListInHouse(pageable);
-//                    break;
-//                case "birthdaySort":
-//                    inHouseCustomerDtoList = iCustomerService.findAllWithNameSortListInHouse(pageable);
-//                    break;
-//                default:
-////                    inHouseCustomerDtoList = iCustomerService.findAllWithNameSortListInHouse(code,name,address,pageable);
-//            }
-//        } else {
-//            sort = "";
-//            inHouseCustomerDtoList = iCustomerService.findAllWithNameSortListInHouse(pageable);
-////            inHouseCustomerDtoList = iCustomerService.findAllWithNameSortListInHouse(code,name,address,pageable);
-//        }
-        inHouseCustomerDtoList = iCustomerService.findAllWithNameSortListInHouse(pageable);
-
+        String sort;
+        Page<IInHouseCustomerDto> inHouseCustomerDtoList;
+        if (sortOption.isPresent()){
+            sort = sortOption.get();
+            switch (sort){
+                case "nameSort":
+                    inHouseCustomerDtoList = iCustomerService.findAllWithNameSortListInHouse(pageable);
+                    break;
+                case "birthdaySort":
+                    inHouseCustomerDtoList = iCustomerService.findAllWithBirthdaySortListInHouse(pageable);
+                    break;
+                default:
+                    inHouseCustomerDtoList = iCustomerService.findAllWithSearchListInHouse(code,name,address,pageable);
+            }
+        } else {
+            sort = "";
+            inHouseCustomerDtoList = iCustomerService.findAllWithSearchListInHouse(code,name,address,pageable);
+        }
         List<CustomerType> customerTypeList = iCustomerTypeService.findAllActive();
         Collections.reverse(customerTypeList);
         model.addAttribute("customerDto", new CustomerDto());

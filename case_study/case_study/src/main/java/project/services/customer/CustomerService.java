@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import project.dto.customer.InHouseCustomerDto;
 import project.models.customer.Customer;
 import project.repositories.customer.ICustomerRepository;
+import project.repositories.customer.IInHouseCustomerDto;
 
 import java.util.List;
 
@@ -71,8 +72,27 @@ public class CustomerService implements ICustomerService {
         return iCustomerRepository.findAllWithBirthdaySort(pageable);
     }
 
+//    @Override
+//    public Page<InHouseCustomerDto> findAllWithNameSortListInHouse(Pageable pageable) {
+//        return iCustomerRepository.findAllWithNameSortListInHouse(pageable);
+//    }
     @Override
-    public Page<InHouseCustomerDto> findAllWithNameSortListInHouse(Pageable pageable) {
-        return iCustomerRepository.findAllWithNameSortListInHouse(pageable);
+    public Page<IInHouseCustomerDto> findAllWithNameSortListInHouse(Pageable pageable) {
+        return iCustomerRepository.findAllWithNameSortListInHouse(IInHouseCustomerDto.class, pageable);
     }
+
+    @Override
+    public Page<IInHouseCustomerDto> findAllWithBirthdaySortListInHouse(Pageable pageable) {
+        return iCustomerRepository.findAllWithBirthdaySortListInHouse(IInHouseCustomerDto.class, pageable);
+    }
+
+    @Override
+    public Page<IInHouseCustomerDto> findAllWithSearchListInHouse(String code, String name, String address, Pageable pageable) {
+        iCustomerRepository.setCodeParam(code);
+        iCustomerRepository.setNameParam(name);
+        iCustomerRepository.setAddressParam(address);
+        return iCustomerRepository.findAllWithSearchListInHouse(IInHouseCustomerDto.class, pageable);
+    }
+
+
 }

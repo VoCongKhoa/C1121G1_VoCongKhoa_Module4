@@ -13,4 +13,9 @@ public class HomeController {
     public String goHome(){
         return "views/home";
     }
+
+    @GetMapping(value = "/login")
+    public String goLogin(){
+        return "views/user/login";
+    }
 }

@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
-import project.dto.customer.InHouseCustomerDto;
 import project.models.customer.Customer;
 
 
@@ -51,26 +50,127 @@ public interface ICustomerRepository extends JpaRepository<Customer, Integer> {
     @Query(value = "select * from customer where active = 1 and customer_id = :id", nativeQuery = true)
     Customer findByIdActive(@Param("id") int id);
 
-    @Query(value = "select customer.customer_id , customer.customer_code , " +
-            "customer.customer_name , customer.customer_birthday , customer.customer_gender , " +
-            "customer.customer_id_card , customer.customer_phone , customer.customer_email , " +
-            "customer.customer_address , customer_type.customer_type_name , contract.contract_id , " +
-            "attach_service.attach_service_id , contract_detail.contract_detail_id , customer.active  " +
-            "from contract left join customer on contract.customer_id = customer.customer_id " +
-            "left join contract_detail on contract.contract_id = contract_detail.contract_id " +
-            "left join attach_service on contract_detail.attach_service_id = attach_service.attach_service_id " +
-            "left join customer_type on customer.customer_type_id = customer_type.customer_type_id " +
-            "where contract.active = 1 and (curdate() between contract.contract_start_date and contract.contract_end_date) ", nativeQuery = true)
-    Page<InHouseCustomerDto> findAllWithNameSortListInHouse(Pageable pageable);
+    // SORT BY NAME
+    @Query(value = "select customer_id as customerId, " +
+            "customer_code as customerCode, " +
+            "customer_name as customerName, " +
+            "customer_birthday as customerBirthday, " +
+            "customer_gender as customerGender, " +
+            "customer_id_card as customerIdCard, " +
+            "customer_phone as customerPhone, " +
+            "customer_email as customerEmail, " +
+            "customer_address as customerAddress, " +
+            "customer_type_name as customerTypeName, " +
+            "contract_id as contractId, " +
+            "attach_service_id as attachServiceId, " +
+            "contract_detail_id as contractDetailId " +
+            " from inHouseCustomerSortByName ", nativeQuery = true)
+    <T> Page<T> findAllWithNameSortListInHouse(Class<T> classType, Pageable pageable);
 
-//    @Query(value = "select new project.dto.customer.InHouseCustomerDto(customer.customer_id customerId, customer.customer_code customerCode, " +
-//            "customer.customer_name customerName, customer.customer_birthday customerBirthday, customer.customer_gender customerGender, " +
-//            "customer.customer_id_card customerIdCard, customer.customer_phone customerPhone, customer.customer_email customerEmail, " +
-//            "customer.customer_address customerAddress, customer.customer_type_name customerTypeName, contract.contract_id contractId, " +
-//            "attach_service.attach_service_id attachServiceId, contract_detail.contract_detail_id contractDetailId, customer.active active) " +
-//            "from contract left join customer on contract.customer_id = customer.customer_id " +
-//            "left join contract_detail on contract.contract_id = contract_detail.contract_id " +
-//            "left join attach_service on contract_detail.attach_service_id = attach_service.attach_service_id " +
-//            "where contract.active = 1 and (curdate() between contract.contract_start_date and contract.contract_end_date) ", nativeQuery = true)
+    // SORT BY BIRTHDAY
+    @Query(value = "select customer_id as customerId, " +
+            "customer_code as customerCode, " +
+            "customer_name as customerName, " +
+            "customer_birthday as customerBirthday, " +
+            "customer_gender as customerGender, " +
+            "customer_id_card as customerIdCard, " +
+            "customer_phone as customerPhone, " +
+            "customer_email as customerEmail, " +
+            "customer_address as customerAddress, " +
+            "customer_type_name as customerTypeName, " +
+            "contract_id as contractId, " +
+            "attach_service_id as attachServiceId, " +
+            "contract_detail_id as contractDetailId " +
+            " from inHouseCustomerSortByBirthday ", nativeQuery = true)
+    <T> Page<T> findAllWithBirthdaySortListInHouse(Class<T> classType, Pageable pageable);
+
+
+    // SET PARAM FOR FUNCTION
+    @Modifying
+    @Transactional
+    @Query(value = "SET @customer_code = :code", nativeQuery = true)
+    void setCodeParam(@Param("code") String code);
+    @Modifying
+    @Transactional
+    @Query(value = "SET @customer_name = :name", nativeQuery = true)
+    void setNameParam(@Param("name") String name);
+    @Modifying
+    @Transactional
+    @Query(value = "SET @customer_address = :address", nativeQuery = true)
+    void setAddressParam(@Param("address") String address);
+
+    // USE VIEW IN DB FO SEARCHING
+    @Query(value ="SELECT customer_id as customerId, " +
+            "customer_code as customerCode, " +
+            "customer_name as customerName, " +
+            "customer_birthday as customerBirthday, " +
+            "customer_gender as customerGender, " +
+            "customer_id_card as customerIdCard, " +
+            "customer_phone as customerPhone, " +
+            "customer_email as customerEmail, " +
+            "customer_address as customerAddress, " +
+            "customer_type_name as customerTypeName, " +
+            "contract_id as contractId, " +
+            "attach_service_id as attachServiceId, " +
+            "contract_detail_id as contractDetailId FROM inHouseCustomerSearch ", nativeQuery = true)
+    <T> Page<T> findAllWithSearchListInHouse(Class<T> classType, Pageable pageable);
+
+
+
+
+//    @Query(value = "select customer_id customerId, " +
+//            "customer_code customerCode, " +
+//            "customer_name customerName, " +
+//            "customer_birthday customerBirthday, " +
+//            "customer_gender customerGender, " +
+//            "customer_id_card customerIdCard, " +
+//            "customer_phone customerPhone, " +
+//            "customer_email customerEmail, " +
+//            "customer_address customerAddress, " +
+//            "customer_type_name customerTypeName, " +
+//            "contract_id contractId, " +
+//            "attach_service_id attachServiceId, " +
+//            "contract_detail_id contractDetailId " +
+//            " from inHouseCustomer where customer_code like concat('%',:code,'%') and customer_name like concat('%',:name,'%') and customer_address like concat('%',:address,'%') ", nativeQuery = true)
+//    Page<IInHouseCustomerDto> findAllWithSearchListInHouse(@Param("code") String code, @Param("name") String name, @Param("address") String address, Pageable pageable);
+
+
+
+
+//    @Query(value = "select customer.customer_id customerId, " +
+//            "customer.customer_code customerCode, " +
+//            "customer.customer_name customerName, " +
+//            "customer.customer_birthday customerBirthday, " +
+//            "customer.customer_gender customerGender, " +
+//            "customer.customer_id_card customerIdCard, " +
+//            "customer.customer_phone customerPhone, " +
+//            "customer.customer_email customerEmail, " +
+//            "customer.customer_address customerAddress, " +
+//            "customer_type.customer_type_name customerTypeName, " +
+//            "contract.contract_id contractId, " +
+//            "attach_service.attach_service_id attachServiceId, " +
+//            "contract_detail.contract_detail_id contractDetailId " +
+//            " from contract left join customer on contract.customer_id = customer.customer_id " +
+//            " left join contract_detail on contract.contract_id = contract_detail.contract_id " +
+//            " left join attach_service on contract_detail.attach_service_id = attach_service.attach_service_id " +
+//            " left join customer_type on customer.customer_type_id = customer_type.customer_type_id " +
+//            " where contract.active = 1 ", nativeQuery = true)
+//    Page<IInHouseCustomerDto> findAllWithSearchListInHouse(@Param("code") String code, @Param("name") String name, @Param("address") String address, Pageable pageable);
+
+//    @Query(value = "select new project.models.customer.InHouseCustomerDto(" +
+//            "customer_id , " +
+//            "customer_code , " +
+//            "customer_name , " +
+//            "customer_birthday , " +
+//            "customer_gender , " +
+//            "customer_id_card , " +
+//            "customer_phone , " +
+//            "customer_email , " +
+//            "customer_address , " +
+//            "customer_type_name , " +
+//            "contract_id , " +
+//            "attach_service_id , " +
+//            "contract_detail_id , " +
+//            "from inHouseCustomer ) ", nativeQuery = true)
 //    Page<InHouseCustomerDto> findAllWithNameSortListInHouse(Pageable pageable);
 }

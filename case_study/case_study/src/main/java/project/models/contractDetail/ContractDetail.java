@@ -9,6 +9,7 @@ public class ContractDetail {
     //contract_detail_id, quantity, contract_id, attach_service_id
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "contract_detail_id")
     private int contractDetailId;
     private int quantity;
     @Column(name = "active", columnDefinition = "BIT(1) default 1")

@@ -70,11 +70,6 @@ public class ContractController {
                 default:
                     contractList = iContractService.findAllWithSearch(contractTotalMoney,contractStartDate,contractEndDate,pageable); //default
             }
-//            if (sort.equals("startDateSort")){ //switch-case
-//                contractList = iContractService.findAllWithStartDateSort(pageable);
-//            } else {
-//                contractList = iContractService.findAllWithSearch(contractTotalMoney,contractStartDate,contractEndDate,pageable); //default
-//            }
         } else {
             sort = "";
             contractList = iContractService.findAllWithSearch(contractTotalMoney,contractStartDate,contractEndDate,pageable);
@@ -98,5 +93,7 @@ public class ContractController {
         model.addAttribute("sortOption", sort);
         return "views/contract/list_contract";
     }
+
+
 
 }
