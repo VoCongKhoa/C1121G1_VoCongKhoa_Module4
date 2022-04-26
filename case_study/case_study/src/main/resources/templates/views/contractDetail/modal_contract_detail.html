@@ -70,7 +70,7 @@
 </div>
 
 <!--MODAL DETAIL CONTRACT DETAIL-->
-<div class="modal fade right" style="background: rgb(0 255 170 / 34%)" id="detailModal" tabindex="-1"
+<div class="modal fade right" style="background: rgb(0 255 170 / 34%)" id="detailModal-contractDetail" tabindex="-1"
      role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="true" data-keyboard="false"
      data-backdrop="static" th:fragment="modal-detail">
     <div class="modal-dialog-full-width modal-dialog momodel modal-fluid" role="document">
@@ -87,28 +87,86 @@
             <div class="container">
 
                 <div class="form-group">
-                    <label for="attachService">Choose new attach service:</label>
-                    <select id="attachService" class="form-control">
-                        <option th:each="row : ${attachServiceList}" th:value="${row.attachServiceId}"
-                                th:text="${row.attachServiceName}">
-                        </option>
-                    </select>
+                        <label for="contractDetailId">ID:</label>
+                        <input type="text" class="form-control" id="contractDetailId" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="attachService">Attach service:</label>
+                    <input type="text" class="form-control" id="attachService" readonly>
                 </div>
 
                 <div class="form-group">
                     <label for="quantity">Quantity:</label>
-                    <input type="text" class="form-control" id="quantity"
-                           placeholder="Type new quantity here">
+                    <input type="text" class="form-control" id="quantity" readonly>
                 </div>
 
                 <div class="form-group">
-                    <label for="contract">Choose new contract:</label>
-                    <select id="contract"
-                            class="form-control">
+                    <label for="contractId">Choose new contract:</label>
+                    <select id="contractId"
+                            class="form-control" readonly>
                         <option th:each="row : ${contractList}" th:value="${row.contractId}"
                                 th:text="${row.contractId}">
                         </option>
                     </select>
+                </div>
+
+                <input type="hidden" id="messageSuccess" name="messageUpdate">
+                <div class="text-center">
+                    <button type="button" class="close " data-dismiss="modal" aria-label="Close">
+                        Close
+                    </button>
+                </div>
+                <br>
+                <h1 id="w3s" class="text-warning" style="text-align: center; font-family: cursive;">
+                    ${message}
+                </h1>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--MODAL ATTACH SERVICE DETAIL-->
+<div class="modal fade right" style="background: rgb(0 255 170 / 34%)" id="detailModal-attachService" tabindex="-1"
+     role="dialog" aria-labelledby="exampleModalPreviewLabel" aria-hidden="true" data-keyboard="false"
+     data-backdrop="static" th:fragment="modal-detail-attach-service">
+    <div class="modal-dialog-full-width modal-dialog momodel modal-fluid" role="document">
+        <div class="modal-content-full-width modal-content ">
+            <div class=" modal-header-full-width  modal-header text-center">
+                <h5 class="modal-title w-100"
+                    style="font-size: 50px;font-family: 'Varela Round';">
+                    View Attach Service detail
+                </h5>
+                <button type="button" class="close " data-dismiss="modal" aria-label="Close">
+                    <span style="font-size: 1.3em;" aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="container">
+
+                <div class="form-group">
+                    <label for="attachServiceId">Attach Service Id:</label>
+                    <input type="text" class="form-control" id="attachServiceId" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="attachServiceCost">Attach Service Cost:</label>
+                    <input type="text" class="form-control" id="attachServiceCost" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="attachServiceName">Attach Service Name:</label>
+                    <input type="text" class="form-control" id="attachServiceName" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="attachServiceStatus">Attach Service Status:</label>
+                    <input type="text" class="form-control" id="attachServiceStatus" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="attachServiceUnit">Attach Service Unit:</label>
+                    <input type="text" class="form-control" id="attachServiceUnit" readonly>
                 </div>
 
                 <input type="hidden" id="messageSuccess" name="messageUpdate">

@@ -32,7 +32,7 @@
 	<div class="limiter">
 		<div class="container-login100" style="background-image: url('https://scontent.fsgn2-5.fna.fbcdn.net/v/t39.30808-6/274181556_10161988079896151_2716674280379739820_n.jpg?_nc_cat=102&ccb=1-5&_nc_sid=e3f864&_nc_ohc=pMIbZK25RfkAX9anuh5&tn=cdOwhPH6hPXowMMt&_nc_ht=scontent.fsgn2-5.fna&oh=00_AT-zWHTv_aCcFKOhS5YD2rc2XKQ7S0TPVZA5TEv2l3OEUQ&oe=626A5B26');">
 			<div class="wrap-login100">
-				<form class="login100-form validate-form">
+				<form class="login100-form validate-form" id="loginForm" action="/home">
 					<div style="display: flex; justify-content: center">
 						<span>
 						<img src="https://furamavietnam.com/wp-content/uploads/2018/10/logo.png" width="150px" height="200px" >
@@ -45,12 +45,12 @@
 					</span>
 
 					<div class="wrap-input100 validate-input" data-validate = "Enter username">
-						<input class="input100" type="text" name="username" placeholder="Username">
+						<input class="input100" type="text" name="username" placeholder="Username" id="username">
 						<span class="focus-input100" data-placeholder="&#xf207;"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="Enter password">
-						<input class="input100" type="password" name="pass" placeholder="Password">
+						<input class="input100" type="password" name="pass" placeholder="Password" id="password">
 						<span class="focus-input100" data-placeholder="&#xf191;"></span>
 					</div>
 
@@ -62,7 +62,7 @@
 					</div>
 
 					<div class="container-login100-form-btn" style="margin-top: -288px;">
-						<button class="login100-form-btn">
+						<button class="login100-form-btn" id="btn-login" type="button">
 							Login
 						</button>
 					</div>
@@ -98,4 +98,59 @@
 	<script src="/assets/login/js/main.js"></script>
 
 </body>
+<script>
+	/**
+	 * Add an item to a localStorage() object
+	 * @param {String} name  The localStorage() key
+	 * @param {String} key   The localStorage() value object key
+	 * @param {String} value The localStorage() value object value
+	 */
+	var addToLocalStorageObject = function (name, key, value) {
+
+		// Get the existing data
+		var existing = localStorage.getItem(name);
+
+		// If no existing data, create an array
+		// Otherwise, convert the localStorage string to an array
+		existing = existing ? JSON.parse(existing) : {};
+
+		// Add new data to localStorage Array
+		existing[key] = value;
+
+		// Save back to localStorage
+		localStorage.setItem(name, JSON.stringify(existing));
+
+	};
+	$('#btn-login').click(function () {
+		// let appUserObjLocalStorage = window.localStorage.getItem("newAppUserObj");
+		let username = $('#username').val();
+
+		let password = $('#password').val();
+
+		let appUserObj = {
+			username: username,
+			password: password
+		}
+		console.log(appUserObj);
+
+		$.ajax({
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			type: "POST", //GET, DELETE, PUT...
+			url: "http://localhost:8080/homeRestful/authenticate",
+			data: JSON.stringify(appUserObj),
+			success: function (resultSuccess) {
+				$('#loginForm').submit();
+				window.localStorage.setItem("appUserObj", JSON.stringify(resultSuccess));
+
+				// addToLocalStorageObject("newAppUserObj","token",resultSuccess.token);
+			},
+			error: function (resultError) {
+				alert("Wrong username or password!")
+			}
+		});
+	});
+</script>
 </html>

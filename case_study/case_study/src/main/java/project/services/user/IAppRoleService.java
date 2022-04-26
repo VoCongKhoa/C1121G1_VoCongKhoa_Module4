@@ -1,10 +1,11 @@
 package project.services.user;
 
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import project.models.user.AppRole;
-import project.models.user.RoleName;
-
-import java.util.Optional;
 
 public interface IAppRoleService {
-    Optional<AppRole> findByName(RoleName name);
+
+    @Query(value = "select * from app_role where role_id = :id ", nativeQuery = true)
+    AppRole findByRoleId(@Param("id") int id);
 }

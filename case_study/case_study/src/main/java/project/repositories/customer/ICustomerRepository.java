@@ -99,7 +99,7 @@ public interface ICustomerRepository extends JpaRepository<Customer, Integer> {
     @Query(value = "SET @customer_address = :address", nativeQuery = true)
     void setAddressParam(@Param("address") String address);
 
-    // USE VIEW IN DB FO SEARCHING
+    // USE VIEW IN DB FOR SEARCHING
     @Query(value ="SELECT customer_id as customerId, " +
             "customer_code as customerCode, " +
             "customer_name as customerName, " +
@@ -116,6 +116,40 @@ public interface ICustomerRepository extends JpaRepository<Customer, Integer> {
     <T> Page<T> findAllWithSearchListInHouse(Class<T> classType, Pageable pageable);
 
 
+
+//    @Query(value ="select  customerId ," +
+//            "  customerCode ," +
+//            "  customerName ," +
+//            "  customerBirthday ," +
+//            "  customerGender ," +
+//            "  customerIdCard ," +
+//            "  customerPhone ," +
+//            "  customerAddress ," +
+//            "  customerTypeName ," +
+//            "  contractId ," +
+//            "  attachServiceId ," +
+//            "  contractDetailId from (" +
+//            "select customer.customer_id as customerId," +
+//            "  customer.customer_code as customerCode," +
+//            "  customer.customer_name as customerName," +
+//            "  customer.customer_birthday as customerBirthday," +
+//            "  customer.customer_gender as customerGender," +
+//            "  customer.customer_id_card as customerIdCard," +
+//            "  customer.customer_phone as customerPhone," +
+//            "  customer.customer_email as customerEmail," +
+//            "  customer.customer_address as customerAddress," +
+//            "  customer_type.customer_type_name as customerTypeName," +
+//            "  contract.contract_id as contractId," +
+//            "  ifnull(attach_service.attach_service_id,0) as attachServiceId ," +
+//            "  ifnull(contract_detail.contract_detail_id,0) as contractDetailId " +
+//            " from contract left join customer on contract.customer_id = customer.customer_id" +
+//            " left join contract_detail on contract.contract_id = contract_detail.contract_id" +
+//            " left join attach_service on contract_detail.attach_service_id = attach_service.attach_service_id" +
+//            " left join customer_type on customer.customer_type_id = customer_type.customer_type_id" +
+//            " where contract.active = 1 and customer.customer_code like concat('%',:code,'%')" +
+//            "    and customer.customer_name like concat('%',:name,'%') and customer.customer_address like concat('%',:address,'%')" +
+//            ") as a ", nativeQuery = true)
+//    <T> Page<T> findAllWithSearchListInHouse(@Param("code") String code, @Param("name") String name, @Param("address") String address, Pageable pageable);
 
 
 //    @Query(value = "select customer_id customerId, " +

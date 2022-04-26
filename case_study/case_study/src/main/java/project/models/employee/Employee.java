@@ -39,13 +39,13 @@ public class Employee {
 
     @Column(name = "active", columnDefinition = "BIT(1) default 1")
     private int active;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "username", referencedColumnName = "username")
-    private AppUser appUser;
 
     @OneToMany(mappedBy = "employee")
     @JsonBackReference
     private Set<Contract> contractSet;
+
+    @OneToOne(mappedBy = "employee")
+    private AppUser appUser;
 
     public Employee() {
     }
@@ -146,19 +146,19 @@ public class Employee {
         this.active = active;
     }
 
-    public AppUser getUser() {
-        return appUser;
-    }
-
-    public void setUser(AppUser appUser) {
-        this.appUser = appUser;
-    }
-
     public Set<Contract> getContractSet() {
         return contractSet;
     }
 
     public void setContractSet(Set<Contract> contractSet) {
         this.contractSet = contractSet;
+    }
+
+    public AppUser getAppUser() {
+        return appUser;
+    }
+
+    public void setAppUser(AppUser appUser) {
+        this.appUser = appUser;
     }
 }

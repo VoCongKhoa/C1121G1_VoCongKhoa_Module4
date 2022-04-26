@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import project.dto.customer.CustomerDto;
 import project.dto.customer.InHouseCustomerDto;
+import project.models.contract.Contract;
 import project.models.customer.Customer;
 import project.models.customer.CustomerType;
 import project.repositories.customer.IInHouseCustomerDto;
@@ -82,20 +83,6 @@ public class CustomerController {
         return "views/customer/list_customer";
     }
 
-//    @GetMapping(value = "/listInHouseCustomer")
-//    public String listInHouseCustomer(Model model,@PageableDefault(value = 3) Pageable pageable){
-////        Page<InHouseCustomerDto> inHouseCustomerDtoList = iCustomerService.findAllWithNameSortListInHouse(pageable);
-//        Page<IInHouseCustomerDto> inHouseCustomerDtoList = iCustomerService.findAllWithNameSortListInHouse(pageable);
-//        for (IInHouseCustomerDto ii: inHouseCustomerDtoList) {
-//            System.out.println(ii.getContractId());
-//            System.out.println(ii.getCustomerEmail());
-//            System.out.println(ii.getCustomerTypeName());
-//        }
-//        model.addAttribute("inHouseCustomerDtoList", inHouseCustomerDtoList);
-//        return "views/customer/list_in_house_customer";
-//    }
-
-
     @GetMapping(value = "/listInHouseCustomer")
     public String listInHouseCustomer(Model model,
                                       @PageableDefault(value = 3) Pageable pageable,
@@ -124,8 +111,12 @@ public class CustomerController {
             sort = "";
             inHouseCustomerDtoList = iCustomerService.findAllWithSearchListInHouse(code,name,address,pageable);
         }
+
+
         List<CustomerType> customerTypeList = iCustomerTypeService.findAllActive();
         Collections.reverse(customerTypeList);
+        List<Contract> contractList = iContractService.findAllActive();
+        model.addAttribute("contractList", contractList);
         model.addAttribute("customerDto", new CustomerDto());
         model.addAttribute("customerTypeList", customerTypeList);
         model.addAttribute("currentPage", pageable.getPageNumber());

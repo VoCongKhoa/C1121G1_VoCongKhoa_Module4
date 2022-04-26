@@ -17,4 +17,9 @@ public class AttachServiceService implements IAttachServiceService{
     public List<AttachService> findAllActive() {
         return iAttachServiceRepository.findAllActive();
     }
+
+    @Override
+    public AttachService findAttachServiceViewById(int id) {
+        return iAttachServiceRepository.findAttachServiceViewById(id);
+    }
 }

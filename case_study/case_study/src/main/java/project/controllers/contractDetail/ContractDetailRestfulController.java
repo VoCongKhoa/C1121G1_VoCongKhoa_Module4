@@ -18,6 +18,7 @@ import project.models.employee.Employee;
 import project.models.rest.ResponseObject;
 import project.models.services.Services;
 import project.repositories.contract.IContractViewDto;
+import project.repositories.contractDetail.IContractDetailViewDto;
 import project.services.contract.IContractService;
 import project.services.contractDetail.IAttachServiceService;
 import project.services.contractDetail.IContractDetailService;
@@ -67,9 +68,19 @@ public class ContractDetailRestfulController {
 
     @GetMapping(value = "/detail/{id}")
     public ResponseEntity<ResponseObject> detail(@PathVariable int id) {
-        ContractDetail contractDetail = iContractDetailService.findById(id);
-        if (contractDetail != null) {
-            return new ResponseEntity<>(new ResponseObject("ok","Success!", new HashMap<>(), contractDetail), HttpStatus.OK);
+        IContractDetailViewDto iContractDetailViewDto = iContractDetailService.findContractDetailViewDtoById(id);
+        if (iContractDetailViewDto != null) {
+            return new ResponseEntity<>(new ResponseObject("ok","Success!", new HashMap<>(), iContractDetailViewDto), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(new ResponseObject("not ok","Failed!",""),HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping(value = "/detailAttachService/{id}")
+    public ResponseEntity<ResponseObject> detailAttachService(@PathVariable int id) {
+        AttachService attachService = iAttachServiceService.findAttachServiceViewById(id);
+        if (attachService != null) {
+            return new ResponseEntity<>(new ResponseObject("ok","Success!", new HashMap<>(), attachService), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(new ResponseObject("not ok","Failed!",""),HttpStatus.BAD_REQUEST);
         }

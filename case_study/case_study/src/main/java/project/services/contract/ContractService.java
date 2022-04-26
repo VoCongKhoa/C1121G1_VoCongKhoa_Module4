@@ -42,8 +42,8 @@ public class ContractService implements IContractService{
     }
 
     @Override
-    public IContractViewDto findContractDetailDtoById(int id) {
-        return iContractRepository.findContractDetailDtoById(id);
+    public IContractViewDto findContractViewDtoById(int id) {
+        return iContractRepository.findContractViewDtoById(id);
     }
 
     @Override

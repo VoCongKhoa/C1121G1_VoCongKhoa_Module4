@@ -33,5 +33,6 @@ public interface IEmployeeRepository extends JpaRepository<Employee,Integer> {
     @Query(value = "select * from employee where active = 1 ", nativeQuery = true)
     List<Employee> findAllActive();
 
-
+    @Query(value = "SELECT employee.* FROM app_user INNER JOIN employee ON app_user.employee_id = employee.employee_id WHERE  employee.active = 1 AND username = :username ", nativeQuery = true)
+    Employee findByUsername(@Param("username") String username);
 }

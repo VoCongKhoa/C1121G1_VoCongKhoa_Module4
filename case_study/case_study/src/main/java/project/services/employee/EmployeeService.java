@@ -53,4 +53,9 @@ public class EmployeeService implements IEmployeeService{
     public Page<Employee> findAllWithBirthdaySort(Pageable pageable) {
         return iEmployeeRepository.findAllWithBirthdaySort(pageable);
     }
+
+    @Override
+    public Employee findByUsername(String username) {
+        return iEmployeeRepository.findByUsername(username);
+    }
 }

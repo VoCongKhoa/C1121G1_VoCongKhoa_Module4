@@ -16,7 +16,7 @@ public interface IContractService {
 
     Contract findByIdActive(int id);
 
-    IContractViewDto findContractDetailDtoById(int id);
+    IContractViewDto findContractViewDtoById(int id);
 
     List<Contract> findAllActive();
 

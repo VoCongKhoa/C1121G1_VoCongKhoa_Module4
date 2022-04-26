@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import project.models.contractDetail.ContractDetail;
 import project.repositories.contractDetail.IContractDetailRepository;
+import project.repositories.contractDetail.IContractDetailViewDto;
 
 import java.util.Optional;
 
@@ -33,5 +34,10 @@ public class ContractDetailService implements IContractDetailService{
     @Override
     public void save(ContractDetail contractDetail) {
         iContractDetailRepository.save(contractDetail);
+    }
+
+    @Override
+    public IContractDetailViewDto findContractDetailViewDtoById(int id) {
+        return iContractDetailRepository.findContractDetailViewDtoById(id, IContractDetailViewDto.class);
     }
 }

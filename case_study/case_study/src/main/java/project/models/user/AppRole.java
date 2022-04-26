@@ -1,51 +1,35 @@
 package project.models.user;
 
-import org.hibernate.annotations.NaturalId;
-
 import javax.persistence.*;
 
 @Entity
-@Table(name = "app_role")
+@Table(name = "app_role", //
+        uniqueConstraints = { //
+                @UniqueConstraint(name = "APP_ROLE_UK", columnNames = "role_name") })
 public class AppRole {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    @Enumerated(EnumType.STRING)
-    @NaturalId
-    @Column(length = 60)
-    private RoleName name;
-    @Column(name = "active", columnDefinition = "BIT(1) default 1")
-    private int active;
+    @Column(name = "role_id", nullable = false)
+    private int roleId;
 
-    public AppRole() {
+    @Column(name = "role_name", length = 30)
+    private String roleName;
+
+    public int getRoleId() {
+        return roleId;
     }
 
-    public AppRole(int id, RoleName name) {
-        this.id = id;
-        this.name = name;
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
     }
 
-    public int getId() {
-        return id;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 
-    public RoleName getName() {
-        return name;
-    }
-
-    public void setName(RoleName name) {
-        this.name = name;
-    }
-
-    public int getActive() {
-        return active;
-    }
-
-    public void setActive(int active) {
-        this.active = active;
-    }
 }

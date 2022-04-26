@@ -133,11 +133,11 @@ public class EmployeeDto implements Validator {
         this.active = active;
     }
 
-    public AppUser getUser() {
+    public AppUser getAppUser() {
         return appUser;
     }
 
-    public void setUser(AppUser appUser) {
+    public void setAppUser(AppUser appUser) {
         this.appUser = appUser;
     }
 

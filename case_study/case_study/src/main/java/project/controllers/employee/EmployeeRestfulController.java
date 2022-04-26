@@ -75,31 +75,6 @@ public class EmployeeRestfulController {
         return "views/employee/list_employee";
     }
 
-//    @PostMapping(value = "/create")
-//    public String create(@Valid @ModelAttribute EmployeeDto employeeDto, BindingResult bindingResult, Model model) {
-//        employeeDto.validate(employeeDto, bindingResult);
-//        if (bindingResult.hasFieldErrors()) {
-//            List<Position> positionList = iPositionService.findAllActive();
-//
-//            List<Division> divisionList = iDivisionService.findAllActive();
-//
-//            List<EducationDegree> educationDegreeList = iEducationDegreeService.findAllActive();
-//            Collections.reverse(positionList);
-//
-//            model.addAttribute("positionList", positionList);
-//            model.addAttribute("divisionList", divisionList);
-//            model.addAttribute("educationDegreeList", educationDegreeList);
-//            System.out.println(bindingResult);
-//            return "views/employee/create_employee";
-//        } else {
-//            Employee employee = new Employee();
-//            BeanUtils.copyProperties(employeeDto, employee);
-//            employee.setEmployeeSalary(Double.parseDouble(employeeDto.getEmployeeSalary()));
-//            iEmployeeService.save(employee);
-//            return "redirect:/employee/list";
-//        }
-//    }
-
     @PostMapping(value = "/create")
     public ResponseEntity<ResponseObject> create(@Valid @RequestBody EmployeeDto employeeDto, BindingResult bindingResult, Model model) {
         employeeDto.validate(employeeDto, bindingResult);
@@ -125,7 +100,6 @@ public class EmployeeRestfulController {
         } else {
             Employee employee = new Employee();
             BeanUtils.copyProperties(employeeDto, employee);
-//            employee.setEmployeeSalary(Double.parseDouble(employeeDto.getEmployeeSalary()));
             iEmployeeService.save(employee);
             return new ResponseEntity<>(HttpStatus.OK);
         }

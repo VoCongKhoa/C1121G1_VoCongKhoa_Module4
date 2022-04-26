@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface IAttachServiceService {
     List<AttachService> findAllActive();
+
+    AttachService findAttachServiceViewById(int id);
 }

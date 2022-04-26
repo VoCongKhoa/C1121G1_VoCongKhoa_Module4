@@ -153,7 +153,7 @@
                     <td>
                         <button class="btn btn-success" type="button"
                                 data-toggle="modal"
-                                data-target="#detailModal"
+                                data-target="#detailModal-contractDetail"
                                 th:onclick="'javascript:sendIdDetail(' + ${row.contractDetailId} + ')'">
                             <span>Detail</span>
                         </button>
@@ -207,13 +207,13 @@
                 let contractDetail = resultSuccess.data;
                 console.log(contractDetail);
 
-                // $('#contractDetailId').val(contractDetail.contractDetailId);
-                //
-                // $('#quantity').val(contractDetail.quantity);
-                //
-                // $('#attachServiceId').val(contractDetail.attachService.attachServiceName);
-                //
-                // $('#contractId').val(contractDetail.contract.contractId);
+                $('#contractDetailId').val(contractDetail.contractDetailId);
+
+                $('#quantity').val(contractDetail.quantity);
+
+                $('#attachService').val(contractDetail.attachServiceId + ' - ' + contractDetail.attachServiceName);
+
+                $('#contractId').val(contractDetail.contractId);
             },
             error: function (resultError) {
                 alert("Not found")

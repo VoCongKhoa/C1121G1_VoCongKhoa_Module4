@@ -20,4 +20,6 @@ public interface IEmployeeService {
     Page<Employee> findAllWithSalarySort(Pageable pageable);
 
     Page<Employee> findAllWithBirthdaySort(Pageable pageable);
+
+    Employee findByUsername(String username);
 }

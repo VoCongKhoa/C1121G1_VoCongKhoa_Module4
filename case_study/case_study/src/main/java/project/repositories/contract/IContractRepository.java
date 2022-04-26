@@ -37,7 +37,7 @@ public interface IContractRepository extends JpaRepository<Contract, Integer> {
             "INNER JOIN customer ON contract.customer_id=customer.customer_id " +
             "INNER JOIN service ON contract.service_id=service.service_id " +
             "WHERE contract.active = 1 AND contract_id=:id ", nativeQuery = true)
-    IContractViewDto findContractDetailDtoById(@Param("id") int id);
+    IContractViewDto findContractViewDtoById(@Param("id") int id);
 
     @Query(value = "select * from contract where active = 1 order by contract_id ", nativeQuery = true)
     List<Contract> findAllActive();
